@@ -30,7 +30,7 @@ const CreateAccount = () => {
                             <input type="password" id="base-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
                         </div>
                         <div className='flex justify-center'>
-                            <button className='w-2/5 bg-sky-300 rounded-full h-10 text-white font-semibold'>Mulai</button>
+                            <button type='submit' className='w-2/5 bg-sky-300 rounded-full h-10 text-white font-semibold'>Mulai</button>
                         </div>
                     </form>
                     <div className='flex gap-3 mt-10 justify-center'>
