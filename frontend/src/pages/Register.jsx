@@ -42,7 +42,7 @@ const Register = () => {
                         <p className='text-sm content-center'>Get The App Now!</p>
                         <img src="assets/img/googleplay.png" className='w-1/3' alt="" />
                     </div>
-                    <p className='mt-10'>Sudah punya akun? <span className='text-sky-300'>Masuk</span></p>
+                    <p className='mt-10'>Sudah punya akun? <Link to = '/login'><span className='text-sky-300'>Masuk</span></Link></p>
                 </div>
                 <div className='w-full hidden flex-col items-center lg:flex'>
                     <form className="w-4/5 mx-auto">

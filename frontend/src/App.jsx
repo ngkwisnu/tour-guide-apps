@@ -5,6 +5,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import UserRole from './pages/UserRole'
+import ChangePassword from './pages/ChangePassword'
+import VerifikasiChangePassword from './pages/VerifikasiChangePassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +19,8 @@ function App() {
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/pilih-pengguna' element={<UserRole/>} />
+          <Route path='/change-password' element={<ChangePassword/>} />
+          <Route path='/verifikasi-password' element={<VerifikasiChangePassword/>} />
         </Routes>
       </BrowserRouter>
     </>
