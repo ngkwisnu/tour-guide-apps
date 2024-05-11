@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import UserRole from './pages/UserRole'
 import ChangePassword from './pages/ChangePassword'
 import VerifikasiChangePassword from './pages/VerifikasiChangePassword'
+import KonfirmasiOTP from './pages/KonfirmasiOTP'
+import VerificationOTP from './pages/VerificationOTP'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,8 @@ function App() {
           <Route path='/pilih-pengguna' element={<UserRole/>} />
           <Route path='/change-password' element={<ChangePassword/>} />
           <Route path='/verifikasi-password' element={<VerifikasiChangePassword/>} />
+          <Route path='/konfirmasi-otp' element={<KonfirmasiOTP/>} />
+          <Route path='/verifikasi-otp' element={<VerificationOTP/>} />
         </Routes>
       </BrowserRouter>
     </>
