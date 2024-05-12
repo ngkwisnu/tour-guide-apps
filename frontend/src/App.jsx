@@ -11,6 +11,7 @@ import KonfirmasiOTP from './pages/KonfirmasiOTP'
 import VerificationOTP from './pages/VerificationOTP'
 import Admin from './pages/Admin'
 import TambahData from './component/admin/TambahData'
+import EditData from './component/admin/EditData'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
           <Route path='/verifikasi-otp' element={<VerificationOTP/>} />
           <Route path='/admin' element={<Admin/>} />
           <Route path='/tambah-wisata' element={<TambahData/>} />
+          <Route path='/edit-wisata' element={<EditData/>} />
         </Routes>
       </BrowserRouter>
     </>

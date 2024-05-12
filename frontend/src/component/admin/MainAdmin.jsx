@@ -1,7 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ReactDOM from 'react-dom/client'
+import { useState } from 'react'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const MainAdmin = () => {
+  const showSwal = () => {
+    withReactContent(Swal).fire({
+        title: "Anda yakin menghapus data?",
+        text: "Anda tidak bisa mengembailkan data yang sudah terhapus!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Hapus",
+        cancelButtonText: "Batal",
+      preConfirm: () => {
+        setInputValue(Swal.getInput()?.value || '')
+      },
+    })
+  }
   return (
     <div className='w-4/5 flex flex-col items-center gap-6 bg-white py-16'>
         
@@ -44,7 +63,7 @@ const MainAdmin = () => {
                             15000
                         </td>
                         <td className="px-6 py-4 bg-blue-300/30 text-center">
-                            <i className="fa-regular fa-pen-to-square text-blue-300"></i>
+                            <Link to = '/edit-wisata'><i onClick={showSwal} className="fa-regular fa-pen-to-square text-blue-300"></i></Link>
                         </td>
                     </tr>
                     <tr className="border-b border-slate-600">
@@ -61,7 +80,7 @@ const MainAdmin = () => {
                             15000
                         </td>
                         <td className="px-6 py-4 bg-blue-300/30 text-center">
-                            <i className="fa-regular fa-pen-to-square text-blue-300"></i>
+                            <Link to = '/edit-wisata'><i className="fa-regular fa-pen-to-square text-blue-300"></i></Link>
                         </td>
                     </tr>
                     <tr className="border-b border-slate-600">
@@ -78,7 +97,7 @@ const MainAdmin = () => {
                             15000
                         </td>
                         <td className="px-6 py-4 bg-blue-300/30 text-center">
-                            <i className="fa-regular fa-pen-to-square text-blue-300"></i>
+                            <Link to = '/edit-wisata'><i className="fa-regular fa-pen-to-square text-blue-300"></i></Link>
                         </td>
                     </tr>
                 </tbody>
