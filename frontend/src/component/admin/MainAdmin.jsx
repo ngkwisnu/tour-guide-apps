@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MainAdmin = () => {
   return (
     <div className='w-4/5 flex flex-col items-center gap-6 bg-white py-16'>
         
         <div className='w-4/5'>
-            <button className='bg-blue-400 rounded-xl w-1/6 h-7 text-white'><i className="fa-solid fa-circle-plus text-white mr-4"></i>Tambah Data</button>
+            <Link to = '/tambah-wisata'><button className='bg-blue-400 rounded-xl w-1/6 h-7 text-white'><i className="fa-solid fa-circle-plus text-white mr-4"></i>Tambah Data</button></Link>
         </div>
         <div className="w-11/12 h-max relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right">

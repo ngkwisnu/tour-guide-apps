@@ -1,7 +1,7 @@
 import React from 'react'
-import NavbarAdmin from '../component/NavbarAdmin'
-import SidebarAdmin from '../component/SidebarAdmin'
-import MainAdmin from '../component/MainAdmin'
+import NavbarAdmin from '../component/admin/NavbarAdmin'
+import SidebarAdmin from '../component/admin/SidebarAdmin'
+import MainAdmin from '../component/admin/MainAdmin'
 
 const Admin = () => {
   return (
