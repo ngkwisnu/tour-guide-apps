@@ -12,6 +12,10 @@ import VerificationOTP from './pages/VerificationOTP'
 import Admin from './pages/Admin'
 import TambahData from './component/admin/TambahData'
 import EditData from './component/admin/EditData'
+import TourGuide from './pages/TourGuide'
+import Pesanan from './component/tour-guide/Pesanan'
+import Paket from './component/tour-guide/Paket'
+import Riwayat from './component/tour-guide/Riwayat'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +35,10 @@ function App() {
           <Route path='/admin' element={<Admin/>} />
           <Route path='/tambah-wisata' element={<TambahData/>} />
           <Route path='/edit-wisata' element={<EditData/>} />
+          <Route path='/tour-guide' element={<TourGuide/>} />
+          <Route path='/tour-guide/pesanan' element={<Pesanan/>} />
+          <Route path='/tour-guide/paket' element={<Paket/>} />
+          <Route path='/tour-guide/riwayat' element={<Riwayat/>} />
         </Routes>
       </BrowserRouter>
     </>
