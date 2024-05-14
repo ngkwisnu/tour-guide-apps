@@ -18,6 +18,7 @@ import Paket from './component/tour-guide/Paket'
 import Riwayat from './component/tour-guide/Riwayat'
 import AkunPengguna from './pages/AkunPengguna'
 import Invoice from './component/pengguna/Invoice'
+import BuktiPembayaran from './component/pengguna/BuktiPembayaran'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,6 +44,7 @@ function App() {
           <Route path='/tour-guide/riwayat' element={<Riwayat/>} />
           <Route path='/akun' element={<AkunPengguna/>} />
           <Route path='/akun/invoice' element={<Invoice/>} />
+          <Route path='/akun/bukti-pembayaran' element={<BuktiPembayaran/>} />
         </Routes>
       </BrowserRouter>
     </>

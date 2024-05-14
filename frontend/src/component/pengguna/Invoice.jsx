@@ -26,31 +26,31 @@ const Invoice = () => {
                         <p>Profile</p>
                     </div>
                     </Link>
-                    <Link to = '/tour-guide/pesanan'>
+                    <Link to = '/akun/invoice'>
                     <div className='flex items-center gap-5 text-blue-300 my-10 text-lg'>
                         <i class="fa-regular fa-square-check"></i>
                         <p>Invoice</p>
                     </div>
                     </Link>
-                    <Link to = '/tour-guide/paket'>
+                    <Link to = '/akun/bukti-pembayaran'>
                     <div className='flex items-center gap-5 hover:text-blue-300 text-slate-700 my-10 text-lg'>
                         <i class="fa-solid fa-barcode"></i>
                         <p>Bukti Pembayaran</p>
                     </div>
                     </Link>
-                    <Link to = '/tour-guide/riwayat'>
+                    <Link to = '/akun/menunggu-pembayaran'>
                     <div className='flex items-center gap-5 hover:text-blue-300 text-slate-700 my-10 text-lg'>
                         <i className="fa-solid fa-clock-rotate-left"></i>
                         <p>Menunggu Pembayaran</p>
                     </div>
                     </Link>
-                    <Link to = '/tour-guide/riwayat'>
+                    <Link to = '/akun/riwayat-transaksi'>
                     <div className='flex items-center gap-5 hover:text-blue-300 text-slate-700 my-10 text-lg'>
                         <i class="fa-regular fa-bookmark"></i>
                         <p>Riwayat Transaksi</p>
                     </div>
                     </Link>
-                    <Link to = '/tour-guide/riwayat'>
+                    <Link to = '/akun/pusat-bantuan'>
                     <div className='flex items-center gap-5 hover:text-blue-300 text-slate-700 my-10 text-lg'>
                         <i class="fa-solid fa-info"></i>
                         <p>Pusat Bantuan</p>
@@ -59,7 +59,7 @@ const Invoice = () => {
                 </div>
                 
                 <div className='w-4/5 flex flex-col items-center gap-6 bg-white'>
-                    <div className='bg-blue-300/30 flex flex-col gap-7 p-10 backdrop-blur-sm border border-blue-400 rounded-3xl w-4/5'>
+                    <div className='bg-blue-300/30 flex flex-col gap-7 p-10 backdrop-blur-sm border border-blue-400 rounded-3xl w-11/12'>
                         <div className='flex flex-col gap-7 text-slate-700'>
                             <h1 className='text-2xl font-bold'>Kode Booking : W-345890</h1>
                             <div className='flex flex-col gap-2 text-sm'>
