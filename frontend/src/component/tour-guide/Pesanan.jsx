@@ -5,7 +5,18 @@ import Navbar from './Navbar'
 const Pesanan = () => {
   return (
     <>
-        <Navbar/>
+        <div className='container mx-auto py-5'>
+            <div className='flex justify-between'>
+                <img src="../assets/img/logo.png" className='w-36' alt="" />
+                <div className='flex gap-5 items-center'>
+                    <p>Home</p>
+                    <p>App</p>
+                    <p>Wisata</p>
+                    <p>Notifikasi</p>
+                    <button className='text-white bg-blue-300 rounded-full w-32 ml-8'><i className="fa-solid fa-user mr-5"></i>Akun</button>
+                </div>
+            </div>
+        </div>
         <div className='flex w-full bg-slate-200 h-screen mb-10'>
             <div className='bg-white w-1/5 px-10 py-10'>
                 <h1 className='font-bold text-2xl'>Akun Tour Guide</h1>
