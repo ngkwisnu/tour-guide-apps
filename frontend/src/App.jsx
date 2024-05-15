@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SectionContainer from './component/sectionContainer';
-import Header from './component/header';
+import Header from './component/Header';
 import Home from './pages/home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
@@ -20,11 +20,13 @@ import Riwayat from './component/tour-guide/Riwayat';
 import AkunPengguna from './pages/AkunPengguna';
 import Invoice from './component/pengguna/Invoice';
 import BuktiPembayaran from './component/pengguna/BuktiPembayaran';
+import ChatBot from './component/ChatBot';
 
 function App() {
   return (
     <>
-    <Header/>
+      <Header />
+      <ChatBot/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
