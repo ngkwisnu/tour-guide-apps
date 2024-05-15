@@ -11,7 +11,25 @@
 
 :star: Star us on GitHub — it motivates us a lot!
 
-
 [Nusa Guide](https://aimeos.org/TYPO3) is THE Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
 
 ![Nusa-frontend](https://github.com/ngkwisnu/tour-guide-apps/assets/146515339/55b93ae6-0542-428f-86ce-8d8dbfae9ab9)
+
+## Table Of Content
+
+- [Installation](#installation)
+  - [Composer](#composer)
+  - [DDev or Colima](#ddev)
+  - [TER](#ter-extension)
+- [TYPO3 setup](#typo3-setup)
+  - [Database setup](#database-setup)
+  - [Security](#security)
+- [Page setup](#page-setup)
+  - [Download the Aimeos Page Tree t3d file](#download-the-aimeos-page-tree-t3d-file)
+  - [Go to the Import View](#go-to-the-import-view)
+  - [Upload the page tree file](#upload-the-page-tree-file)
+  - [Go to the import view](#go-to-the-import-view)
+  - [Import the page tree](#import-the-page-tree)
+  - [SEO-friendly URLs](#seo-friendly-urls)
+- [License](#license)
+- [Links](#links)
