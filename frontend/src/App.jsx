@@ -21,16 +21,19 @@ import AkunPengguna from './pages/AkunPengguna';
 import Invoice from './component/pengguna/Invoice';
 import BuktiPembayaran from './component/pengguna/BuktiPembayaran';
 import ChatBot from './component/ChatBot';
+import Package from './pages/Package';
+import Footer from './component/footer';
 
 function App() {
   return (
     <>
       <Header />
-      <ChatBot/>
+      <ChatBot />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/package" element={<Package />} />
         <Route path="/pilih-pengguna" element={<UserRole />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/verifikasi-password" element={<VerifikasiChangePassword />} />
@@ -39,6 +42,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/tambah-wisata" element={<TambahData />} />
         <Route path="/edit-wisata" element={<EditData />} />
+        {/* guider website */}
         <Route path="/tour-guide" element={<TourGuide />} />
         <Route path="/tour-guide/pesanan" element={<Pesanan />} />
         <Route path="/tour-guide/paket" element={<Paket />} />
@@ -47,6 +51,7 @@ function App() {
         <Route path="/akun/invoice" element={<Invoice />} />
         <Route path="/akun/bukti-pembayaran" element={<BuktiPembayaran />} />
       </Routes>
+      <Footer />
     </>
   );
 }

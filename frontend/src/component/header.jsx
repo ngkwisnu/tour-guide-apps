@@ -67,7 +67,8 @@ const Header = () => {
 
   return (
     <SectionContainer>
-      <header class="bg-white w-full">
+      {/* tambahni klo mau asbsolute => md:absolute z-50 top-0 */}
+      <header class="bg-white  left-0 w-full">
         <div class="mx-auto w-full px-4 ">
           <div class="flex h-16 items-center justify-between">
             {/* LOGO */}
