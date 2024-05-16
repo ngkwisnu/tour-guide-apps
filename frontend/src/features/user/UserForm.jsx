@@ -16,7 +16,7 @@ export default function UserForm() {
 
   return (
     <>
-      <div className=" px-24 py-8">
+      <div className="profile-container">
         <div className="flex gap-8 items-center">
           <div>
             <img
@@ -34,7 +34,10 @@ export default function UserForm() {
             <p className="text-sm text-gray-500">maya@example.com</p>
           </div>
         </div>
-        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="mt-8 w-full flex flex-col gap-8  "
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <InputRow label="Nama Lengkap" error={errors?.nama?.message}>
             <input
               type="text"
@@ -43,7 +46,39 @@ export default function UserForm() {
               {...register("nama", { required: "Kolom nama harus diisi." })}
             />
           </InputRow>
-          <button className="bg-sky-400">Submit</button>
+          <InputRow label="No Handphone" error={errors?.handphone?.message}>
+            <input
+              type="number"
+              id="handphone"
+              className="border-b border-gray-900 p-2 bg-transparent"
+              {...register("handphone", {
+                required: "Kolom no handphone harus diisi.",
+              })}
+            />
+          </InputRow>
+          <InputRow label="E-mail" error={errors?.email?.message}>
+            <input
+              type="text"
+              id="email"
+              className="border-b border-gray-900 p-2 bg-transparent"
+              {...register("email", {
+                required: "Kolom email harus diisi.",
+              })}
+            />
+          </InputRow>
+          <InputRow label="Ganti kata sandi" error={errors?.sandi?.message}>
+            <input
+              type="password"
+              id="sandi"
+              className="border-b border-gray-900 p-2 bg-transparent"
+              {...register("sandi", {
+                required: "Kolom sandi harus diisi.",
+              })}
+            />
+          </InputRow>
+          <div className="ml-auto">
+            <button className="button px-6 mt-8 w-full">Submit</button>
+          </div>
         </form>
       </div>
     </>
