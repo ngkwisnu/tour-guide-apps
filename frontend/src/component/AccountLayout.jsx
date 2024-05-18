@@ -9,7 +9,7 @@ export default function AccountLayout() {
       <Navbar />
       <div className="grid grid-cols-4 mt-16">
         <Sidebar />
-        <div className=" col-span-3 flex flex-col w-full relative">
+        <div className=" col-span-3 flex flex-col w-full ">
           <div className="border-2 border-sky-300  rounded-xl px-8 min-h-full bg-sky-50">
             <Outlet />
           </div>

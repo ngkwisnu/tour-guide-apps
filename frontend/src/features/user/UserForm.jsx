@@ -42,7 +42,7 @@ export default function UserForm() {
             <input
               type="text"
               id="nama"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-900 p-2 bg-transparent outline-sky-500"
               {...register("nama", { required: "Kolom nama harus diisi." })}
             />
           </InputRow>
@@ -50,7 +50,7 @@ export default function UserForm() {
             <input
               type="number"
               id="handphone"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-900 p-2 bg-transparent outline-sky-500"
               {...register("handphone", {
                 required: "Kolom no handphone harus diisi.",
               })}
@@ -60,7 +60,7 @@ export default function UserForm() {
             <input
               type="text"
               id="email"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-900 p-2 bg-transparent outline-sky-500"
               {...register("email", {
                 required: "Kolom email harus diisi.",
               })}
@@ -70,7 +70,7 @@ export default function UserForm() {
             <input
               type="password"
               id="sandi"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-900 p-2 bg-transparent outline-sky-500"
               {...register("sandi", {
                 required: "Kolom sandi harus diisi.",
               })}
