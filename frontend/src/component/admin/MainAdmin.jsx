@@ -21,8 +21,9 @@ const MainAdmin = () => {
       },
     })
   }
+  const [page, setPage] = useState("admin")
   return (
-    <div className='w-4/5 flex flex-col items-center gap-6 bg-white py-16'>
+    <div className='w-4/5 flex flex-col items-center gap-6 bg-white py-10'>
         
         <div className='w-4/5'>
             <Link to = '/tambah-wisata'><button className='bg-blue-400 rounded-xl w-1/6 h-7 text-white'><i className="fa-solid fa-circle-plus text-white mr-4"></i>Tambah Data</button></Link>

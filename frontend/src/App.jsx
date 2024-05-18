@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SectionContainer from './component/sectionContainer';
-import Header from './component/Header';
+import Header from './component/header';
 import Home from './pages/home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
@@ -14,9 +14,9 @@ import Admin from './pages/Admin';
 import TambahData from './component/admin/TambahData';
 import EditData from './component/admin/EditData';
 import TourGuide from './pages/TourGuide';
-import Pesanan from './component/tour-guide/Pesanan';
+import Pesanan from './component/admin/Pesanan';
 import Paket from './component/tour-guide/Paket';
-import Riwayat from './component/tour-guide/Riwayat';
+import Riwayat from './component/admin/Riwayat';
 import AkunPengguna from './pages/AkunPengguna';
 import Invoice from './component/pengguna/Invoice';
 import BuktiPembayaran from './component/pengguna/BuktiPembayaran';
@@ -27,8 +27,8 @@ import Footer from './component/footer';
 function App() {
   return (
     <>
-      <Header />
-      <ChatBot />
+      {/* <Header />
+      <ChatBot /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -42,16 +42,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/tambah-wisata" element={<TambahData />} />
         <Route path="/edit-wisata" element={<EditData />} />
-        {/* guider website */}
-        <Route path="/tour-guide" element={<TourGuide />} />
-        <Route path="/tour-guide/pesanan" element={<Pesanan />} />
-        <Route path="/tour-guide/paket" element={<Paket />} />
-        <Route path="/tour-guide/riwayat" element={<Riwayat />} />
-        <Route path="/akun" element={<AkunPengguna />} />
-        <Route path="/akun/invoice" element={<Invoice />} />
-        <Route path="/akun/bukti-pembayaran" element={<BuktiPembayaran />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
