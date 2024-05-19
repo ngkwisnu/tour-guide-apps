@@ -104,9 +104,9 @@ const MobileView = () => {
         }
         {page == 'data-riwayat' && 
           <>
-          <h3 className='mx-10 flex justify-start font-bold text-blue-300 gap-3 items-center' onClick={() => setPage('')}><i class="fa-solid fa-arrow-left"></i>Kembali</h3>
-            <div className='flex flex-col justify-center items-center'>
-              <div className={`flex justify-between w-4/5 ${detail1 ? `shadow-none` : `shadow-md`} rounded-lg py-2 px-7`}>
+          <h3 className='mx-10 flex justify-start font-bold text-blue-300 gap-3 items-center mb-10' onClick={() => setPage('')}><i class="fa-solid fa-arrow-left"></i>Kembali</h3>
+            <div className={`flex flex-col ${!detail1 && !detail2 ? 'gap-10' : `gap-0`} justify-center items-center`}>
+              <div className={`flex justify-between w-4/5 shadow-md ${detail1 && `rounded-b-none`} rounded-lg py-2 px-7`}>
                 <div className='flex flex-col items-start gap-1 py-5 text-slate-700'>
                   <p className='font-normal'>22 Juni 2035</p>
                   <p className='font-bold text-lg'>Ahmad Sumamad</p>
@@ -166,7 +166,7 @@ const MobileView = () => {
                  </div>
                 </>
               }
-              <div className='flex justify-between w-4/5 shadow-lg rounded-lg py-2 px-7'>
+              <div className={`flex justify-between w-4/5 shadow-lg rounded-lg py-2 px-7 ${detail2 && `rounded-b-none`}`}>
                 <div className='flex flex-col items-start gap-1 py-5 text-slate-700'>
                   <p className='font-normal'>22 Juni 2035</p>
                   <p className='font-bold text-lg'>Ahmad Sumamad</p>
@@ -260,6 +260,17 @@ const MobileView = () => {
                             <span className="bg-white text-blue-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-eye mr-2"></i></span>
                           </td>
                       </tr>
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              Nusa Penida
+                          </td>
+                          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              12/03/2024
+                          </td>
+                          <td className="px-6 py-4 text-center" data-modal-target="default-modal" data-modal-toggle="default-modal" onClick={() => setShow(!show)}>
+                            <span className="bg-white text-blue-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-eye mr-2"></i></span>
+                          </td>
+                      </tr>
                   </tbody>
                 </table>
               </div>
@@ -320,14 +331,11 @@ const MobileView = () => {
                               {status == 'selesai' && 
                                 <span className="bg-gray-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full"><i class="fa-solid fa-check mr-4"></i>Selesai</span>
                               }
-                              {status == 'ulasan' && 
-                                <p>Perjalanan user telah berakhir, kirim notifikasi untuk segara mengisi ulasan!</p>
-                              }
                             </td>
                           </tr>
                           }
                         </table>
-                          {status == 'ulasan' && 
+                          {status == 'selesai' && 
                             <p className='text-yellow-500 font-medium mt-10'><i>Perjalanan user telah berakhir, kirim notifikasi untuk segara mengisi ulasan!</i></p>
                           }
                       </div>
@@ -347,16 +355,11 @@ const MobileView = () => {
                       }
                       {status == 'dalam-perjalanan' && 
                         <>
+                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => setStatus('selesai')}>Selesaikan Perjalanan</button>
                           <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
                         </>
                       }
                       {status == 'selesai' && 
-                        <>
-                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => setStatus('ulasan')}>Selesaikan Perjalanan</button>
-                          <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
-                        </>
-                      }
-                      {status == 'ulasan' && 
                         <>
                           <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim</button>
                           <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
