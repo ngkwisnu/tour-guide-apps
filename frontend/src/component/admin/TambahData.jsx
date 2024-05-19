@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Stars from './Stars'
 import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom';
+import MainAdmin from './MainAdmin';
 
 const TambahData = () => {
   const [star, setStar] = useState(5)
@@ -22,6 +23,20 @@ const TambahData = () => {
 
   const simpanData = (e) => {
     e.preventDefault()
+    const datas = {
+        nama: e.target.nama.value,
+        lokasi: e.target.lokasi.value,
+        jam_buka: e.target.jam_buka.value,
+        jarak_lokasi: e.target.jarak_lokasi.value,
+        rating: e.target.rating.value,
+        deskripsi: e.target.deskripsi.value,
+        galeri: images,
+        informasi_tourguide: e.target.informasi_tourguide.value,
+        rating_tour: e.target.rating_tour.value,
+        ulasan: e.target.ulasan.value,
+    }
+    console.log('Data Berhasil Ditambahkan!');
+    console.log(datas);
     Swal.fire({
         title: "Berhasil!",
         text: "Data wisata telah ditambahkan.",
@@ -38,27 +53,27 @@ const TambahData = () => {
                 <form className="w-full mx-auto" onSubmit={(e) => simpanData(e)}>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">Nama</label>
-                        <input type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan nama wisata" />
+                        <input type="text" id="text" name='nama' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan nama wisata" />
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">Lokasi</label>
-                        <input type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan lokasi wisata" />
+                        <input type="text" id="text" name='lokasi' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan lokasi wisata" />
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">Jam Buka</label>
-                        <input type="time" id="text" className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jam buka wisata" />
+                        <input type="time" name='jam_buka' id="text" className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jam buka wisata" />
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">Jarak Lokasi <i></i></label>
-                        <input type="number" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jarak wisata (km)" />
+                        <input type="number" name='jarak_lokasi' id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jarak wisata (km)" />
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">Rating</label>
-                        <input type="number" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan rating wisata" />
+                        <input type="number" name='rating' id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan rating wisata" />
                     </div>
                     <div className='mb-5 lg:flex justify-center'>
                         <label htmlFor="message" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">Deskripsi</label>
-                        <textarea id="message" rows="6" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan deskripsi wisata..."></textarea>                        
+                        <textarea id="message" name='deskripsi' rows="6" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan deskripsi wisata..."></textarea>                        
                     </div>
                     <div className='mb-5 lg:flex justify-center'>
                         <label htmlFor="message" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">Galeri</label>
@@ -85,11 +100,11 @@ const TambahData = () => {
                     </div>
                     <div className='mb-5 lg:flex justify-center'>
                         <label htmlFor="message" className="block mb-2 text-sm font-medium lg:w-1/6 pr-4 text-slate-700">Informasi Tour Guide</label>
-                        <textarea id="message" rows="6" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan deskripsi tour guide..."></textarea>                        
+                        <textarea id="message" name='informasi_tourguide' rows="6" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan deskripsi tour guide..."></textarea>                        
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">Harga Termasuk</label>
-                        <input type="number" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan harga" />
+                        <input type="number" id="text" name='harga' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan harga" />
                     </div>
                     <div className="mb-5 lg:flex justify-center">
                         <label className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">Rating & Ulasan</label>
@@ -98,8 +113,8 @@ const TambahData = () => {
                                 <Stars star={star}/>
                             </div>
                             <div className='lg:w-4/5 w-full lg:flex lg:justify-between lg:items-center lg:flex-row flex flex-col gap-3'>
-                                <input type="number" min='1' max='5' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan rating user" onChange={e => setStar(e.target.value)}/>
-                                <input type="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jumlah ulasan" />
+                                <input type="number" name='rating_tour' min='1' max='5' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan rating user" onChange={e => setStar(e.target.value)}/>
+                                <input type="number" name='ulasan' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan jumlah ulasan" />
                             </div>
                         </div>
                     </div>

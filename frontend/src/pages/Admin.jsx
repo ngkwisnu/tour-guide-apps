@@ -4,9 +4,13 @@ import MainAdmin from '../component/admin/MainAdmin'
 import Pesanan from '../component/admin/Pesanan'
 import Riwayat from '../component/admin/Riwayat'
 import MobileView from '../component/admin/MobileView'
+import { useLocation } from 'react-router-dom'
 
 const Admin = () => {
   const [page, setPage] = useState('data-wisata')
+  // const location = useLocation()
+  // const {datas} = location.state || {}
+  // console.log(datas);
   
   return (
     <>

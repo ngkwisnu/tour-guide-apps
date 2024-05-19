@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const MainAdmin = () => {
+const MainAdmin = (props) => {
   const [page, setPage] = useState("admin")
   const [datas, setDatas] = useState([
     {
@@ -94,6 +94,12 @@ const MainAdmin = () => {
         rating_ulasan: 4.8
     }
   ])
+  useEffect(() => {
+    if (props.tambahData != null) {
+        setDatas((prevData) => [...prevData, props.tambahData])
+    }
+  }, [])
+  console.log(datas);
   const hapusData = (index) => {
     Swal.fire({
         title: "Apakah anda yakin?",

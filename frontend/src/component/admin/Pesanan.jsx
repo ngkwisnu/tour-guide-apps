@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Pesanan = () => {
+  const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [status, setStatus] = useState('verifikasi')
   console.log(show);
+  const kirimUlasan = () => {
+    Swal.fire("SweetAlert2 is working!").then(() => {
+      navigate('/admin')
+    });
+  }
   return (
     <>
       <div className='w-4/5 flex flex-col items-center gap-6 bg-white py-10'>
@@ -129,16 +135,15 @@ const Pesanan = () => {
                                 <span className="bg-blue-400 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full"><i class="fa-solid fa-plane mr-4"></i>Dalam Perjalanan</span>
                               }
                               {status == 'selesai' && 
+                                <>
                                 <span className="bg-gray-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full"><i class="fa-solid fa-check mr-4"></i>Selesai</span>
-                              }
-                              {status == 'ulasan' && 
-                                <p>Perjalanan user telah berakhir, kirim notifikasi untuk segara mengisi ulasan!</p>
+                                </>
                               }
                             </td>
                           </tr>
                           }
                         </table>
-                          {status == 'ulasan' && 
+                          {status == 'selesai' && 
                             <p className='text-yellow-500 font-medium mt-10'><i>Perjalanan user telah berakhir, kirim notifikasi untuk segara mengisi ulasan!</i></p>
                           }
                       </div>
@@ -158,18 +163,13 @@ const Pesanan = () => {
                       }
                       {status == 'dalam-perjalanan' && 
                         <>
+                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => setStatus('selesai')}>Selesaikan Perjalanan</button>
                           <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
                         </>
                       }
                       {status == 'selesai' && 
                         <>
-                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => setStatus('ulasan')}>Selesaikan Perjalanan</button>
-                          <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
-                        </>
-                      }
-                      {status == 'ulasan' && 
-                        <>
-                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim</button>
+                          <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={kirimUlasan}>Kirim</button>
                           <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={() => setShow(!show)}>Kembali</button>
                         </>
                       }
