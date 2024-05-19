@@ -7,7 +7,7 @@ import InputRow from "../component/InputRow";
 import { useForm } from "react-hook-form";
 
 const tempDataBooking = {
-  nama: "Maya Anggita",
+  nama: "Ahmad Sumamad",
   handphone: 81234567890,
   tanggalKeberangkatan: "2024-05-16T12:43:33.569Z",
   tanggalBayar: "2024-05-08T12:43:33.569Z",
@@ -42,20 +42,20 @@ export default function InvoicePage() {
         <div className="w-1/2">
           <div className="grid grid-cols-2">
             <p>Nama Tour Guide</p>
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-gray-950">
               : {tempDataBooking.nama}
             </span>
           </div>
 
           <div className="grid grid-cols-2">
             <p>No WhatsApp</p>
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-gray-950">
               : {tempDataBooking.handphone}
             </span>
           </div>
           <div className="grid grid-cols-2">
             <p>Tanggal Keberangkatan</p>
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-gray-950">
               :{" "}
               {new Date(tempDataBooking.tanggalKeberangkatan).toLocaleString(
                 "id-ID",
@@ -100,7 +100,7 @@ export default function InvoicePage() {
         <Button type="halfFull" onClick={() => setShowModal(true)}>
           Beri Ulasan
         </Button>
-        <div className="txt-gray-500 text-sm">
+        <div className="txt-raven-500 text-sm">
           <p>*Tunjukan invoice ini pada pemandu saat tiba di kedatangan.</p>
           <p>*Pstikan data pemandu anda sesuai.</p>
         </div>
@@ -115,7 +115,7 @@ export default function InvoicePage() {
                 <Star
                   size={32}
                   fill="yellow"
-                  className="text-yellow-500"
+                  className="text-yellow-300"
                   key={i}
                 />
               ))}
@@ -129,7 +129,7 @@ export default function InvoicePage() {
               <textarea
                 id="ulasan"
                 {...register("ulasan", { required: true })}
-                className="border outline-none p-2 border-gray-500"
+                className="border outline-none p-2 border-raven-500"
                 rows={6}
                 placeholder="Contoh: “Tempatnya bagus banget! murah dan ramah banget petugas petugasnya gaess 🤩💫”."
               />
@@ -171,7 +171,7 @@ export default function InvoicePage() {
               type="file"
               id="image"
               {...register("image")}
-              className="border border-sky-500 w-full rounded-full cursor-pointer my-4 file:bg-sky-500 file:text-sky-50 file:border-none file:py-2 file:px-4"
+              className="border border-regent-500 w-full rounded-full cursor-pointer my-4 file:bg-regent-500 file:text-regent-100 file:border-none file:py-2 file:px-4"
             />
             <Button type="full">Kirim Ulasan</Button>
           </form>

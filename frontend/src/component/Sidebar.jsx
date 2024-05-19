@@ -54,7 +54,7 @@ export default function Sidebar() {
             <Link
               to={link.to}
               className={`flex gap-4 ${
-                path === link.to ? "text-sky-500 font-semibold" : ""
+                path === link.to ? "text-regent-500 font-semibold" : ""
               }`}
             >
               {link.icon} {link.title}

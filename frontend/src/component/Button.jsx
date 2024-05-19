@@ -6,12 +6,12 @@ export default function Button({ onClick, type, children }) {
     " rounded-full font-semibold px-6 py-2 flex items-center gap-2 justify-center";
 
   const style = {
-    primary: `${base} bg-sky-500 text-sky-50`,
-    secondary: `${base} bg-white text-sky-500 border border-sky-500`,
-    full: `${base} bg-sky-500 text-sky-50 w-full`,
+    primary: `${base} bg-regent-500 text-regent-100 hover:bg-regent-800`,
+    secondary: `${base} bg-gray-50 text-regent-500 border border-regent-500 hover:bg-gray-700`,
+    full: `${base} bg-regent-500 text-regent-100 w-full hover:bg-regent-800`,
     circle:
-      "bg-sky-500 w-10 h-10 flex items-center justify-center rounded-full text-sky-50",
-    halfFull: `${base} bg-sky-500 text-sky-50 w-1/2 mx-auto`,
+      "bg-regent-500 w-10 h-10 flex items-center justify-center rounded-full text-regent-100 hover:bg-regent-800",
+    halfFull: `${base} bg-regent-500 text-regent-100 w-1/2 mx-auto hover:bg-regent-800`,
   };
 
   return (

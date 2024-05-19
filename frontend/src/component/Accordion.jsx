@@ -9,7 +9,7 @@ export default function Accordion({ faq, openContent, setOpenContent, index }) {
 
   return (
     <>
-      <div className="bg-white border-2 rounded-xl p-4 border-gray-300">
+      <div className="bg-gray-50 border-2 rounded-xl p-4 border-regent-500 shadow-lg">
         <div className="flex items-center justify-between">
           <p className="first-letter:uppercase text-2xl font-semibold">
             {faq.title}

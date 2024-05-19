@@ -77,10 +77,10 @@ button:focus-visible {
   }
 
   .profile-header {
-    @apply text-4xl font-bold text-gray-700;
+    @apply text-4xl font-bold text-gray-950;
   }
 
   .button {
-    @apply bg-sky-500 px-1 py-2 rounded-full text-sky-50 font-semibold;
+    @apply bg-regent-500 hover:bg-regent-800 px-1 py-2 rounded-full text-regent-100 font-semibold;
   }
 }

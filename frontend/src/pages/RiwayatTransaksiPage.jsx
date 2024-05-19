@@ -41,28 +41,28 @@ export default function RiwayatTransaksiPage() {
     <div className="profile-container">
       {tempData.map((data) => (
         <div
-          className="flex gap-2 justify-between border-b py-4 border-gray-500"
+          className="flex gap-2 justify-between border-b py-4 border-raven-500"
           key={data.id}
         >
           <div>
-            <p className="font-bold text-gray-700">23 Juni 2024</p>
+            <p className="font-bold text-gray-950">23 Juni 2024</p>
             <p>
               Kode Pemesanan{" "}
-              <span className="font-bold text-gray-700">{data.kode}</span>
+              <span className="font-bold text-gray-950">{data.kode}</span>
             </p>
-            <p className="font-bold text-gray-700">{data.tujuan}</p>
+            <p className="font-bold text-gray-950">{data.tujuan}</p>
           </div>
           <div className="flex flex-col gap-2 items-center">
             <p
-              className={`py-2 px-6  font-bold bg-white border  rounded-full text-center w-fit mx-auto first-letter:uppercase ${
+              className={`py-2 px-6  font-bold bg-gray-50 border  rounded-full text-center w-fit mx-auto first-letter:uppercase ${
                 data.status === "gagal"
-                  ? "text-gray-500 border-gray-500"
-                  : "text-sky-500 border-sky-500"
+                  ? "text-raven-800 border-raven-800"
+                  : "text-regent-500 border-regent-500"
               }`}
             >
               {data.status}
             </p>
-            <p className="font-bold text-gray-700">
+            <p className="font-bold text-gray-950">
               {formatCurrecy(data.harga)}
             </p>
           </div>

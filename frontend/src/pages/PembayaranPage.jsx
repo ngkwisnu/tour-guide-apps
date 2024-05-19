@@ -14,7 +14,7 @@ export default function PembayaranPage() {
       <div className="grid grid-cols-4">
         <div className=" col-span-3">
           <h1 className="profile-header mb-4">Menunggu Pembayaran</h1>
-          <p className="text-gray-500">Batas Pembayaran</p>
+          <p className="text-gray-700">Batas Pembayaran</p>
           <p>
             {new Date(tempData.deadline).toLocaleString("id-ID", {
               day: "numeric",
@@ -23,27 +23,27 @@ export default function PembayaranPage() {
             })}
           </p>
         </div>
-        <div className="bg-white flex gap-4 border border-sky-500 rounded-full items-center h-fit py-2 px-6 text-base text-sky-500 mt-auto justify-center w-fit">
+        <div className="bg-gray-50 flex gap-4 border border-regent-500 rounded-full items-center h-fit py-2 px-6 text-base text-regent-500 mt-auto justify-center w-fit">
           <Clock size={22} />
           <span>08:30:54</span>
         </div>
       </div>
-      <div className="w-full border mt-12 border-gray-500"></div>
+      <div className="w-full border mt-12 border-raven-500"></div>
       <div className="w-full  flex justify-center my-10">
         <div className=" w-full max-w-96">
           <div className="flex gap-4">
             <CreditCard size={96} />
             <div className="flex flex-col gap-2">
-              <p className="text-xl font-bold text-gray-700">
+              <p className="text-xl font-bold text-gray-950">
                 Transfer Bank - BCA
               </p>
               <p>No. Rekening : 093374837409</p>
               <p>a/n PT Nuansa Digital Tech</p>
             </div>
           </div>
-          <div className="mt-8 border-b border-gray-500">
+          <div className="mt-8 border-b border-raven-500">
             <p>Total Tagihan :</p>
-            <p className="text-4xl font-bold text-gray-700 py-2">
+            <p className="text-4xl font-bold text-gray-950 py-2">
               {formatCurrecy(tempData.tagihan)}
             </p>
           </div>

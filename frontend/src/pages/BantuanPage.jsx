@@ -4,9 +4,7 @@ import Accordion from "../component/Accordion";
 const faqTemp = [
   {
     title: "apa itu invoice?",
-    content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-        incidunt amet accusamus aperiam laboriosam facere ipsa impedit
-        natus, asperiores a!`,
+    content: `Invoice adalah faktur yang akan didapatkan saat Anda sudah berhasil melakukan pembayaran dan upload bukti pembayaran`,
   },
   {
     title: "bagaimana cara saya memesan tour guide?",
