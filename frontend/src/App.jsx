@@ -23,6 +23,7 @@ import BuktiPembayaran from './component/pengguna/BuktiPembayaran';
 import ChatBot from './component/ChatBot';
 import Package from './pages/Package';
 import Footer from './component/footer';
+import Pembayaran from './pages/Pembayaran';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/tambah-wisata" element={<TambahData />} />
         <Route path="/edit-wisata" element={<EditData />} />
+        <Route path="/pembayaran" element={<Pembayaran />} />
       </Routes>
       {/* <Footer /> */}
     </>
