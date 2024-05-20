@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import InputRow from "../../component/InputRow";
+import Button from "../../component/Button";
 
 export default function UserForm() {
   const {
@@ -24,14 +25,14 @@ export default function UserForm() {
               alt="user profile"
               className=" w-24"
             />
-            <Link to="/upload-foto" className="text-sky-500">
+            <Link to="/upload-foto" className="text-regent-500">
               Tambah foto
             </Link>
           </div>
           <div className="flex flex-col gap-1">
-            <p className="text-xl font-semibold">Maya Anggita</p>
+            <p className="text-xl font-semibold">Ahmad Sumamad</p>
             <p className="text-sm text-gray-500">0812-3456-7890</p>
-            <p className="text-sm text-gray-500">maya@example.com</p>
+            <p className="text-sm text-gray-500">sumamad@example.com</p>
           </div>
         </div>
         <form
@@ -42,7 +43,7 @@ export default function UserForm() {
             <input
               type="text"
               id="nama"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-950 p-2 bg-regent-100 outline-regent-500"
               {...register("nama", { required: "Kolom nama harus diisi." })}
             />
           </InputRow>
@@ -50,7 +51,7 @@ export default function UserForm() {
             <input
               type="number"
               id="handphone"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-950 p-2 bg-regent-100 outline-regent-500"
               {...register("handphone", {
                 required: "Kolom no handphone harus diisi.",
               })}
@@ -60,7 +61,7 @@ export default function UserForm() {
             <input
               type="text"
               id="email"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-950 p-2 bg-regent-100 outline-regent-500"
               {...register("email", {
                 required: "Kolom email harus diisi.",
               })}
@@ -70,14 +71,14 @@ export default function UserForm() {
             <input
               type="password"
               id="sandi"
-              className="border-b border-gray-900 p-2 bg-transparent"
+              className="border-b border-gray-950 p-2 bg-regent-100 outline-regent-500"
               {...register("sandi", {
                 required: "Kolom sandi harus diisi.",
               })}
             />
           </InputRow>
           <div className="ml-auto">
-            <button className="button px-6 mt-8 w-full">Submit</button>
+            <Button type="primary">Submit</Button>
           </div>
         </form>
       </div>

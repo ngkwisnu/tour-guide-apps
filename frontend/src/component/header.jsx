@@ -15,7 +15,7 @@ const nav__links = [
     display: 'App',
   },
   {
-    path: '/wisata',
+    path: '/package',
     display: 'wisata',
   },
   {

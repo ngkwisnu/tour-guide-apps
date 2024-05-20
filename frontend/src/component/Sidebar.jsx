@@ -1,49 +1,54 @@
-import React from "react";
-import {
-  ArrowDownWideNarrow,
-  BadgeInfo,
-  CreditCard,
-  LayoutList,
-  SquareCheckBig,
-  User,
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { ArrowDownWideNarrow, BadgeInfo, CreditCard, LayoutList, SquareCheckBig, User } from 'lucide-react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+
+const links = [
+  {
+    title: 'Profile Pengguna',
+    to: '/profile',
+    icon: <User />,
+  },
+  {
+    title: 'Invoice',
+    to: '/profile/invoice',
+    icon: <SquareCheckBig />,
+  },
+  {
+    title: 'Bukti Pembayaran',
+    to: '/profile/bukti-pembayaran',
+    icon: <LayoutList />,
+  },
+  {
+    title: 'Menunggu Pembayaran',
+    to: '/profile/menunggu-pembayaran',
+    icon: <CreditCard />,
+  },
+  {
+    title: 'Riwayat Transaksi',
+    to: '/profile/riwayat-transaksi',
+    icon: <ArrowDownWideNarrow />,
+  },
+  {
+    title: 'Pusat Bantuan',
+    to: '/profile/pusat-bantuan',
+    icon: <BadgeInfo />,
+  },
+];
 
 export default function Sidebar() {
+  const path = useLocation().pathname;
+
   return (
     <div className="">
       <h1 className="text-4xl font-semibold">Akun</h1>
       <ul className="mt-16 flex flex-col gap-11">
-        <li>
-          <Link to="/profile" className="flex gap-4 text-sky-500">
-            <User /> Profile Pengguna
-          </Link>
-        </li>
-        <li>
-          <Link to="invoice" className="flex gap-4">
-            <SquareCheckBig /> Invoice
-          </Link>
-        </li>
-        <li>
-          <Link to="bukti-pembayaran" className="flex gap-4">
-            <LayoutList /> Bukti Pembayaran
-          </Link>
-        </li>
-        <li>
-          <Link to="menunggu-pembayaran" className="flex gap-4">
-            <CreditCard /> Menunggu Pembayaran
-          </Link>
-        </li>
-        <li>
-          <Link to="riwayat-transaksi" className="flex gap-4">
-            <ArrowDownWideNarrow /> Riwayat Transaksi
-          </Link>
-        </li>
-        <li>
-          <Link to="pusat-bantuan" className="flex gap-4">
-            <BadgeInfo /> Pusat Bantuan
-          </Link>
-        </li>
+        {links.map((link) => (
+          <li key={link.to}>
+            <Link to={link.to} className={`flex gap-4 ${path === link.to ? 'text-regent-500 font-semibold' : ''}`}>
+              {link.icon} {link.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
