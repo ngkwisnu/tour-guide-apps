@@ -10,6 +10,7 @@ import Admin from '../../pages/Admin';
 import TambaData from '../admin/TambahData';
 import EditData from '../admin/EditData';
 import UserLayout from '../layout/userLayout';
+import Pembayaran from '../../pages/Pembayaran'
 import AccountLayout from '../AccountLayout';
 import ProfileUser from '../../pages/ProfileUser';
 import InvoicePage from '../../pages/InvoicePage';
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path="/package" element={<Package />} />
         <Route path="/package/package-detail" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/pembayaran" element={<Pembayaran />} />
         <Route path="/admin/tambah-wisata" element={<TambaData />} />
         <Route path="/admin/edit-wisata" element={<EditData />} />
         <Route path="/profile" element={<UserLayout />}>

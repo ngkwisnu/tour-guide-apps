@@ -2,14 +2,16 @@
 
 const colors = require('tailwindcss/colors');
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', 'node_modules/flowbite-react/lib/esm/**/*.js'],
+
   purge: ['./src/**/*.{js,jsx,ts,tsx,html}'],
   theme: {
     extend: {},
     colors: {
       'gray-50': '#F5F8F8',
-      'white': '#ffff',
-      'black': '#000',
+      white: '#ffff',
+      black: '#000',
+      blue: '#319795',
       'gray-200': '#DDE5E8',
       'gray-700': '#6D7989',
       'gray-950': '#2E3238',

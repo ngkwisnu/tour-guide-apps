@@ -1,13 +1,17 @@
 import Background from '../assets/images/bg-hero.png';
 import Background2 from '../assets/images/bg-hero.png';
 import People from '../assets/images/people.png';
+import React, { useRef } from 'react';
+import { Star } from 'lucide-react';
+import { Button, ButtonGroup, Link, Text } from '@chakra-ui/react';
 
 export default function Home() {
+  
   const destination = [
     {
       img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Rome, Italy',
-      amount: '$5.42k',
+      location: 'Nusa Penida',
+      amount: 'Rp. 320.000',
       days: '10 Days Trip',
       sideImg: '',
     },
@@ -26,6 +30,8 @@ export default function Home() {
       sideImg: '/img/Decore2.png',
     },
   ];
+
+
   return (
     <>
       {/* Home */}
@@ -34,21 +40,13 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen items-center justify-center lg:px-8 lg:flex-row lg:justify-between">
           <div className="max-w-xl text-center md:text-left">
-            <h1 className="text-3xl font-extrabold sm:text-5xl">
-              Let us find your
-              <strong className="block font-extrabold text-rose-700"> Forever Home. </strong>
-            </h1>
+            <h1 className="text-3xl text-white font-extrabold sm:text-5xl">Lebih dari Sekadar Wisata!</h1>
 
-            <p className="mt-4 max-w-lg sm:text-xl/relaxed">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus numquam ea!</p>
+            <p className="mt-4 max-w-lg text-white sm:text-lg">Jelajahi keindahan dan budaya Bali bersama Nusa Guide. Biarkan kami membantu merencanakan liburan impian Anda!</p>
 
             <div className="mt-8 flex flex-wrap gap-4 text-center">
-              <a href="#" className="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
-                Get Started
-              </a>
-
-              <a href="#" className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
-                Learn More
-              </a>
+              <Link color='white' href="#popular"  _hover={{ textDecoration: "none" }}  className="block  bg-[#319795] w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">Mulai perjalan</Link>
+              <Link color='black' href="#learn"  _hover={{ textDecoration: "none" }}  className="block  bg-white w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">Pelajari lebih lanjut</Link>
             </div>
           </div>
           <div className="md:flex hidden h-screen items-center justify-center p-6 mt-8 lg:mt-0  sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
@@ -58,30 +56,42 @@ export default function Home() {
       </section>
 
       {/* POPULAR DEST */}
-      <section className="relative w-full mt-10  px-[5%] grid grid-cols-1 gap-6" id="destination">
+      <section id="popular" className="relative w-full mt-10  px-[5%] grid grid-cols-1 gap-6">
         <div className="border-b mb-5 flex justify-between text-sm">
           <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
-            <a href="#" className="font-semibold inline-block">
-              Popular destination
-            </a>
+            <Text className="font-semibold inline-block">Popular destination</Text>
           </div>
-          <a href="#">See All</a>
+          <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
+            <Link color="teal.500" href="/package">
+              See All
+            </Link>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-4 lg:gap-8 xl:gap-16 special-font">
+        <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-4 lg:gap-8 xl:gap-16 special-font ">
           {destination.map((destinations, index) => (
-            <div className="relative flex flex-col rounded-2xl shadow-sm" key={index}>
+            <div className="relative flex flex-col rounded-2xl shadow-sm border border-black " key={index}>
               <div className="relative z-10" data-aos="fade-down">
-                <div className="h-[350px]">
+                <div className="h-[250px]">
                   <img src={destinations.img} width={300} height={300} alt="img" className="w-full h-full rounded-tl-2xl rounded-tr-2xl" />
                 </div>
                 <div className="grid grid-cols-1 gap-2 p-4">
-                  <div className="text-[18px] text-litegrey font-medium flex items-center justify-between gap-4">
-                    <p>{destinations.location}</p> <p>{destinations.amount}</p>
+                  <p className="text-xl font-medium">{destinations.location}</p>
+                  <div className="text-base text-litegrey  flex items-center justify-between gap-4">
+                    <div>
+                      <p>Ulasan 1rb</p>
+                      <div className="flex gap-2 items-center text-xs">
+                        <Star size={16} color="#FABB05" fill="#FABB05" />
+                        4.5
+                      </div>
+                    </div>
+                    <p>
+                      {destinations.amount}/<span className="text-sm italic">orang</span>
+                    </p>
                   </div>
-                  <div className="text-[16px] text-litegrey font-medium flex items-center gap-1">
-                    <p>{destinations.days}</p>
-                  </div>
+                  <Button colorScheme="teal" size="md">
+                    Button
+                  </Button>
                 </div>
               </div>
 
@@ -92,7 +102,7 @@ export default function Home() {
       </section>
 
       {/* BENEFIT */}
-      <div className="max-w-screen-xl h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
+      <div id='learn' className="max-w-screen-xl h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
             <div class="flex justify-center">
@@ -128,7 +138,7 @@ export default function Home() {
       </div>
 
       {/* PREVIEW */}
-      <section class="bg-white">
+      <section  class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Read trusted reviews from our customers</h2>
 
