@@ -6,7 +6,7 @@ import PackageDetail from '../../pages/PackageDetail';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import NotFound from '../../pages/NotFound';
-import Admin from '../admin/MainAdmin';
+import Admin from '../../pages/Admin';
 import TambaData from '../admin/TambahData';
 import EditData from '../admin/EditData';
 import UserLayout from '../layout/userLayout';

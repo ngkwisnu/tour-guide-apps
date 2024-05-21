@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
-import { Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react';
+// import { Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react';
 
 const Package = () => {
   const [modal, setModal] = useState(false);
@@ -49,14 +49,14 @@ const Package = () => {
       {/* input */}
       <div class="flex items-center justify-center py-10">
         <div class="flex w-full mx-16 items-center">
-          <InputGroup>
+          {/* <InputGroup>
             <Input focusBorderColor="black" placeholder="Nyari opo...? " size="md" borderRadius="full"  />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" colorScheme='teal'>
                 <Search />
               </Button>
             </InputRightElement>
-          </InputGroup>
+          </InputGroup> */}
         </div>
       </div>
       <section className="relative w-full py-8  px-[5%]  gap-6" id="destination">
