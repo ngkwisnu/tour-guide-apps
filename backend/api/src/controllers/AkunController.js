@@ -1,10 +1,10 @@
-const userModel = require('../models/UserModel')
+const akunModel = require('../models/AkunModel')
 
-const getAllUser = async(req, res) => {
+const getAllAkun = async(req, res) => {
     try {
-        const [ data ] = await userModel.getAllUser()
+        const [ data ] = await akunModel.getAllAkun()
         res.json({
-            message: 'GET all user success!',
+            message: 'GET all akun success!',
             data: data
         })
     } catch (error) {
@@ -15,20 +15,20 @@ const getAllUser = async(req, res) => {
     }
 }
 
-const getUserById = async(req, res) => {
+const getAkunById = async(req, res) => {
     const id = req.params.id
 
     try {
-        const user = await userModel.getUserById(id)
+        const akun = await akunModel.getAkunById(id)
 
-        if (user.length > 0) {
+        if (akun.length > 0) {
             res.json({
-                message: `Data user Dengan ID:${id} Berhasil Diambil!`,
-                data: user,
+                message: `Data akun Dengan ID:${id} Berhasil Diambil!`,
+                data: akun,
             });
         } else {
             res.status(404).json({
-                message: `Data user Dengan ID:${id} tidak ditemukan, tolong masukkan data dengan benar!`,
+                message: `Data akun Dengan ID:${id} tidak ditemukan, tolong masukkan data dengan benar!`,
             })
         }
     } catch (error) {
@@ -39,31 +39,31 @@ const getUserById = async(req, res) => {
     }
 }
 
-const addUser = async (req, res) => {
+const addAkun = async (req, res) => {
     const { body } = req;
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.email || !body.username || !body.password || !body.role || !body.created_at || !body.updated_at) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
         });
     }
 
     try {
-        // Cek apakah data dengan nama yang sama sudah ada
-        const dataAlreadyExists = await userModel.getUserByName(body.nama);
+        // Cek apakah data dengan email yang sama sudah ada
+        const dataAlreadyExists = await akunModel.getAkunByEmail(body.email);
         if (dataAlreadyExists.length > 0) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama User yang lain!`
+                message: `Akun dengan Email: ${body.email} sudah ada, silahkan masukkan Email yang lain!`
             });
         }
 
-        // Tambahkan data user
-        await userModel.addUser(body);
+        // Tambahkan data akun
+        await akunModel.addAkun(body);
 
         // Kirim respons berhasil
         res.status(201).json({
-            message: 'Tambah data User berhasil!',
+            message: 'Tambah data Akun berhasil!',
             data: body
         });
     } catch (error) {
@@ -75,13 +75,12 @@ const addUser = async (req, res) => {
     }
 }
 
-const updateUser = async (req, res) => {
+const updateAkun = async (req, res) => {
     const { id } = req.params;
-    let { body } = req;
-    console.log(body);
+    const { body } = req;
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.email || !body.username || !body.password || !body.role || !body.created_at || !body.updated_at) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
             data: null
@@ -89,20 +88,20 @@ const updateUser = async (req, res) => {
     }
 
     try {
-        // Cek apakah data dengan nama yang sama sudah ada
-        const dataAlreadyExists = await userModel.getUserByName(body.nama);
+        // Cek apakah data dengan email yang sama sudah ada
+        const dataAlreadyExists = await akunModel.getAkunByEmail(body.email);
         if (dataAlreadyExists.length > 1) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama user yang lain!`
+                message: `Akun dengan Email: ${body.email} sudah ada, silahkan masukkan Email yang lain!`
             });
         }
 
-        // Lakukan pembaruan data user
-        await userModel.updateUser(body, id);
+        // Lakukan pembaruan data akun
+        await akunModel.updateAkun(body, id);
 
         // Kirim respons berhasil
         res.status(201).json({
-            message: `UPDATE user dengan ID:${id} berhasil!`,
+            message: `UPDATE akun dengan ID:${id} berhasil!`,
             data: {
                 id: id,
                 ...body
@@ -117,18 +116,18 @@ const updateUser = async (req, res) => {
     }
 }
 
-const deleteUser = async(req, res) => {
+const deleteAkun = async(req, res) => {
     const { id } = req.params
     try {
-        const dataAlreadyExists = await userModel.getUserById(id)
+        const dataAlreadyExists = await akunModel.getAkunById(id)
         if(dataAlreadyExists.length == 0){
             return res.status(400).json({
-                message: `Deleted failed! User dengan ID:${id} tidak ditemukan!`
+                message: `Deleted failed! Akun dengan ID:${id} tidak ditemukan!`
             })
         } 
-        await userModel.deleteUser(id)
+        await akunModel.deleteAkun(id)
         res.json({
-            message : `Deleted User dengan ID:${id} sukses!`,
+            message : `Deleted Akun dengan ID:${id} sukses!`,
             data : null
         })
     } catch (error) {
@@ -140,9 +139,9 @@ const deleteUser = async(req, res) => {
 }
 
 module.exports = {
-    getAllUser,
-    getUserById,
-    addUser,
-    updateUser,
-    deleteUser
+    getAllAkun,
+    getAkunById,
+    addAkun,
+    updateAkun,
+    deleteAkun
 }

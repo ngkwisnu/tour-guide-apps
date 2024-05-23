@@ -1,10 +1,10 @@
-const userModel = require('../models/UserModel')
+const pusatBantuanModel = require('../models/PusatBantuanModel')
 
-const getAllUser = async(req, res) => {
+const getAllInformasi = async(req, res) => {
     try {
-        const [ data ] = await userModel.getAllUser()
+        const [ data ] = await pusatBantuanModel.getAllInformasi()
         res.json({
-            message: 'GET all user success!',
+            message: 'GET all information success!',
             data: data
         })
     } catch (error) {
@@ -15,20 +15,20 @@ const getAllUser = async(req, res) => {
     }
 }
 
-const getUserById = async(req, res) => {
+const getInformasiById = async(req, res) => {
     const id = req.params.id
 
     try {
-        const user = await userModel.getUserById(id)
+        const information = await pusatBantuanModel.getInformasiById(id)
 
-        if (user.length > 0) {
+        if (information.length > 0) {
             res.json({
-                message: `Data user Dengan ID:${id} Berhasil Diambil!`,
-                data: user,
+                message: `Informasi layanan Dengan ID:${id} Berhasil Diambil!`,
+                data: information,
             });
         } else {
             res.status(404).json({
-                message: `Data user Dengan ID:${id} tidak ditemukan, tolong masukkan data dengan benar!`,
+                message: `Informasi layanan Dengan ID:${id} tidak ditemukan, tolong masukkan data dengan benar!`,
             })
         }
     } catch (error) {
@@ -39,31 +39,31 @@ const getUserById = async(req, res) => {
     }
 }
 
-const addUser = async (req, res) => {
+const addInformasi = async (req, res) => {
     const { body } = req;
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.judul || !body.deskripsi) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
         });
     }
 
     try {
-        // Cek apakah data dengan nama yang sama sudah ada
-        const dataAlreadyExists = await userModel.getUserByName(body.nama);
-        if (dataAlreadyExists.length > 0) {
+        // Cek apakah data dengan judul yang sama sudah ada
+        const dataAlreadyExists = await pusatBantuanModel.getInformasiByJudul(body.judul);
+        if (dataAlreadyExists.length > 1) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama User yang lain!`
+                message: `Informasi dengan Judul: ${body.judul} sudah ada, silahkan masukkan Judul yang lain!`
             });
         }
 
-        // Tambahkan data user
-        await userModel.addUser(body);
+        // Tambahkan data informasi
+        await pusatBantuanModel.addInformasi(body);
 
         // Kirim respons berhasil
         res.status(201).json({
-            message: 'Tambah data User berhasil!',
+            message: 'Tambah data Informasi berhasil!',
             data: body
         });
     } catch (error) {
@@ -75,13 +75,12 @@ const addUser = async (req, res) => {
     }
 }
 
-const updateUser = async (req, res) => {
+const updateInformasi = async (req, res) => {
     const { id } = req.params;
-    let { body } = req;
-    console.log(body);
+    const { body } = req;
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.judul || !body.deskripsi) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
             data: null
@@ -89,20 +88,20 @@ const updateUser = async (req, res) => {
     }
 
     try {
-        // Cek apakah data dengan nama yang sama sudah ada
-        const dataAlreadyExists = await userModel.getUserByName(body.nama);
-        if (dataAlreadyExists.length > 1) {
+        // Cek apakah data dengan judul yang sama sudah ada
+        const dataAlreadyExists = await pusatBantuanModel.getInformasiByJudul(body.judul);
+        if (dataAlreadyExists.length > 0) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama user yang lain!`
+                message: `Informasi dengan Judul: ${body.judul} sudah ada, silahkan masukkan Judul yang lain!`
             });
         }
 
-        // Lakukan pembaruan data user
-        await userModel.updateUser(body, id);
+        // Lakukan pembaruan data informasi
+        await pusatBantuanModel.updateInformasi(body, id);
 
         // Kirim respons berhasil
         res.status(201).json({
-            message: `UPDATE user dengan ID:${id} berhasil!`,
+            message: `UPDATE informasi dengan ID:${id} berhasil!`,
             data: {
                 id: id,
                 ...body
@@ -117,18 +116,18 @@ const updateUser = async (req, res) => {
     }
 }
 
-const deleteUser = async(req, res) => {
+const deleteInformasi = async(req, res) => {
     const { id } = req.params
     try {
-        const dataAlreadyExists = await userModel.getUserById(id)
+        const dataAlreadyExists = await pusatBantuanModel.getInformasiById(id)
         if(dataAlreadyExists.length == 0){
             return res.status(400).json({
-                message: `Deleted failed! User dengan ID:${id} tidak ditemukan!`
+                message: `Deleted failed! Informasi dengan ID:${id} tidak ditemukan!`
             })
         } 
-        await userModel.deleteUser(id)
+        await pusatBantuanModel.deleteInformasi(id)
         res.json({
-            message : `Deleted User dengan ID:${id} sukses!`,
+            message : `Deleted Informasi dengan ID:${id} sukses!`,
             data : null
         })
     } catch (error) {
@@ -140,9 +139,9 @@ const deleteUser = async(req, res) => {
 }
 
 module.exports = {
-    getAllUser,
-    getUserById,
-    addUser,
-    updateUser,
-    deleteUser
+    getAllInformasi,
+    getInformasiById,
+    addInformasi,
+    updateInformasi,
+    deleteInformasi
 }

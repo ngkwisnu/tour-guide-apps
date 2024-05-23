@@ -16,28 +16,30 @@ const getUserById = async(id) => {
 }
 
 const addUser = (body) => {
-    const { name, email, role, password, created_at, updated_at } = body;
+    const { nama, telepon, alamat, foto, id_akun } = body;
+    console.log(body);
     const SQLQuery = `
-        INSERT INTO user (name, email, role, password, created_at, updated_at) 
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO user (nama, telepon, alamat, foto, id_akun) 
+        VALUES (?, ?, ?, ?, ?)
     `;
-    const values = [ name, email, role, password, created_at, updated_at ];
+    const values = [ nama, telepon, alamat, foto, id_akun ];
     return dbPool.execute(SQLQuery, values);
 }
 
 const updateUser = (body, id) => {
-    const { name, email, role, password, created_at, updated_at } = body;
+    const { nama, telepon, alamat, foto, id_akun } = body;
     const SQLQuery = `
         UPDATE user 
-        SET name = ?, email = ?, role = ?, password = ?, created_at = ?, updated_at = ? WHERE id = ?
+        SET nama = ?, telepon = ?, alamat = ?, foto = ?, id_akun = ? 
+        WHERE id = ?
     `;
-    const values =  [ name, email, role, password, created_at, updated_at, id ];
+    const values = [ nama, telepon, alamat, foto, id_akun, id ];
     return dbPool.execute(SQLQuery, values);
 }
 
-const getUserByName = async(name) => {
+const getUserByName = async(nama) => {
     try {
-        const [ hasil ] = await dbPool.query(`SELECT * FROM user WHERE name = ?`, [name])
+        const [ hasil ] = await dbPool.query(`SELECT * FROM user WHERE nama = ?`, [nama])
         return hasil
     } catch (error) {
         console.error('Error in getUserByName ', error)

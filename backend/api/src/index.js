@@ -7,16 +7,20 @@ app.use(express.json());
 const server = http.createServer(app);
 
 const WisataRoute = require('./routes/WisataRoute');
-const TourGuideRoute = require('./routes/TourGuideRoute');
 const UserRoute = require('./routes/UserRoute');
-const TransactionRoute = require('./routes/TransactionRoute');
-const RiviewRoute = require('./routes/RiviewRoute');
+const AkunRoute = require('./routes/AkunRoute');
+const PusatBantuanRoute = require('./routes/PusatBantuanRoute');
+const PaketRoute = require('./routes/PaketRoute');
+const PesananRoute = require('./routes/PesananRoute');
+const UlasanRoute = require('./routes/UlasanRoute');
 
 app.use('/wisata', WisataRoute);
-app.use('/tour-guide', TourGuideRoute);
 app.use('/user', UserRoute);
-app.use('/transaction', TransactionRoute);
-app.use('/review', RiviewRoute);
+app.use('/akun', AkunRoute);
+app.use('/pusat-bantuan', PusatBantuanRoute);
+app.use('/paket', PaketRoute);
+app.use('/pesanan', PesananRoute);
+app.use('/ulasan', UlasanRoute);
 
 server.listen(PORT, HOST, () => {
     console.log(`Server is running in http://localhost:${PORT}`);

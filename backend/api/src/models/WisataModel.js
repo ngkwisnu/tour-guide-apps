@@ -1,13 +1,13 @@
 const dbPool = require('../config/database')
 
 const getAllWisata = () => {
-    const SQLQuery = 'SELECT * FROM destination'
+    const SQLQuery = 'SELECT * FROM wisata'
     return dbPool.execute(SQLQuery)
 }
 
 const getWisataById = async(id) => {
     try {
-        const result = await dbPool.query('SELECT * FROM destination WHERE id = ?', [id]);
+        const result = await dbPool.query('SELECT * FROM wisata WHERE id = ?', [id]);
         return result[0];
     } catch (error) {
         console.error('Error in getWisataById:', error);
@@ -16,28 +16,30 @@ const getWisataById = async(id) => {
 }
 
 const addWisata = (body) => {
-    const { user_id, name, latitude, longitude, description, address, price_ticket, image, opening_hours } = body;
+    const { nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at } = body;
+    console.log(body);
     const SQLQuery = `
-        INSERT INTO destination (user_id, name, latitude, longitude, description, address, price_ticket, image, opening_hours) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO wisata (nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
-    const values = [ user_id, name, latitude, longitude, description, address, price_ticket, image, opening_hours ];
+    const values = [ nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at ];
     return dbPool.execute(SQLQuery, values);
 }
 
 const updateWisata = (body, id) => {
-    const { user_id, name, latitude, longitude, description, address, price_ticket, image, opening_hours } = body;
+    const { nama, lokasi, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at } = body;
     const SQLQuery = `
-        UPDATE destination 
-        SET user_id = ?, name = ?, latitude = ?, longitude = ?, description = ?, address = ?, price_ticket = ?, image = ?, opening_hours = ? WHERE id = ?
+        UPDATE wisata 
+        SET nama = ?, lokasi = ?, jarak_lokasi = ?, rating = ?, harga = ?, deskripsi = ?, gambar1 = ?, gambar2 = ?, gambar3 = ?, gambar4 = ?, informasi_tourguide = ?, harga_termasuk = ?, created_at = ?, updated_at = ? 
+        WHERE id = ?
     `;
-    const values =  [ user_id, name, latitude, longitude, description, address, price_ticket, image, opening_hours, id ];
+    const values =  [ nama, lokasi, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at, id ];
     return dbPool.execute(SQLQuery, values);
 }
 
-const getWisataByName = async(name) => {
+const getWisataByName = async(nama) => {
     try {
-        const [ hasil ] = await dbPool.query(`SELECT * FROM destination WHERE name = ?`, [name])
+        const [ hasil ] = await dbPool.query(`SELECT * FROM wisata WHERE nama = ?`, [nama])
         return hasil
     } catch (error) {
         console.error('Error in getWisataByName ', error)
@@ -47,7 +49,7 @@ const getWisataByName = async(name) => {
 
 const deleteWisata = async(id) => {
     try {
-        await dbPool.query('DELETE FROM destination WHERE id = ?', [id]);
+        await dbPool.query('DELETE FROM wisata WHERE id = ?', [id]);
     } catch (error) {
         console.error('Error in deleteWisata:', error);
         throw error;
