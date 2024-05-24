@@ -11,16 +11,12 @@ const nav__links = [
     display: 'Home',
   },
   {
-    path: '/app',
-    display: 'App',
-  },
-  {
     path: '/package',
     display: 'wisata',
   },
   {
-    path: '/notifikasi',
-    display: 'notifikasi',
+    path: '/about',
+    display: 'about',
   },
 ];
 
@@ -91,14 +87,14 @@ const Header = () => {
 
               <div class="flex items-center gap-4">
                 <div class="sm:flex sm:gap-4">
-                  <Link class="rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white shadow" href="/login">
+                  <a class="rounded-md bg-black px-5 py-2.5 text-sm font-medium text-white shadow" href="/login">
                     Login
-                  </Link>
+                  </a>
 
                   <div class="hidden sm:flex">
-                    <Link class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600" href="/register">
+                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600" href="/register">
                       Register
-                    </Link>
+                    </a>
                   </div>
                 </div>
 

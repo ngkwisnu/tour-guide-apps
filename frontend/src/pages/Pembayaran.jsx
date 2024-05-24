@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../component/header';
+import { Button, Link } from '@chakra-ui/react';
 
 const Pembayaran = () => {
   const [showNav, setShowNav] = useState(false);
@@ -67,6 +68,11 @@ const Pembayaran = () => {
               </div>
             </div>
           </div>
+          <div className="w-full text-center my-8">
+            <Button colorScheme="blue">
+              <Link _hover={{ textDecoration: "none" }} href="/profile/invoice">Bayar</Link>{' '}
+            </Button>
+          </div>
         </main>
       </div>
       <div className="lg:hidden flex flex-col justify-center item-center">
@@ -133,7 +139,7 @@ const Pembayaran = () => {
           </div>
           <div className="flex flex-col justify-center items-center mt-10">
             <span className="bg-slate-200 text-sm px-5 py-1 rounded-t-md">Download aplikasi diskon Rp 20.000!</span>
-            <button className="w-full bg-blue-300 text-lg font-bold text-white h-12 rounded-md">Bayar</button>
+            <button className="w-full bg-blue-300 text-lg font-bold bg-black text-white h-12 rounded-md">Bayar</button>
           </div>
         </div>
       </div>

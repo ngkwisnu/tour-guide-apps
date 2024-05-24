@@ -7,21 +7,21 @@ const Package = () => {
   const destination = [
     {
       img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Rome, Italy',
+      location: 'Nusa Penida',
       amount: 'Rp 300.000',
       days: '10 Days Trip',
       sideImg: '',
     },
     {
       img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'London, UK',
+      location: 'Nusa Penida',
       amount: 'Rp 300.000',
       days: '12 Days Trip',
       sideImg: '',
     },
     {
       img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Full Europe',
+      location: 'Nusa Penida',
       amount: 'Rp 300.000',
       days: '28 Days Trip',
       sideImg: '/img/Decore2.png',
@@ -31,16 +31,18 @@ const Package = () => {
     <>
       <section className="overflow-hidden h-screen  px-4 sm:px-6 w-full relative">
         <div
-          className="relative min-h-screen rounded-lg "
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1613121618125-025de63d792d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)' }}
+          className="relative min-h-screen rounded-lg object-cover w-full"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1596402184320-417e7178b2cd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D),', backgroundPosition: 'center',
+            
+           }}
         >
           <div class="absolute inset-0 bg-black opacity-40 rounded-lg "></div>
           {/* tulisan */}
-          <div className="flex justify-start px-24 h-full w-full items-start pt-8 absolute inset-0 ">
+          <div className="flex justify-start px-24 h-full w-full items-start pt-20 absolute inset-0 ">
             <div className="max-w-full">
-              <h1 className="mb-5 text-8xl text-[#fff] font-bold">Explore the sight of the azore</h1>
-              <p className="mb-5 text-xl text-[#fff] ">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-              <button className=" text-sm py-2 px-6 bg-white rounded-full  ">Book Now</button>
+              <h1 className="mb-5 text-4xl text-[#fff] font-bold  ">Bali Memanggil <span className='block text-red-500 text-7xl '>Temukan Surga yang Tak Terlupakan</span></h1>
+              <p className="mb-5 text-xl text-[#fff] ">Nikmati keindahan alam, pantai berpasir putih, budaya yang kaya, dan petualangan seru di setiap sudut Bali. Bersiaplah untuk menciptakan kenangan tak terlupakan di pulau surga ini.</p>
+              <button className=" text-sm py-2 px-6 bg-white rounded-full  ">Pesan Sekarang!</button>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ export default {
       white: '#ffff',
       black: '#000',
       blue: '#319795',
+      'indigo-500': '#6366f1',
       'gray-200': '#DDE5E8',
       'gray-700': '#6D7989',
       'gray-950': '#2E3238',

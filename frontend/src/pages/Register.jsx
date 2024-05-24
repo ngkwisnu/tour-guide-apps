@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@chakra-ui/react';
 
 const Register = () => {
   return (
@@ -56,10 +56,8 @@ const Register = () => {
             </div>
             <p className="mt-10">
               Sudah punya akun?{' '}
-              <Link to="/login">
-                <a href="/" className="text-sky-300">
-                  Masuk
-                </a>
+              <Link _hover={{ textColor: 'white' }} color="teal.500" href="/login">
+                Masuk
               </Link>
             </p>
           </div>
@@ -109,10 +107,8 @@ const Register = () => {
             </div>
             <p className="mt-10 lg:mt-7">
               Sudah punya akun?{' '}
-              <Link to="/login">
-                <a href="/" className="text-sky-300">
-                  Masuk
-                </a>
+              <Link _hover={{ textColor: 'black' }} className='font-semibold' color="teal.500" href="/login">
+                Masuk
               </Link>
             </p>
           </div>

@@ -18,7 +18,7 @@ export default function NotFound() {
               </div>
               <h5 className="-mr-10 -mt-3 font-semibold text-gray-300">Page not found</h5>
               <p className="mb-6 mt-2 text-gray-100">we are sorry, but the page you requested was not found</p>
-              <a className="rounded-full bg-green-400 px-5 py-3 text-sm font-medium tracking-wider text-gray-50 shadow-sm hover:shadow-lg"> Got to Home </a>
+              <a href="/" className="rounded-full bg-green-400 px-5 py-3 text-sm font-medium tracking-wider text-gray-50 shadow-sm hover:shadow-lg"> Got to Home </a>
             </div>
           </div>
         </div>

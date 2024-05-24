@@ -7,7 +7,7 @@ const userLayout = () => {
   return (
     <>
       <div className="mx-[72px] mb-16">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="grid grid-cols-4 mt-16">
           <Sidebar />
           <div className=" col-span-3 flex flex-col w-full ">

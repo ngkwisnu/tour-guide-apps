@@ -6,7 +6,7 @@ import Profile from '../component/pengguna/Profile'
 const AkunPengguna = () => {
     return (
         <>
-            <Navbar/>
+            {/* <Navbar/> */}
             <div className='flex w-full bg-slate-200 h-screen mb-10'>
                 <div className='bg-white w-1/5 px-10 py-10'>
                     <h1 className='font-bold text-2xl'>Akun</h1>

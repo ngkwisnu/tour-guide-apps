@@ -1,13 +1,13 @@
 import ImagePreview from '../ImagePreview';
 import { Award, Star, BadgePercent } from 'lucide-react';
-// sourve : https://flowbite.com/blocks/publisher/blog-templates/
+import { Button, Link } from '@chakra-ui/react';
 
 export default function PackageLayout() {
   return (
     <>
       <main className=" mb-16 ">
         <ImagePreview
-          src="https://images.unsplash.com/photo-1714837003223-5144b6e082cb?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           className="h-[20rem] w-full object-cover rounded-none"
           alt="Example Image"
         />
@@ -49,33 +49,36 @@ export default function PackageLayout() {
             </div>
           </div>
           <h1 className="text-2xl font-bold md:text-4xl mt-5">Informasi Paket</h1>
-          <ul className='list-disc px-8 py-2'>
+          <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
           <h4 className="text-2xl font-bold md:text-xl mt-5">Paket Termasuk</h4>
-          <ul className='list-disc px-8 py-2'>
+          <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
           <h4 className="text-2xl font-bold md:text-xl mt-5">Paket tidak Termasuk</h4>
-          <ul className='list-disc px-8 py-2'>
+          <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
           <h4 className="text-2xl font-bold md:text-xl mt-5">Pilihan Jenis Kendaraan</h4>
-          <ul className='list-disc px-8 py-2'>
+          <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
           <div>
-          <h1 className="text-2xl font-bold md:text-4xl mt-5">Rating & Reviews</h1>
+            <h1 className="text-2xl font-bold md:text-4xl mt-5">Rating & Reviews</h1>
           </div>
         </article>
+        <div className="w-full text-center mt-8">
+          <Button colorScheme='blue'><Link href='/pembayaran'>Pesan sekarang</Link> </Button>
+        </div>
       </main>
     </>
   );
