@@ -16,24 +16,24 @@ const getWisataById = async(id) => {
 }
 
 const addWisata = (body) => {
-    const { nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at } = body;
+    const { nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, kategori, created_at, updated_at } = body;
     console.log(body);
     const SQLQuery = `
-        INSERT INTO wisata (nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at) 
+        INSERT INTO wisata (nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, kategori, created_at, updated_at) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
-    const values = [ nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at ];
+    const values = [ nama, lokasi, jam_buka, jam_tutup, jarak_lokasi, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, kategori, created_at, updated_at ];
     return dbPool.execute(SQLQuery, values);
 }
 
 const updateWisata = (body, id) => {
-    const { nama, lokasi, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at } = body;
+    const { nama, lokasi, jarak_lokasi, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, kategori, created_at, updated_at } = body;
     const SQLQuery = `
         UPDATE wisata 
-        SET nama = ?, lokasi = ?, jarak_lokasi = ?, rating = ?, harga = ?, deskripsi = ?, gambar1 = ?, gambar2 = ?, gambar3 = ?, gambar4 = ?, informasi_tourguide = ?, harga_termasuk = ?, created_at = ?, updated_at = ? 
+        SET nama = ?, lokasi = ?, jarak_lokasi = ?, harga = ?, deskripsi = ?, gambar1 = ?, gambar2 = ?, gambar3 = ?, gambar4 = ?, informasi_tourguide = ?, harga_termasuk = ?, kategori = ?, created_at = ?, updated_at = ? 
         WHERE id = ?
     `;
-    const values =  [ nama, lokasi, jarak_lokasi, rating, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, created_at, updated_at, id ];
+    const values =  [ nama, lokasi, jarak_lokasi, harga, deskripsi, gambar1, gambar2, gambar3, gambar4, informasi_tourguide, harga_termasuk, kategori, created_at, updated_at, id ];
     return dbPool.execute(SQLQuery, values);
 }
 

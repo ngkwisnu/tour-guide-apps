@@ -40,11 +40,10 @@ const getWisataById = async(req, res) => {
 }
 
 const addWisata = async(req, res) => {
-    let { body } = req
-    body = body[0]
-    const requiredFields = ['nama', 'lokasi', 'jam_buka', 'jam_tutup', 'jarak_lokasi', 'rating', 'harga', 'deskripsi', 'gambar1', 'gambar2', 'gambar3', 'gambar4', 'informasi_tourguide', 'harga_termasuk', 'created_at', 'updated_at'];
-
-    if (!requiredFields.every(field => body)) {
+    const { body } = req;
+    console.log(body);
+    // Periksa apakah semua properti yang diperlukan ada dalam objek body
+    if (!body.nama || !body.lokasi || !body.jarak_lokasi || !body.harga || !body.deskripsi || !body.gambar1 || !body.gambar2 || !body.gambar3 || !body.gambar4 || !body.informasi_tourguide || !body.harga_termasuk || !body.kategori || !body.created_at || !body.updated_at) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
         });
@@ -72,9 +71,9 @@ const addWisata = async(req, res) => {
 const updateWisata = async (req, res) => {
     const { id } = req.params;
     const { body } = req;
-
+    console.log(body);
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.lokasi || !body.jarak_lokasi || !body.rating || !body.harga || !body.deskripsi || !body.gambar1 || !body.gambar2 || !body.gambar3 || !body.gambar4 || !body.informasi_tourguide || !body.harga_termasuk || !body.created_at || !body.updated_at) {
+    if (!body.nama || !body.lokasi || !body.jarak_lokasi || !body.harga || !body.deskripsi || !body.gambar1 || !body.gambar2 || !body.gambar3 || !body.gambar4 || !body.informasi_tourguide || !body.harga_termasuk || !body.kategori || !body.created_at || !body.updated_at) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
             data: null

@@ -43,7 +43,7 @@ const addUser = async (req, res) => {
     const { body } = req;
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.email ||!body.username ||!body.password ||!body.role || !body.nama || !body.telepon || !body.alamat || !body.foto) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
         });
@@ -81,7 +81,7 @@ const updateUser = async (req, res) => {
     console.log(body);
 
     // Periksa apakah semua properti yang diperlukan ada dalam objek body
-    if (!body.nama || !body.telepon || !body.alamat || !body.foto || !body.id_akun) {
+    if (!body.email ||!body.username ||!body.password ||!body.role || !body.nama || !body.telepon || !body.alamat || !body.foto) {
         return res.status(400).json({
             message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
             data: null

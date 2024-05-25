@@ -42,7 +42,7 @@ const getPesananById = async(req, res) => {
 const addPesanan = async (req, res) => {
     let { body } = req;
     console.log(body);
-    const requiredFields = ['total', 'tanggal_pemesanan', 'tanggal_bayar', 'tanggal_keberangkatan', 'jumlah_orang', 'kode_booking', 'status', 'metode_pembayaran', 'id_user', 'id_paket', 'id_wisata'];
+    const requiredFields = ['total', 'tanggal_pemesanan', 'tanggal_bayar', 'tanggal_keberangkatan', 'jumlah_orang', 'kode_booking', 'status', 'metode_pembayaran', 'id_user', 'id_wisata'];
 
     if (!requiredFields.every(field => body.hasOwnProperty(field))) {
         return res.status(400).json({
@@ -73,7 +73,7 @@ const updatePesanan = async (req, res) => {
     const { id } = req.params;
     let { body } = req;
     console.log(body);
-    const requiredFields = ['total', 'tanggal_pemesanan', 'tanggal_bayar', 'tanggal_keberangkatan', 'jumlah_orang', 'kode_booking', 'status', 'metode_pembayaran', 'id_user', 'id_paket', 'id_wisata'];
+    const requiredFields = ['total', 'tanggal_pemesanan', 'tanggal_bayar', 'tanggal_keberangkatan', 'jumlah_orang', 'kode_booking', 'status', 'metode_pembayaran', 'id_user', 'id_wisata'];
 
     if (!requiredFields.every(field => body.hasOwnProperty(field))) {
         return res.status(400).json({

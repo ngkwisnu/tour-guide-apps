@@ -42,7 +42,7 @@ const getUlasanById = async(req, res) => {
 const addUlasan = async (req, res) => {
     let { body } = req;
     console.log(body);
-    const requiredFields = ['rating', 'ulasan', 'keunggulan', 'file', 'id_user', 'id_wisata', 'id_paket', 'created_at', 'updated_at'];
+    const requiredFields = ['rating', 'ulasan', 'keunggulan', 'file', 'id_user', 'id_wisata', 'created_at', 'updated_at'];
 
     if (!requiredFields.every(field => body.hasOwnProperty(field))) {
         return res.status(400).json({
@@ -73,7 +73,7 @@ const updateUlasan = async (req, res) => {
     const { id } = req.params;
     let { body } = req;
     console.log(body);
-    const requiredFields = ['rating', 'ulasan', 'keunggulan', 'file', 'id_user', 'id_wisata', 'id_paket', 'created_at', 'updated_at'];
+    const requiredFields = ['rating', 'ulasan', 'keunggulan', 'file', 'id_user', 'id_wisata', 'created_at', 'updated_at'];
 
     if (!requiredFields.every(field => body.hasOwnProperty(field))) {
         return res.status(400).json({
