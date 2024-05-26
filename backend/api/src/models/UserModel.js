@@ -80,6 +80,16 @@ const getUserByEmail = async (email) => {
     }
 };
 
+const getUserByUsername = async (username) => {
+    try {
+        const hasil = await dbPool.query(`SELECT * FROM user WHERE username = ?`, [username]);
+        return hasil
+    } catch (error) {
+        console.error('Error in getUserByUsername ', error);
+        throw error;
+    }
+};
+
 const deleteUser = async(id) => {
     try {
         await dbPool.query('DELETE FROM user WHERE id = ?', [id]);
@@ -97,5 +107,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getUserByEmail,
+    getUserByUsername,
     registerUser
 }

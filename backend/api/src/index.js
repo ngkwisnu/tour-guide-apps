@@ -5,6 +5,10 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
+// Impor dotenv
+const dotenv = require('dotenv');
+// Panggil method config() untuk memuat variabel lingkungan dari file .env
+dotenv.config();
 
 const WisataRoute = require('./routes/WisataRoute');
 const UserRoute = require('./routes/UserRoute');

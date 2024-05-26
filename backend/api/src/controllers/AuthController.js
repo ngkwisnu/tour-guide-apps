@@ -20,7 +20,7 @@ const register = async (req, res) => {
         const dataAlreadyExists = await userModel.getUserByEmail(body.email);
         if (dataAlreadyExists.length > 0) {
             return res.status(400).json({
-                message: `Email: ${body.nama} sudah terdaftar, silahkan Email yang lain!`
+                message: `Email: ${body.email} sudah terdaftar, silahkan Email yang lain!`
             });
         }
 
@@ -44,14 +44,13 @@ const register = async (req, res) => {
 const login = async (req, res) => {
 
     console.log(req.body);
-    const email = req.body.email
+    const username = req.body.username
     const password = req.body.password
 
     try{
         console.log('hai');
-        const user = await userModel.getUserByEmail(email)
-        console.log(user);
-        //if user doesnt exist
+        let user = await userModel.getUserByUsername(username)
+        user = user[0][0]
         if(!user){
             return res.status(404).json({
                 success: false,
@@ -59,15 +58,11 @@ const login = async (req, res) => {
             })
         }
 
-        // console.log(user);
-
         //if user exist then check the password or compare the password
         const checkCorrectPassword = await bcrypt.compare(
             password, 
             user.password
         )
-
-        // console.log(checkCorrectPassword);
 
         //if password is wrong
         if(!checkCorrectPassword){
@@ -77,11 +72,12 @@ const login = async (req, res) => {
             })
         }
 
-        const {password: hashedPassword, role, ...rest} = user._doc
+        const {password: hashedPassword, role, ...rest} = user
 
+        console.log(process.env);
         //create jwt token
         const token = jwt.sign(
-            {id: user._id, role: user.role},
+            {id: user.id, role: user.role},
             process.env.JWT_SECRET_KEY,
             {expiresIn: "15d"}
         )
@@ -94,6 +90,7 @@ const login = async (req, res) => {
         })
         .status(200)
         .json({
+            message: "Login Success!",
             token,
             data:{...rest},
             role,
