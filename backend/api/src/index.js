@@ -18,6 +18,11 @@ app.use('/user', UserRoute);
 app.use('/transaction', TransactionRoute);
 app.use('/review', RiviewRoute);
 
+//tes donk
+app.get("/", (req, res)=> {
+    res.json("Hello from backedn")
+})
+
 server.listen(PORT, HOST, () => {
     console.log(`Server is running in http://localhost:${PORT}`);
 });

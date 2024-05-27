@@ -2,11 +2,12 @@ import Header from '../header'
 import Router from '../router/Router';
 import ChatBot from '../ChatBot';
 import Footer from '../footer'
+import HeaderCopy from '../headerCopy';
 
 const Layout = () => {
   return (
     <>
-      <Header />
+      <HeaderCopy />
       <ChatBot/>
       <Router />
       <Footer />

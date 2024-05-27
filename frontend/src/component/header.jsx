@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
+import {Box} from '@chakra-ui/react'
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 // import { Link } from '@chakra-ui/react';
 import SectionContainer from './sectionContainer';
@@ -43,8 +44,7 @@ const Header = () => {
   };
 
   return (
-    <SectionContainer>
-      {/* tambahni klo mau asbsolute => md:absolute z-50 top-0 */}
+    <Box px={4}>
       <header class="bg-white  left-0 w-full">
         <div class="mx-auto w-full px-4 ">
           <div class="flex h-16 items-center justify-between">
@@ -62,7 +62,7 @@ const Header = () => {
                 <ul class="flex md:flex-row items-center gap-6 text-sm ">
                   {nav__links.map((item, index) => (
                     <li key={index}>
-                      <NavLink to={item.path} className={(navClass) => (navClass.isActive ? ' text-black transition hover:text-gray-500/75' : 'text-gray-500 transition hover:text-gray-500/75')}>
+                      <NavLink to={item.path} className={(navClass) => (navClass.isActive ? ' text-black transition hover:text-gray-500/75' : 'text-black transition hover:text-gray-500/75')}>
                         {item.display}
                       </NavLink>
                     </li>
@@ -72,11 +72,11 @@ const Header = () => {
 
               {/* Menu Dropdown */}
               {menuOpen && (
-                <nav className="md:hidden w-1/2 h-full absolute top-0 right-0 text-black bg-white z-40 border-l-2 border-black">
-                  <ul className="flex flex-col items-center justify-center h-full gap-4 ">
+                <nav className="md:hidden flex bg-white w-1/2 h-full absolute top-0 right-0  z-40 border-l-2 border-black">
+                  <ul >
                     {nav__links.map((item, index) => (
-                      <li key={index}>
-                        <NavLink to={item.path} className="text-gray-500 transition hover:text-gray-500/75">
+                      <li key={index} className="flex flex-col items-center absolute justify-center h-full gap-4 ">
+                        <NavLink to={item.path} className="text-black absolute top-[50%] z-50 transition hover:text-gray-500/75">
                           {item.display}
                         </NavLink>
                       </li>
@@ -111,7 +111,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </SectionContainer>
+    </Box >
   );
 };
 
