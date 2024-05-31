@@ -15,7 +15,6 @@ const corsOptions = {
     origin:true,
     credentials:true
 }
-
 const WisataRoute = require('./routes/WisataRoute');
 const UserRoute = require('./routes/UserRoute');
 const PusatBantuanRoute = require('./routes/PusatBantuanRoute');
@@ -37,7 +36,16 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-
+const dbPool = require('./config/database')
+const testConnection = async () => {
+    try {
+        await dbPool.getConnection()
+        console.log('Koneksi Berhasil');
+    } catch (error) {
+        console.log('Koneksi Gagal');
+    }
+}
 server.listen(PORT, HOST, () => {
+    testConnection()
     console.log(`Server is running in http://localhost:${PORT}`);
 });
