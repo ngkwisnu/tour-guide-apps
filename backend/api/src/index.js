@@ -30,10 +30,6 @@ app.use('/pusat-bantuan', PusatBantuanRoute);
 app.use('/pesanan', PesananRoute);
 app.use('/ulasan', UlasanRoute);
 app.use('/auth', AuthRoute);
-app.use(cors({
-    origin: 'http://localhost:5173/',
-    credentials: true,
-}));
 
 app.use(cookieParser());
 const dbPool = require('./config/database')
