@@ -2,8 +2,7 @@ const wisataModel = require('../models/WisataModel')
 
 const getAllWisata = async(req, res) => {
     try {
-        const result = await wisataModel.getAllWisata()
-        console.log(result);
+        const [ result ] = await wisataModel.getAllWisata()
         res.json({
             message: 'GET all wisata success!',
             data: result
