@@ -23,19 +23,19 @@ const MainAdmin = (props) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/wisata");
-        const fetchedDatas = await response.json();
-        const { data } = fetchedDatas;
-        setDatas(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, [datas]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3000/wisata");
+  //       const fetchedDatas = await response.json();
+  //       const { data } = fetchedDatas;
+  //       setDatas(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [datas]);
 
   useEffect(() => {
     if (props.tambahData != null) {
@@ -166,7 +166,7 @@ const MainAdmin = (props) => {
                   {data.harga}
                 </td>
                 <td className="px-6 py-4 bg-blue-300/30 text-center justify-center flex gap-5">
-                  <Link to="/edit-wisata">
+                  <Link to={`/edit-wisata/${data.id}`}>
                     <i className="fa-regular fa-pen-to-square text-green-600"></i>
                   </Link>
                   <i
