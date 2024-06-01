@@ -9,7 +9,7 @@ export default function PackageDetail() {
 
   const [packageDetail, setPackageDetail] = useState(null);
 
-  const getPackageDetail = async () => {
+  const getData = async () => {
     try {
       const response = await fetch(`http://localhost:3000/wisata/${id}`); // Ganti dengan URL API yang sesuai
       const result = await response.json();
@@ -23,11 +23,11 @@ export default function PackageDetail() {
   };
 
   useEffect(() => {
-    getPackageDetail();
+    getData();
   }, [id]);
 
   useEffect(() => {
-    console.log('Packages state:', packageDetail); 
+    console.log('Packages state:', packageDetail);
   }, [packageDetail]);
 
   if (!packageDetail) {
@@ -37,11 +37,7 @@ export default function PackageDetail() {
   return (
     <>
       <main className=" mb-16 ">
-        <ImagePreview
-          src={packageDetail.gambar1}
-          className="h-[20rem] w-full object-cover rounded-none"
-          alt="Example Image"
-        />
+        <ImagePreview src={packageDetail.gambar1} className="h-[20rem] w-full object-cover rounded-none" alt="Example Image" />
         <article className="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
           <div className="mt-8 grid gap-2">
             <h1 className="text-2xl font-bold md:text-4xl">{packageDetail.nama}</h1>
@@ -107,7 +103,7 @@ export default function PackageDetail() {
         </article>
         <div className="w-full text-center mt-8">
           <Button colorScheme="blue">
-            <Link href="/pembayaran">Pesan sekarang</Link>{' '}
+            <Link href={`/wisata/${id}/payment`}>Pesan sekarang</Link>{' '}
           </Button>
         </div>
       </main>

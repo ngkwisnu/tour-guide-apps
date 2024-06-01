@@ -30,7 +30,7 @@ const Router = () => {
         <Route path="/wisata" element={<Package />} />
         <Route path="/wisata/:id" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/pembayaran" element={<Pembayaran />} />
+        <Route path="/wisata/:id/payment" element={<Pembayaran />} />
         <Route path="/admin/tambah-wisata" element={<TambaData />} />
         <Route path="/admin/edit-wisata" element={<EditData />} />
         <Route path="/profile" element={<UserLayout />}>

@@ -102,7 +102,7 @@ export default function Home() {
       </section>
 
       {/* BENEFIT */}
-      <div id='learn' className="max-w-screen-xl h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
+      <div id='learn' className=" h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
             <div class="flex justify-center">
