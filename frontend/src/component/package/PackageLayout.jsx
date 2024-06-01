@@ -1,6 +1,7 @@
 import ImagePreview from '../ImagePreview';
 import { Award, Star, BadgePercent } from 'lucide-react';
 import { Button, Link } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 
 export default function PackageLayout() {
   return (
@@ -77,7 +78,9 @@ export default function PackageLayout() {
           </div>
         </article>
         <div className="w-full text-center mt-8">
-          <Button colorScheme='blue'><Link href='/pembayaran'>Pesan sekarang</Link> </Button>
+          <Button colorScheme="blue">
+            <Link href="/pembayaran">Pesan sekarang</Link>{' '}
+          </Button>
         </div>
       </main>
     </>

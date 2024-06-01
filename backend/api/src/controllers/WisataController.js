@@ -4,7 +4,7 @@ const getAllWisata = async(req, res) => {
     try {
         const [ data ] = await wisataModel.getAllWisata()
         res.json({
-            message: 'GET all jurusan success!',
+            message: 'GET all wisata success!',
             data: data
         })
     } catch (error) {
@@ -40,17 +40,19 @@ const getWisataById = async(req, res) => {
 }
 
 const addWisata = async(req, res) => {
-    const { body } = req
-    if(!body.user_id || !body.name || !body.latitude || !body.longitude || !body.description || !body.address || !body.price_ticket || !body.image || !body.opening_hours) {
+    const { body } = req;
+    console.log(body);
+    // Periksa apakah semua properti yang diperlukan ada dalam objek body
+    if (!body.nama || !body.lokasi || !body.jarak_lokasi || !body.harga || !body.deskripsi || !body.gambar1 || !body.gambar2 || !body.gambar3 || !body.gambar4 || !body.informasi_tourguide || !body.harga_termasuk || !body.kategori || !body.created_at || !body.updated_at) {
         return res.status(400).json({
-            message : 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
-        })
+            message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
+        });
     }
     try {
-        const dataAlreadyExists = await wisataModel.getWisataByName(body.name)
+        const dataAlreadyExists = await wisataModel.getWisataByName(body.nama)
         if(dataAlreadyExists.length > 0){
             return res.status(400).json({
-                message: `Wisata dengan Nama: ${body.name} sudah ada, silahkan masukkan nama wisata yang lain!`
+                message: `Wisata dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama wisata yang lain!`
             })
         }
         await wisataModel.addWisata(body)
@@ -66,35 +68,44 @@ const addWisata = async(req, res) => {
     }
 }
 
-const updateWisata = async(req, res) => {
-    const { id } = req.params
-    const { body } = req
-    if(!body.user_id || !body.name || !body.latitude || !body.longitude || !body.description || !body.address || !body.price_ticket || !body.image || !body.opening_hours) {
+const updateWisata = async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    console.log(body);
+    // Periksa apakah semua properti yang diperlukan ada dalam objek body
+    if (!body.nama || !body.lokasi || !body.jarak_lokasi || !body.harga || !body.deskripsi || !body.gambar1 || !body.gambar2 || !body.gambar3 || !body.gambar4 || !body.informasi_tourguide || !body.harga_termasuk || !body.kategori || !body.created_at || !body.updated_at) {
         return res.status(400).json({
-            message : 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
-            data : null
-        })
+            message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
+            data: null
+        });
     }
+
     try {
-        const dataAlreadyExists = await wisataModel.getWisataByName(body.name)
-        if(dataAlreadyExists.length > 0){
+        // Cek apakah data dengan nama yang sama sudah ada
+        const dataAlreadyExists = await wisataModel.getWisataByName(body.nama);
+        if (dataAlreadyExists.length > 1) {
             return res.status(400).json({
-                message: `Wisata dengan Nama: ${body.name} sudah ada, silahkan masukkan nama wisata yang lain!`
-            })
+                message: `Wisata dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama wisata yang lain!`
+            });
         }
-        await wisataModel.updateWisata(body, id)
+
+        // Lakukan pembaruan data
+        await wisataModel.updateWisata(body, id);
+
+        // Kirim respons berhasil
         res.status(201).json({
-            message : `UPDATE jurusan dengan ID:${id} berhasil!`,
-            data : {
+            message: `UPDATE wisata dengan ID:${id} berhasil!`,
+            data: {
                 id: id,
                 ...body
             }
-        })
+        });
     } catch (error) {
+        // Tangani kesalahan server
         res.status(500).json({
             message: "Server error!",
             serverMessage: error
-        })
+        });
     }
 }
 

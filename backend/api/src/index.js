@@ -1,28 +1,54 @@
 const http = require('http');
-const PORT = 5000;
+const PORT = 3000;
 const HOST = '0.0.0.0';
 const express = require('express');
 const app = express();
 app.use(express.json());
 const server = http.createServer(app);
+// Impor dotenv
+const dotenv = require('dotenv');
+// Panggil method config() untuk memuat variabel lingkungan dari file .env
+dotenv.config();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
 
 const WisataRoute = require('./routes/WisataRoute');
-const TourGuideRoute = require('./routes/TourGuideRoute');
 const UserRoute = require('./routes/UserRoute');
-const TransactionRoute = require('./routes/TransactionRoute');
-const RiviewRoute = require('./routes/RiviewRoute');
+const PusatBantuanRoute = require('./routes/PusatBantuanRoute');
+const PesananRoute = require('./routes/PesananRoute');
+const UlasanRoute = require('./routes/UlasanRoute');
+const AuthRoute = require('./routes/AuthRoute');
 
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use('/wisata', WisataRoute);
-app.use('/tour-guide', TourGuideRoute);
 app.use('/user', UserRoute);
-app.use('/transaction', TransactionRoute);
-app.use('/review', RiviewRoute);
+app.use('/pusat-bantuan', PusatBantuanRoute);
+app.use('/pesanan', PesananRoute);
+app.use('/ulasan', UlasanRoute);
+app.use('/auth', AuthRoute);
+app.use(
+  cors({
+    origin: 'http://localhost:5173/',
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
+
+process.on('uncaughtException', function (err) {
+  console.log(err);
+});
 
 //tes donk
-app.get("/", (req, res)=> {
-    res.json("Hello from backedn")
-})
+app.get('/', (req, res) => {
+  res.json('Hello from backedn');
+});
 
 server.listen(PORT, HOST, () => {
-    console.log(`Server is running in http://localhost:${PORT}`);
+  console.log(`Server is running in http://localhost:${PORT}`);
 });

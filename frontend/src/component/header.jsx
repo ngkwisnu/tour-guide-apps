@@ -12,7 +12,7 @@ const nav__links = [
     display: 'Home',
   },
   {
-    path: '/package',
+    path: '/wisata',
     display: 'wisata',
   },
   {

@@ -27,8 +27,8 @@ const Router = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/package" element={<Package />} />
-        <Route path="/package/package-detail" element={<PackageDetail />} />
+        <Route path="/wisata" element={<Package />} />
+        <Route path="/wisata/:id" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/pembayaran" element={<Pembayaran />} />
         <Route path="/admin/tambah-wisata" element={<TambaData />} />

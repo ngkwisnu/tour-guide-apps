@@ -39,62 +39,81 @@ const getUserById = async(req, res) => {
     }
 }
 
-const addUser = async(req, res) => {
-    const { body } = req
-    if(!body.name || !body.email || !body.role || !body.password || !body.created_at || !body.updated_at) {
+const addUser = async (req, res) => {
+    const { body } = req;
+
+    // Periksa apakah semua properti yang diperlukan ada dalam objek body
+    if (!body.email ||!body.username ||!body.password ||!body.role || !body.nama || !body.telepon || !body.alamat || !body.foto) {
         return res.status(400).json({
-            message : 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
-        })
+            message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.'
+        });
     }
+
     try {
-        const dataAlreadyExists = await userModel.getUserByName(body.name)
-        if(dataAlreadyExists.length > 0){
+        // Cek apakah data dengan nama yang sama sudah ada
+        const dataAlreadyExists = await userModel.getUserByName(body.nama);
+        if (dataAlreadyExists.length > 0) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.name} sudah ada, silahkan masukkan nama User yang lain!`
-            })
+                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama User yang lain!`
+            });
         }
-        await userModel.addUser(body)
+
+        // Tambahkan data user
+        await userModel.addUser(body);
+
+        // Kirim respons berhasil
         res.status(201).json({
-            message : 'Tambah data User berhasil!',
-            data : body
-        })
+            message: 'Tambah data User berhasil!',
+            data: body
+        });
     } catch (error) {
+        // Tangani kesalahan server
         res.status(500).json({
             message: "Server error!",
             serverMessage: error
-        })
+        });
     }
 }
 
-const updateUser = async(req, res) => {
-    const { id } = req.params
-    const { body } = req
-    if(!body.name || !body.email || !body.role || !body.password || !body.created_at || !body.updated_at) {
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    let { body } = req;
+    console.log(body);
+
+    // Periksa apakah semua properti yang diperlukan ada dalam objek body
+    if (!body.email ||!body.username ||!body.password ||!body.role || !body.nama || !body.telepon || !body.alamat || !body.foto) {
         return res.status(400).json({
-            message : 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
-            data : null
-        })
+            message: 'Data yang dikirim tidak lengkap atau tidak sesuai format.',
+            data: null
+        });
     }
+
     try {
-        const dataAlreadyExists = await userModel.getUserByName(body.name)
-        if(dataAlreadyExists.length > 0){
+        // Cek apakah data dengan nama yang sama sudah ada
+        const dataAlreadyExists = await userModel.getUserByName(body.nama);
+        if (dataAlreadyExists.length > 1) {
             return res.status(400).json({
-                message: `User dengan Nama: ${body.name} sudah ada, silahkan masukkan nama user yang lain!`
-            })
+                message: `User dengan Nama: ${body.nama} sudah ada, silahkan masukkan nama user yang lain!`
+            });
         }
-        await userModel.updateUser(body, id)
+
+        // Lakukan pembaruan data user
+        await userModel.updateUser(body, id);
+
+        // Kirim respons berhasil
         res.status(201).json({
-            message : `UPDATE user dengan ID:${id} berhasil!`,
-            data : {
+            message: `UPDATE user dengan ID:${id} berhasil!`,
+            data: {
                 id: id,
                 ...body
             }
-        })
+        });
     } catch (error) {
+        // Tangani kesalahan server
         res.status(500).json({
             message: "Server error!",
             serverMessage: error
-        })
+        });
     }
 }
 

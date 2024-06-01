@@ -1,69 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Search } from 'lucide-react';
 import { Input, InputGroup, InputRightElement, Button, Link, Box, Center, Heading, Text, Stack, Avatar, useColorModeValue, Image } from '@chakra-ui/react';
 import { Star, MapPin } from 'lucide-react';
 import Background from '/img/img2.jpg';
+import useFetch from '../hook/useFetch';
+
+async function getData() {
+  try {
+    const response = await fetch('http://localhost:3000/wisata');
+
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    return result;
+  } catch (err) {
+    return []; // Kembalikan array kosong jika terjadi error
+  }
+}
 
 const Package = () => {
-  const [modal, setModal] = useState(false);
-  const destination = [
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '10 Days Trip',
-      sideImg: '',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '12 Days Trip',
-      sideImg: '',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp 300.000',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-  ];
+  const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    getData().then((data) => {
+      console.log('Data set in state:', data); // Log data yang diset ke state
+      setPackages(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log('Packages state:', packages); // Log state packages setelah update
+  }, [packages]);
+
   return (
     <>
       <section className="overflow-hidden h-screen  px-4 sm:px-6 w-full relative">
@@ -99,70 +71,49 @@ const Package = () => {
       </div>
       <section className="relative w-full py-8  px-[5%]  gap-6" id="destination">
         <div className="grid  grid-cols-2 sm:grid-cols-4 items-center gap-4 lg:gap-6 special-font">
-          {/* nengok konsep blog */}
-          {destination.map((destinations, index) => (
-            <Link href="/package/package-detail" _hover={{ textDecoration: 'none' }} className="group relative flex flex-col rounded-2xl shadow-sm border border-black " key={index}>
-              <div className="relative z-10" data-aos="fade-down">
-                <div className="h-[250px] ">
-                  <img src={destinations.img} width={300} height={300} alt="img" className="w-full h-full rounded-tl-2xl rounded-tr-2xl group-hover:grayscale-[50%]" />
-                </div>
-                <div className='absolute w-full flex justify-between px-2 top-3 gap-2'>
-                  <div className="  p-1 bg-[#ff5b00]">
-                    <p className="text-xs text-white font-semibold">pilihan kami</p>
+          {Array.isArray(packages.data) && packages.data.length > 0 ? (
+            packages.data.map((pkg) => (
+              <Link href={`/wisata/${pkg.id}`} _hover={{ textDecoration: 'none' }} className="group relative flex flex-col rounded-2xl shadow-sm border border-black " key={pkg.id}>
+                <div className="relative z-10" data-aos="fade-down">
+                  <div className="h-[250px] ">
+                    <img src={pkg.gambar1} alt={`Image of ${pkg.nama}`} width={300} height={300} className="w-full h-full rounded-tl-2xl rounded-tr-2xl group-hover:grayscale-[50%]" />
                   </div>
-                  <Star color='#ff5b00' />
-                </div>
-                <div className="grid grid-cols-1 gap-2 p-4">
-                  <div className="flex gap-1 text-xs">
-                    <MapPin color="#319795" size={16} />
-                    Kabupaten Klungkung, Bali
-                  </div>
-                  <p className="text-xs text-[#6B7280]">5 Km - 20 menit</p>
-                  <p className="text-xl font-bold">{destinations.location}</p>
-                  <div className="text-base text-litegrey  flex items-center justify-between gap-4">
-                    <div>
-                      <p>Ulasan 1rb</p>
-                      <div className="flex gap-2 items-center text-xs">
-                        <Star size={16} color="#FABB05" fill="#FABB05" />
-                        4.5
-                      </div>
+                  <div className="absolute w-full flex justify-between px-2 top-3 gap-2">
+                    <div className="  p-1 bg-[#ff5b00]">
+                      <p className="text-xs text-white font-semibold">pilihan kami</p>
                     </div>
-                    <p className="font-bold text-[#319795]">
-                      {destinations.amount}
-                      <span className="text-sm font-normal italic">/orang</span>
-                    </p>
+                    <Star color="#ff5b00" />
+                  </div>
+                  <div className="grid grid-cols-1 gap-2 p-4">
+                    <div className="flex gap-1 text-xs">
+                      <MapPin color="#319795" size={16} />
+                      {pkg.lokasi}
+                    </div>
+                    <p className="text-xs text-[#6B7280]">5 Km - 20 menit</p>
+                    <p className="text-xl font-bold">{pkg.lokasi}</p>
+                    <div className="text-base text-litegrey  flex items-center justify-between gap-4">
+                      <div>
+                        <p>Ulasan 1rb</p>
+                        <div className="flex gap-2 items-center text-xs">
+                          <Star size={16} color="#FABB05" fill="#FABB05" />
+                          4.5
+                        </div>
+                      </div>
+                      <p className="font-bold text-[#319795]">
+                        {pkg.harga}
+                        <span className="text-sm font-normal italic">/orang</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-          {/* <Center py={6}>
-            <Box maxW={'350px'} w={'full'} bg={useColorModeValue('white', 'gray.900')} boxShadow={'2xl'} rounded={'md'} p={6} overflow={'hidden'}>
-              <Box h={'200px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
-                <Image src={'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'} layout={'fill'} />
-              </Box>
-              <Stack>
-                <Text color={'green.500'} textTransform={'uppercase'} fontWeight={800} fontSize={'sm'} letterSpacing={1.1}>
-                  Blog
-                </Text>
-                <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'2xl'} fontFamily={'body'}>
-                  Boost your conversion rate
-                </Heading>
-                <Text color={'gray.500'}>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                </Text>
-              </Stack>
-              <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-                <Avatar src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} alt={'Author'} />
-                <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-                  <Text fontWeight={600}>Achim Rolle</Text>
-                  <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
-                </Stack>
-              </Stack>
-            </Box>
-          </Center> */}
+              </Link>
+            ))
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
       </section>
+      {/* <p>{this.packages.nama}</p> */}
     </>
   );
 };

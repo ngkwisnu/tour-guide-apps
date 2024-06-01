@@ -24,21 +24,21 @@ const Admin = () => {
                   onClick={() => setPage('data-wisata')}
                 >
                   <i className="fa-solid fa-database"></i>
-                  <p>Data Wisata</p>
+                  <button>Data Wisata</button>
               </div>
               <div
                   className={`flex items-center gap-5 my-10 text-lg ${page == 'pesanan' ? 'text-blue-300' : `hover:text-blue-300 text-slate-700`} `}
                   onClick={() => setPage('pesanan')}
                 >
                   <i className="fa-solid fa-list"></i>
-                  <p>Pesanan</p>
+                  <button>Pesanan</button>
               </div>
               <div
                   className={`flex items-center gap-5 my-10 text-lg ${page == 'riwayat' ? 'text-blue-300' : `hover:text-blue-300 text-slate-700`} `}
                   onClick={() => setPage('riwayat')}
                 >
                   <i className="fa-solid fa-clock-rotate-left"></i>
-                  <p>Riwayat</p>
+                  <button>Riwayat</button>
               </div>
             </div>
             {page == 'data-wisata' && <MainAdmin/>}
