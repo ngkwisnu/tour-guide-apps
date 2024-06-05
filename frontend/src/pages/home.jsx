@@ -101,7 +101,7 @@ export default function Home() {
                         {pkg.lokasi}
                       </div>
                       <p className="text-xs text-[#6B7280]">5 Km - 20 menit</p>
-                      <p className="text-xl font-bold">{pkg.lokasi}</p>
+                      <p className="text-xl font-bold">{pkg.nama}</p>
                       <div className="text-base text-litegrey  flex items-center justify-between gap-4">
                         <div>
                           <p>Ulasan 1rb</p>

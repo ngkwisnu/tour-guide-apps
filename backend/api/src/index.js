@@ -15,7 +15,6 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
-
 const WisataRoute = require('./routes/WisataRoute');
 const UserRoute = require('./routes/UserRoute');
 const PusatBantuanRoute = require('./routes/PusatBantuanRoute');
@@ -31,24 +30,18 @@ app.use('/pusat-bantuan', PusatBantuanRoute);
 app.use('/pesanan', PesananRoute);
 app.use('/ulasan', UlasanRoute);
 app.use('/auth', AuthRoute);
-app.use(
-  cors({
-    origin: 'http://localhost:5173/',
-    credentials: true,
-  })
-);
 
 app.use(cookieParser());
-
-process.on('uncaughtException', function (err) {
-  console.log(err);
-});
-
-//tes donk
-app.get('/', (req, res) => {
-  res.json('Hello from backedn');
-});
-
+const dbPool = require('./config/database');
+const testConnection = async () => {
+  try {
+    await dbPool.getConnection();
+    console.log('Koneksi Berhasil');
+  } catch (error) {
+    console.log(error);
+  }
+};
 server.listen(PORT, HOST, () => {
+  testConnection();
   console.log(`Server is running in http://localhost:${PORT}`);
 });

@@ -147,7 +147,7 @@ const PackageDetail = ({}) => {
         </article>
         <div className="w-full text-center mt-8">
           <Button colorScheme="blue">
-            <Link href={`/wisata/${id}/payment`}>Pesan sekarang</Link>{' '}
+            <Link href={`/wisata/${id}/payment`}  _hover={{ textDecoration: "none" }}>Pesan sekarang</Link>{' '}
           </Button>
         </div>
       </main>

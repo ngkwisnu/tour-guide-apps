@@ -10,7 +10,7 @@ import Admin from '../../pages/Admin';
 import TambaData from '../admin/TambahData';
 import EditData from '../admin/EditData';
 import UserLayout from '../layout/userLayout';
-import Pembayaran from '../../pages/Pembayaran'
+import Pembayaran from '../../pages/Pembayaran';
 import AccountLayout from '../AccountLayout';
 import ProfileUser from '../../pages/ProfileUser';
 import InvoicePage from '../../pages/InvoicePage';
@@ -29,12 +29,12 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wisata" element={<Package />} />
-        
+
         <Route path="/wisata/:id" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/wisata/:id/payment" element={<Pembayaran />} />
-        <Route path="/admin/tambah-wisata" element={<TambaData />} />
-        <Route path="/admin/edit-wisata" element={<EditData />} />
+        <Route path="/tambah-wisata" element={<TambaData />} />
+        <Route path="/edit-wisata/:id" element={<EditData />} />
         <Route path="/profile" element={<UserLayout />}>
           <Route index element={<ProfileUser />} />
           <Route path="invoice" element={<InvoicePage />} />

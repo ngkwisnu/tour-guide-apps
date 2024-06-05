@@ -9,20 +9,20 @@ const DEMO_DATA = [
   {
     id: 1,
     img: HIW1img,
-    title: 'Book & relax',
-    desc: 'Let each trip be an inspirational journey, each room a peaceful space',
+    title: 'Jelajahi Paket Liburan',
+    desc: 'Lihat berbagai paket liburan yang telah kami sediakan. Dari pantai eksotis hingga pegunungan yang menakjubkan, kami memiliki semuanya.',
   },
   {
     id: 2,
     img: HIW2img,
-    title: 'Smart checklist',
-    desc: 'Let each trip be an inspirational journey, each room a peaceful space',
+    title: 'Pesan Paket Liburan',
+    desc: 'Setelah menemukan paket yang sempurna, lakukan pemesanan dengan mudah dan cepat.',
   },
   {
     id: 3,
     img: HIW3img,
-    title: 'Save more',
-    desc: 'Let each trip be an inspirational journey, each room a peaceful space',
+    title: 'Bersantai dan Nikmati Setiap Momen!',
+    desc: 'Dengan semuanya sudah diatur, saatnya Anda bersantai dan menikmati liburan.',
   },
 ];
 

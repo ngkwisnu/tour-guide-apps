@@ -2,14 +2,14 @@ const wisataModel = require('../models/WisataModel')
 
 const getAllWisata = async(req, res) => {
     try {
-        const [ data ] = await wisataModel.getAllWisata()
+        const [ result ] = await wisataModel.getAllWisata()
         res.json({
             message: 'GET all wisata success!',
-            data: data
+            data: result
         })
     } catch (error) {
         res.status(500).json({
-            message: "Server error!",
+            message: "Server error wkwk!",
             serverMessage: error
         })
     }

@@ -1,8 +1,12 @@
 const dbPool = require('../config/database')
 
 const getAllWisata = () => {
-    const SQLQuery = 'SELECT * FROM wisata'
-    return dbPool.execute(SQLQuery)
+    try {
+        const SQLQuery = 'SELECT * FROM wisata'
+        return dbPool.execute(SQLQuery)
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const getWisataById = async(id) => {

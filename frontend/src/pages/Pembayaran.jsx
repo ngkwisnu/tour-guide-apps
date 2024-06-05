@@ -70,7 +70,7 @@ const Pembayaran = () => {
               <hr />
               <div className="flex justify-between">
                 <p>Subtotal Pesanan</p>
-                <p className="font-bold">Rp 320.000</p>
+                <p className="font-bold">{packages.harga}</p>
               </div>
               <div className="flex justify-between">
                 <p>Biaya Layanan</p>
