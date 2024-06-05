@@ -49,7 +49,7 @@ const TambahData = () => {
       datas.harga_termasuk ||
       datas.kategori
     ) {
-      fetch("http://localhost:3000/wisata", {
+      fetch("http://18.141.9.175:5000/wisata", {
         method: "POST",
         body: JSON.stringify(datas),
         headers: {

@@ -12,7 +12,7 @@ const MainAdmin = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/wisata");
+        const response = await fetch("http://18.141.9.175:5000/wisata");
         const fetchedDatas = await response.json();
         const { data } = fetchedDatas;
         setDatas(data);
