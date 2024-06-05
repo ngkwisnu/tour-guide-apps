@@ -18,6 +18,7 @@ import BuktiPembayaran from '../../pages/BuktiPembayaranPage';
 import PembayaranPage from '../../pages/PembayaranPage';
 import RiwayatTransaksi from '../../pages/RiwayatTransaksiPage';
 import BantuanPage from '../../pages/BantuanPage';
+import PackageDetail2 from '../../pages/PackageDetail2';
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wisata" element={<Package />} />
+        
         <Route path="/wisata/:id" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/wisata/:id/payment" element={<Pembayaran />} />

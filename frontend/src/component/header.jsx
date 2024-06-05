@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
-import {Box} from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 // import { Link } from '@chakra-ui/react';
 import SectionContainer from './sectionContainer';
@@ -73,7 +73,7 @@ const Header = () => {
               {/* Menu Dropdown */}
               {menuOpen && (
                 <nav className="md:hidden flex bg-white w-1/2 h-full absolute top-0 right-0  z-40 border-l-2 border-black">
-                  <ul >
+                  <ul>
                     {nav__links.map((item, index) => (
                       <li key={index} className="flex flex-col items-center absolute justify-center h-full gap-4 ">
                         <NavLink to={item.path} className="text-black absolute top-[50%] z-50 transition hover:text-gray-500/75">
@@ -111,7 +111,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </Box >
+    </Box>
   );
 };
 

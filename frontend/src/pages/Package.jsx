@@ -7,7 +7,7 @@ import useFetch from '../hook/useFetch';
 
 async function getData() {
   try {
-    const response = await fetch('http://localhost:3000/wisata');
+    const response = await fetch('http://18.141.9.175:5000/wisata');
 
     if (!response.ok) {
       throw new Error(`Error! status: ${response.status}`);

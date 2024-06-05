@@ -1,36 +1,42 @@
+import React, { useEffect, useState } from 'react';
 import Background from '../assets/images/bg-hero.png';
 import Background2 from '../assets/images/bg-hero.png';
 import People from '../assets/images/people.png';
-import React, { useRef } from 'react';
-import { Star } from 'lucide-react';
+import { Star, MapPin } from 'lucide-react';
 import { Button, ButtonGroup, Link, Text } from '@chakra-ui/react';
+import Benefit from '../component/Benefit';
+import SectionHowItWork from '../component/SectionHowItWork';
+import SectionClientSay from '../component/SectionClientSay';
+
+async function getData() {
+  try {
+    const response = await fetch('http://18.141.9.175:5000/wisata');
+
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    return result;
+  } catch (err) {
+    return []; // Kembalikan array kosong jika terjadi error MapPin
+  }
+}
 
 export default function Home() {
-  
-  const destination = [
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Nusa Penida',
-      amount: 'Rp. 320.000',
-      days: '10 Days Trip',
-      sideImg: '',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'London, UK',
-      amount: '$4.2k',
-      days: '12 Days Trip',
-      sideImg: '',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1585060085275-6035d9d50f96?q=80&w=1864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      location: 'Full Europe',
-      amount: '$15k',
-      days: '28 Days Trip',
-      sideImg: '/img/Decore2.png',
-    },
-  ];
+  const [packages, setPackages] = useState([]);
 
+  useEffect(() => {
+    getData().then((data) => {
+      console.log('Data set in state:', data); // Log data yang diset ke state
+      setPackages(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log('Packages state:', packages); // Log state packages setelah update
+  }, [packages]);
 
   return (
     <>
@@ -45,8 +51,12 @@ export default function Home() {
             <p className="mt-4 max-w-lg text-white sm:text-lg">Jelajahi keindahan dan budaya Bali bersama Nusa Guide. Biarkan kami membantu merencanakan liburan impian Anda!</p>
 
             <div className="mt-8 flex flex-wrap gap-4 text-center">
-              <Link color='white' href="#popular"  _hover={{ textDecoration: "none" }}  className="block  bg-[#319795] w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">Mulai perjalan</Link>
-              <Link color='black' href="#learn"  _hover={{ textDecoration: "none" }}  className="block  bg-white w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">Pelajari lebih lanjut</Link>
+              <Link color="white" href="#popular" _hover={{ textDecoration: 'none' }} className="block  bg-[#319795] w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">
+                Mulai perjalan
+              </Link>
+              <Link color="black" href="#learn" _hover={{ textDecoration: 'none' }} className="block  bg-white w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">
+                Pelajari lebih lanjut
+              </Link>
             </div>
           </div>
           <div className="md:flex hidden h-screen items-center justify-center p-6 mt-8 lg:mt-0  sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
@@ -69,76 +79,60 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 items-center gap-4 lg:gap-8 xl:gap-16 special-font ">
-          {destination.map((destinations, index) => (
-            <div className="relative flex flex-col rounded-2xl shadow-sm border border-black " key={index}>
-              <div className="relative z-10" data-aos="fade-down">
-                <div className="h-[250px]">
-                  <img src={destinations.img} width={300} height={300} alt="img" className="w-full h-full rounded-tl-2xl rounded-tr-2xl" />
-                </div>
-                <div className="grid grid-cols-1 gap-2 p-4">
-                  <p className="text-xl font-medium">{destinations.location}</p>
-                  <div className="text-base text-litegrey  flex items-center justify-between gap-4">
-                    <div>
-                      <p>Ulasan 1rb</p>
-                      <div className="flex gap-2 items-center text-xs">
-                        <Star size={16} color="#FABB05" fill="#FABB05" />
-                        4.5
+          {Array.isArray(packages.data) && packages.data.length > 0 ? (
+            packages.data
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 3)
+              .map((pkg) => (
+                <Link href={`/wisata/${pkg.id}`} _hover={{ textDecoration: 'none' }} className="group relative flex flex-col rounded-2xl shadow-sm border border-black " key={pkg.id}>
+                  <div className="relative z-10" data-aos="fade-down">
+                    <div className="h-[250px] ">
+                      <img src={pkg.gambar1} alt={`Image of ${pkg.nama}`} width={300} height={300} className="w-full h-full rounded-tl-2xl rounded-tr-2xl group-hover:grayscale-[50%]" />
+                    </div>
+                    <div className="absolute w-full flex justify-between px-2 top-3 gap-2">
+                      <div className="  p-1 bg-[#ff5b00]">
+                        <p className="text-xs text-white font-semibold">pilihan kami</p>
+                      </div>
+                      <Star color="#ff5b00" />
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 p-4">
+                      <div className="flex gap-1 text-xs">
+                        <MapPin color="#319795" size={16} />
+                        {pkg.lokasi}
+                      </div>
+                      <p className="text-xs text-[#6B7280]">5 Km - 20 menit</p>
+                      <p className="text-xl font-bold">{pkg.lokasi}</p>
+                      <div className="text-base text-litegrey  flex items-center justify-between gap-4">
+                        <div>
+                          <p>Ulasan 1rb</p>
+                          <div className="flex gap-2 items-center text-xs">
+                            <Star size={16} color="#FABB05" fill="#FABB05" />
+                            4.5
+                          </div>
+                        </div>
+                        <p className="font-bold text-[#319795]">
+                          {pkg.harga}
+                          <span className="text-sm font-normal italic">/orang</span>
+                        </p>
                       </div>
                     </div>
-                    <p>
-                      {destinations.amount}/<span className="text-sm italic">orang</span>
-                    </p>
                   </div>
-                  <Button colorScheme="teal" size="md">
-                    Button
-                  </Button>
-                </div>
-              </div>
-
-              {destinations.sideImg && <img src={destinations.sideImg} width={80} height={80} alt="img" className="absolute right-[-15px] sm:right-[-30px] lg:right-[-50px] bottom-[90px]" />}
-            </div>
-          ))}
+                </Link>
+              ))
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
       </section>
 
       {/* BENEFIT */}
-      <div id='learn' className=" h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
-            <div class="flex justify-center">
-              <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
-            </div>
-
-            <div class=" h-48 flex justify-center items-center flex-col gap-4">
-              <h1 class="font-bold text-center text-xl text-gray-900">Rating & Review</h1>
-              <p class="text-center text-sm text-gray-400 font-medium">Membantu pengguna memilih tour guide yang terpercaya</p>
-            </div>
-          </div>
-          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
-            <div class="flex justify-center">
-              <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
-            </div>
-
-            <div class=" h-48 flex justify-center items-center flex-col gap-4">
-              <h1 class="font-bold text-center text-xl text-gray-900">Rating & Review</h1>
-              <p class="text-center text-sm text-gray-400 font-medium">Membantu pengguna memilih tour guide yang terpercaya</p>
-            </div>
-          </div>
-          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
-            <div class="flex justify-center">
-              <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
-            </div>
-
-            <div class=" h-48 flex justify-center items-center flex-col gap-4">
-              <h1 class="font-bold text-center text-xl text-gray-900">Rating & Review</h1>
-              <p class="text-center text-sm text-gray-400 font-medium">Membantu pengguna memilih tour guide yang terpercaya</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Benefit />
+      {/* HIW */}
+      <SectionHowItWork className='px-4 lg:py-16 flex items-center justify-center flex-col' />
 
       {/* PREVIEW */}
-      <section  class="bg-white">
+      <SectionClientSay className='px-4 lg:py-16 flex items-center justify-center flex-col'/>
+      {/* <section class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Read trusted reviews from our customers</h2>
 
@@ -240,7 +234,7 @@ export default function Home() {
             </blockquote>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

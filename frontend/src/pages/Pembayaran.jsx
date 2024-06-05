@@ -1,3 +1,5 @@
+//coba buat pembayatan pake EMBED dlu, klo dh berhasil baru pake SNAP
+
 import React, { useState, useEffect } from 'react';
 import Header from '../component/header';
 import { Button, Link } from '@chakra-ui/react';
@@ -14,7 +16,7 @@ const Pembayaran = () => {
   const [packages, setpackages] = useState(null);
   const getData = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/wisata/${id}`); // Ganti dengan URL API yang sesuai
+      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}}`); // Ganti dengan URL API yang sesuai
       const result = await response.json();
       if (Array.isArray(result.data) && result.data.length > 0) {
         setpackages(result.data[0]); // Ambil elemen pertama dari array
