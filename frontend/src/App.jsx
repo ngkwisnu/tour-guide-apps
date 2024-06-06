@@ -24,6 +24,7 @@ import ChatBot from "./component/ChatBot";
 import Package from "./pages/Package";
 import Footer from "./component/footer";
 import Pembayaran from "./pages/Pembayaran";
+import Loading from "./component/admin/Loading";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/tambah-wisata" element={<TambahData />} />
         <Route path="/edit-wisata/:id" element={<EditData />} />
         <Route path="/pembayaran" element={<Pembayaran />} />
+        <Route path="/loading" element={<Loading />} />
       </Routes>
       {/* <Footer /> */}
     </>

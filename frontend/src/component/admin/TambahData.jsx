@@ -3,10 +3,12 @@ import Stars from "./Stars";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import MainAdmin from "./MainAdmin";
+import Loading from "./Loading";
 
 const TambahData = () => {
   const [star, setStar] = useState(5);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const uploadGambar = (e) => {
     const file = e.target.files[0];
@@ -17,7 +19,6 @@ const TambahData = () => {
 
   const simpanData = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("nama", e.target.nama.value);
     formData.append("lokasi", e.target.lokasi.value);
@@ -59,31 +60,48 @@ const TambahData = () => {
       e.target.harga_termasuk.value ||
       e.target.kategori.value
     ) {
-      try {
-        fetch("http://18.141.9.175:5000/wisata", {
-          method: "POST",
-          body: formData,
+      setLoading(true);
+      fetch("http://18.141.9.175:5000/wisata", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            setLoading(false);
+            throw new Error(
+              "Network response was not ok " + response.statusText
+            );
+          }
+          return response.json();
         })
-          .then((response) => response.json())
-          .then((data) => {
-            Swal.fire({
-              title: "Berhasil!",
-              text: "Data wisata telah ditambahkan.",
-              icon: "success",
-            }).then(() => {
-              navigate("/admin");
-            });
+        .then((data) => {
+          Swal.fire({
+            title: "Berhasil!",
+            text: data.message,
+            icon: "success",
+          }).then(() => {
+            setLoading(false);
+            navigate("/admin");
           });
-      } catch (error) {
-        console.log(error);
-      }
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat menambahkan data.",
+            icon: "error",
+          });
+          setLoading(false);
+        });
     } else {
+      setLoading(false);
       console.log("error");
     }
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto relative">
+      {loading && <Loading />}
       <h1 className="text-4xl font-bold my-10 mx-10">Form Data</h1>
       <div className="w-full my-10 flex justify-center">
         <div className="w-4/5 my-10">

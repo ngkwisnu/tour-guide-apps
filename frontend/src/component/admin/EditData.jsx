@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Stars from "./Stars";
 import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const EditData = () => {
   const [star, setStar] = useState(5);
   const [images, setImages] = useState([]);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     const getDataById = async () => {
@@ -76,25 +78,31 @@ const EditData = () => {
       e.target.harga_termasuk.value ||
       e.target.kategori.value
     ) {
-      try {
-        fetch(`http://18.141.9.175:5000/wisata/${id}`, {
-          method: "PUT",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            Swal.fire({
-              title: "Berhasil!",
-              text: "Data wisata telah diubah!.",
-              icon: "success",
-            }).then(() => {
-              navigate("/admin");
-            });
+      setLoading(true);
+      fetch(`http://18.141.9.175:5000/wisata/${id}`, {
+        method: "PUT",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          Swal.fire({
+            title: "Berhasil!",
+            text: "Data wisata telah diubah!.",
+            icon: "success",
+          }).then(() => {
+            navigate("/admin");
           });
-      } catch (error) {
-        console.log(error);
-      }
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat mengubah data.",
+            icon: "error",
+          });
+          setLoading(false);
+        });
     } else {
       console.log("error");
     }
@@ -107,7 +115,8 @@ const EditData = () => {
     });
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto relative">
+      {loading && <Loading />}
       <h1 className="text-4xl font-bold my-10 mx-10">Form Edit Data</h1>
       <div className="w-full my-10 flex justify-center">
         {data.map((data, index) => (

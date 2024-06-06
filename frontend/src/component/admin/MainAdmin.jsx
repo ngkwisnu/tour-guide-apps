@@ -4,10 +4,12 @@ import ReactDOM from "react-dom/client";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Loading from "./Loading";
 
 const MainAdmin = (props) => {
   const [page, setPage] = useState("admin");
   const [datas, setDatas] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +58,7 @@ const MainAdmin = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          setLoading(true);
           const response = await fetch(
             `http://18.141.9.175:5000/wisata/${id}`,
             {
@@ -81,6 +84,7 @@ const MainAdmin = (props) => {
             throw new Error("Data deletion failed");
           }
         } catch (error) {
+          setLoading(false);
           console.error("Error fetching data:", error);
           Swal.fire({
             title: "Error",
@@ -108,7 +112,12 @@ const MainAdmin = (props) => {
   }
 
   return (
-    <div className="w-4/5 flex flex-col items-center gap-6 bg-white py-10">
+    <div
+      className={`w-4/5 ${
+        loading ? "relatve" : "flex flex-col"
+      } items-center gap-6 bg-white py-10`}
+    >
+      {loading && <Loading />}
       <div className="w-4/5">
         <Link to="/tambah-wisata">
           <button className="bg-blue-400 rounded-xl w-1/6 h-7 text-white">
