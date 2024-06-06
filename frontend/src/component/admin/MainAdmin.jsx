@@ -12,7 +12,7 @@ const MainAdmin = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/wisata");
+        const response = await fetch("http://18.141.9.175:5000/wisata");
         const fetchedDatas = await response.json();
         const { data } = fetchedDatas;
         setDatas(data);
@@ -26,7 +26,7 @@ const MainAdmin = (props) => {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await fetch("http://localhost:3000/wisata");
+  //       const response = await fetch("http://18.141.9.175:5000/wisata");
   //       const fetchedDatas = await response.json();
   //       const { data } = fetchedDatas;
   //       setDatas(data);
@@ -43,7 +43,7 @@ const MainAdmin = (props) => {
     }
   }, []);
 
-  const hapusData = (index) => {
+  const hapusData = (id) => {
     Swal.fire({
       title: "Apakah anda yakin?",
       text: "Anda akan menghapus sebuah data wisata!",
@@ -57,24 +57,37 @@ const MainAdmin = (props) => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `http://localhost:3000/wisata/${index}`,
+            `http://18.141.9.175:5000/wisata/${id}`,
             {
               method: "DELETE",
             }
           );
-          const fetchedDatas = await response.json();
-          const { data } = fetchedDatas;
-          setUsers((data) => {
-            return data.filter((item) => item.id !== id);
-          });
+
+          if (!response.ok) {
+            throw new Error("Failed to delete data");
+          }
+
+          if (response.ok) {
+            setDatas((prevData) => {
+              return prevData.filter((item) => item.id !== id);
+            });
+
+            Swal.fire({
+              title: "Data Dihapus!",
+              text: "Data wisata telah dihapus!",
+              icon: "success",
+            });
+          } else {
+            throw new Error("Data deletion failed");
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat menghapus data.",
+            icon: "error",
+          });
         }
-        Swal.fire({
-          title: "Data Dihapus!",
-          text: "Data wisata telah dihapus!",
-          icon: "success",
-        });
       }
     });
   };
