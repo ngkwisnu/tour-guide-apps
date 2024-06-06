@@ -48,7 +48,6 @@ function App() {
         <Route path="/tambah-wisata" element={<TambahData />} />
         <Route path="/edit-wisata/:id" element={<EditData />} />
         <Route path="/pembayaran" element={<Pembayaran />} />
-        <Route path="/loading" element={<Loading />} />
       </Routes>
       {/* <Footer /> */}
     </>

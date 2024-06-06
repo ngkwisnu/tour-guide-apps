@@ -8,8 +8,8 @@ import Loading from "./Loading";
 
 const MainAdmin = (props) => {
   const [page, setPage] = useState("admin");
-  const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [datas, setDatas] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +74,8 @@ const MainAdmin = (props) => {
             setDatas((prevData) => {
               return prevData.filter((item) => item.id !== id);
             });
+
+            setLoading(false);
 
             Swal.fire({
               title: "Data Dihapus!",

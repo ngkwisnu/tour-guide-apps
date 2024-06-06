@@ -85,7 +85,7 @@ const EditData = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          setLoading(false);
           Swal.fire({
             title: "Berhasil!",
             text: "Data wisata telah diubah!.",
