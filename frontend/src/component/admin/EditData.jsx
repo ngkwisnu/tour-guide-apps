@@ -256,7 +256,36 @@ const EditData = () => {
                 >
                   Galeri
                 </label>
-
+                <div className="w-full flex gap-5 flex-col justify-between">
+                  <div className="w-full flex gap-5">
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar1"
+                    />
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar2"
+                    />
+                  </div>
+                  <div className="w-full flex gap-5">
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar3"
+                    />
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar4"
+                    />
+                  </div>
+                </div>
                 {/* <div className="flex items-center justify-center w-full">
                   <label
                     htmlFor="dropzone-file"
@@ -294,10 +323,6 @@ const EditData = () => {
                     />
                   </label>
                 </div> */}
-                <input type="file" name="gambar1" />
-                <input type="file" name="gambar2" />
-                <input type="file" name="gambar3" />
-                <input type="file" name="gambar4" />
               </div>
               <div className="lg:w-4/5 w-full mb-5 lg:mb-0 flex lg:flex-row flex-col lg:justify-end">
                 <div className="lg:w-4/5 w-full justify-center lg:justify-start flex flex-wrap gap-5">
