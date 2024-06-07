@@ -111,6 +111,19 @@ const Pesanan = () => {
         });
       });
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://18.141.9.175:5000/pesanan");
+        const fetchedDatas = await response.json();
+        const { data } = fetchedDatas;
+        setDatas(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData(datas);
+  }, [getData]);
   return (
     <>
       <div className="w-4/5 flex flex-col items-center gap-6 bg-white py-10">
@@ -157,54 +170,59 @@ const Pesanan = () => {
               </tr>
             </thead>
             <tbody>
-              {datas.map((data, index) => (
-                <tr className="border-b border-slate-600">
-                  {/* <td className="px-6 py-4 bg-blue-300/30 text-center">
+              {datas
+                .filter((data) => data.status !== "selesai")
+                .map((data, index) => (
+                  <tr className="border-b border-slate-600">
+                    {/* <td className="px-6 py-4 bg-blue-300/30 text-center">
                     {data.id_user}
                   </td> */}
-                  <td className="px-6 py-4 bg-blue-300/30 text-center">
-                    {/* Pastikan user didefinisikan dan memiliki nilai sebelum mencoba memfilter */}
-                    {user
-                      .filter((pengguna) => pengguna.id === data.id_user)
-                      .map((filteredUser) => (
-                        // Menampilkan nama pengguna yang ditemukan
-                        <span key={filteredUser.id}>
-                          {filteredUser.username}
-                        </span>
-                      ))}
-                  </td>
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-normal whitespace-nowrap bg-blue-300/30 text-center"
-                  >
-                    {format(new Date(data.tanggal_keberangkatan), "yyyy-MM-dd")}
-                  </th>
-                  <td className="px-6 py-4 bg-blue-300/30 text-center">
-                    {wisata
-                      .filter((wisata) => wisata.id === data.id_wisata)
-                      .map((w) => {
-                        return <span key={w.id}>{w.nama}</span>;
-                      })}
-                  </td>
-                  <td className="px-6 py-4 bg-blue-300/30 text-center">3</td>
-                  <td className="px-6 py-4 bg-blue-300/30 text-center">
-                    {data.kode_booking}
-                  </td>
-                  <td
-                    className="px-6 py-4 bg-blue-300/30 text-center"
-                    data-modal-target="default-modal"
-                    data-modal-toggle="default-modal"
-                    onClick={() => setShow(!show)}
-                  >
-                    <button
-                      onClick={() => getDataPesanan(data.id)}
-                      className="bg-white text-blue-300 text-xs font-medium cursor-pointer me-2 px-2.5 py-0.5 rounded-full"
+                    <td className="px-6 py-4 bg-blue-300/30 text-center">
+                      {/* Pastikan user didefinisikan dan memiliki nilai sebelum mencoba memfilter */}
+                      {user
+                        .filter((pengguna) => pengguna.id === data.id_user)
+                        .map((filteredUser) => (
+                          // Menampilkan nama pengguna yang ditemukan
+                          <span key={filteredUser.id}>
+                            {filteredUser.username}
+                          </span>
+                        ))}
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-normal whitespace-nowrap bg-blue-300/30 text-center"
                     >
-                      <i class="fa-solid fa-eye mr-2 cursor-pointer"></i>Lihat
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                      {format(
+                        new Date(data.tanggal_keberangkatan),
+                        "yyyy-MM-dd"
+                      )}
+                    </th>
+                    <td className="px-6 py-4 bg-blue-300/30 text-center">
+                      {wisata
+                        .filter((wisata) => wisata.id === data.id_wisata)
+                        .map((w) => {
+                          return <span key={w.id}>{w.nama}</span>;
+                        })}
+                    </td>
+                    <td className="px-6 py-4 bg-blue-300/30 text-center">3</td>
+                    <td className="px-6 py-4 bg-blue-300/30 text-center">
+                      {data.kode_booking}
+                    </td>
+                    <td
+                      className="px-6 py-4 bg-blue-300/30 text-center"
+                      data-modal-target="default-modal"
+                      data-modal-toggle="default-modal"
+                      onClick={() => setShow(!show)}
+                    >
+                      <button
+                        onClick={() => getDataPesanan(data.id)}
+                        className="bg-white text-blue-300 text-xs font-medium cursor-pointer me-2 px-2.5 py-0.5 rounded-full"
+                      >
+                        <i class="fa-solid fa-eye mr-2 cursor-pointer"></i>Lihat
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
