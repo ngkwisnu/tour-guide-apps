@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 const Pesanan = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("verifikasi");
+  const [getData, setGetData] = useState([]);
   console.log(show);
   const kirimUlasan = () => {
     Swal.fire("SweetAlert2 is working!").then(() => {
@@ -56,6 +58,59 @@ const Pesanan = () => {
     };
     fetchData();
   }, []);
+  const getDataPesanan = async (id) => {
+    try {
+      const res = await fetch(`http://18.141.9.175:5000/pesanan/${id}`);
+      const result = await res.json();
+      const { data } = result;
+      console.log(data);
+      setGetData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const updatePesanan = (id, status, message) => {
+    const formData = new FormData();
+    getData.map((data) => {
+      return [
+        formData.append("total", data.total),
+        formData.append("tanggal_pemesanan", data.total_pemesanan),
+        formData.append("tanggal_bayar", data.tanggal_bayar),
+        formData.append("tanggal_keberangkatan", data.tanggal_keberangkatan),
+        formData.append("jumlah_orang", data.jumlah_orang),
+        formData.append("kode_booking", data.kode_booking),
+        formData.append("status", status),
+        formData.append("metode_pembayaran", data.metode_pembayaran),
+        formData.append("id_user", data.id_user),
+        formData.append("id_wisata", data.id_wisata),
+        formData.append("file", data.file),
+      ];
+    });
+    fetch(`http://18.141.9.175:5000/pesanan/${id}`, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setGetData((prevData) => {
+          return prevData.filter((item) => item.id !== id);
+        });
+        setShow(!show);
+        Swal.fire({
+          title: "Berhasil!",
+          text: message,
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        Swal.fire({
+          title: "Error",
+          text: "Terjadi kesalahan saat mengubah data.",
+          icon: "error",
+        });
+      });
+  };
   return (
     <>
       <div className="w-4/5 flex flex-col items-center gap-6 bg-white py-10">
@@ -122,7 +177,7 @@ const Pesanan = () => {
                     scope="row"
                     className="px-6 py-4 font-normal whitespace-nowrap bg-blue-300/30 text-center"
                   >
-                    {data.tanggal_keberangkatan}
+                    {format(new Date(data.tanggal_keberangkatan), "yyyy-MM-dd")}
                   </th>
                   <td className="px-6 py-4 bg-blue-300/30 text-center">
                     {wisata
@@ -141,9 +196,12 @@ const Pesanan = () => {
                     data-modal-toggle="default-modal"
                     onClick={() => setShow(!show)}
                   >
-                    <span className="bg-white text-blue-300 text-xs font-medium cursor-pointer me-2 px-2.5 py-0.5 rounded-full">
+                    <button
+                      onClick={() => getDataPesanan(data.id)}
+                      className="bg-white text-blue-300 text-xs font-medium cursor-pointer me-2 px-2.5 py-0.5 rounded-full"
+                    >
                       <i class="fa-solid fa-eye mr-2 cursor-pointer"></i>Lihat
-                    </span>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -194,141 +252,174 @@ const Pesanan = () => {
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <div class="p-4 md:p-5 space-y-4">
-              <div>
-                <table>
-                  <tr className="h-10">
-                    <td className="w-20">Nama</td>
-                    <td className="w-5">:</td>
-                    <td>Ahmad Sumamad</td>
-                  </tr>
-                  <tr className="h-10">
-                    <td className="w-20">Telepon</td>
-                    <td className="w-5">:</td>
-                    <td>087789876567</td>
-                  </tr>
-                  <tr className="h-10">
-                    <td className="w-20">Email</td>
-                    <td className="w-5">:</td>
-                    <td>ahmadsumamad@gmail.com</td>
-                  </tr>
-                  {status != "ulasan" && (
-                    <tr className="h-10">
-                      <td className="w-20">Status</td>
-                      <td className="w-5">:</td>
-                      <td>
-                        {status == "menunggu-pembayaran" && (
-                          <span className="bg-yellow-200 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
-                            <i class="fa-solid fa-clock-rotate-left mr-4"></i>
-                            Menunggu Pembayaran
-                          </span>
-                        )}
-                        {status == "verifikasi" && (
-                          <span className="bg-green-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
-                            <i class="fa-solid fa-handshake mr-4"></i>Verifikasi
-                          </span>
-                        )}
-                        {status == "dalam-perjalanan" && (
-                          <span className="bg-blue-400 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
-                            <i class="fa-solid fa-plane mr-4"></i>Dalam
-                            Perjalanan
-                          </span>
-                        )}
-                        {status == "selesai" && (
-                          <>
-                            <span className="bg-gray-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
-                              <i class="fa-solid fa-check mr-4"></i>Selesai
+            {getData.map((data, index) => (
+              <>
+                <div class="p-4 md:p-5 space-y-4">
+                  <div>
+                    <table>
+                      <tr className="h-10">
+                        <td className="w-20">Nama</td>
+                        <td className="w-5">:</td>
+                        <td>
+                          {user
+                            .filter((pengguna) => pengguna.id === data.id_user)
+                            .map((p) => {
+                              return <span key={p.id}>{p.username}</span>;
+                            })}
+                        </td>
+                      </tr>
+                      <tr className="h-10">
+                        <td className="w-20">Telepon</td>
+                        <td className="w-5">:</td>
+                        <td>
+                          {user
+                            .filter((pengguna) => pengguna.id === data.id_user)
+                            .map((p) => {
+                              return <span key={p.id}>{p.telepon}</span>;
+                            })}
+                        </td>
+                      </tr>
+                      <tr className="h-10">
+                        <td className="w-20">Email</td>
+                        <td className="w-5">:</td>
+                        <td>
+                          {user
+                            .filter((pengguna) => pengguna.id === data.id_user)
+                            .map((p) => {
+                              return <span key={p.id}>{p.email}</span>;
+                            })}
+                        </td>
+                      </tr>
+                      {/* {data.status != "selesai" && ( */}
+                      <tr className="h-10">
+                        <td className="w-20">Status</td>
+                        <td className="w-5">:</td>
+                        <td>
+                          {data.status == "menunggu-pembayaran" && (
+                            <span className="bg-yellow-200 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
+                              <i class="fa-solid fa-clock-rotate-left mr-4"></i>
+                              Menunggu Pembayaran
                             </span>
-                          </>
-                        )}
-                      </td>
-                    </tr>
+                          )}
+                          {data.status == "verifikasi" && (
+                            <span className="bg-green-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
+                              <i class="fa-solid fa-handshake mr-4"></i>
+                              Verifikasi
+                            </span>
+                          )}
+                          {data.status == "dalam_perjalanan" && (
+                            <span className="bg-blue-400 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
+                              <i class="fa-solid fa-plane mr-4"></i>Dalam
+                              Perjalanan
+                            </span>
+                          )}
+                          {data.status == "selesai" && (
+                            <>
+                              <span className="bg-gray-300 text-slate-700 text-xs font-medium me-2 px-5 py-2 rounded-full">
+                                <i class="fa-solid fa-check mr-4"></i>Selesai
+                              </span>
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                      {/* )} */}
+                    </table>
+                    {data.status == "selesai" && (
+                      <p className="text-yellow-500 font-medium mt-10">
+                        <i>
+                          Perjalanan user telah berakhir, notifikasi ulasan
+                          telah dikirim ke{" "}
+                          {user
+                            .filter((pengguna) => pengguna.id === data.id_user)
+                            .map((p) => {
+                              return <span key={p.id}>{p.username}</span>;
+                            })}
+                          !
+                        </i>
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {/* <!-- Modal footer --> */}
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  {data.status == "menunggu-pembayaran" && (
+                    <>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        onClick={() => setShow(!show)}
+                      >
+                        Kembali
+                      </button>
+                    </>
                   )}
-                </table>
-                {status == "selesai" && (
-                  <p className="text-yellow-500 font-medium mt-10">
-                    <i>
-                      Perjalanan user telah berakhir, kirim notifikasi untuk
-                      segara mengisi ulasan!
-                    </i>
-                  </p>
-                )}
-              </div>
-            </div>
-            {/* <!-- Modal footer --> */}
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-              {status == "menunggu-pembayaran" && (
-                <>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                    onClick={() => setShow(!show)}
-                  >
-                    Kembali
-                  </button>
-                </>
-              )}
-              {status == "verifikasi" && (
-                <>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => setStatus("dalam-perjalanan")}
-                  >
-                    Terima
-                  </button>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                  >
-                    Tolak
-                  </button>
-                </>
-              )}
-              {status == "dalam-perjalanan" && (
-                <>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => setStatus("selesai")}
-                  >
-                    Selesaikan Perjalanan
-                  </button>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                    onClick={() => setShow(!show)}
-                  >
-                    Kembali
-                  </button>
-                </>
-              )}
-              {status == "selesai" && (
-                <>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={kirimUlasan}
-                  >
-                    Kirim
-                  </button>
-                  <button
-                    data-modal-hide="default-modal"
-                    type="button"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                    onClick={() => setShow(!show)}
-                  >
-                    Kembali
-                  </button>
-                </>
-              )}
-            </div>
+                  {data.status == "verifikasi" && (
+                    <>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={() =>
+                          updatePesanan(
+                            data.id,
+                            "dalam_perjalanan",
+                            "Pesanan Telah di Konfirmasi!"
+                          )
+                        }
+                      >
+                        Terima
+                      </button>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                      >
+                        Tolak
+                      </button>
+                    </>
+                  )}
+                  {data.status == "dalam_perjalanan" && (
+                    <>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={() =>
+                          updatePesanan(
+                            data.id,
+                            "selesai",
+                            "Pesanan sedang berlangsung / Dalam Perjalanan!"
+                          )
+                        }
+                      >
+                        Selesaikan Perjalanan
+                      </button>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        onClick={() => setShow(!show)}
+                      >
+                        Kembali
+                      </button>
+                    </>
+                  )}
+                  {data.status == "selesai" && (
+                    <>
+                      <button
+                        data-modal-hide="default-modal"
+                        type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        onClick={() => setShow(!show)}
+                      >
+                        Kembali
+                      </button>
+                    </>
+                  )}
+                </div>
+              </>
+            ))}
           </div>
         </div>
       </div>
