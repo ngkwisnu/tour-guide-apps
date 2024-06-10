@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ImagePreview from '../component/ImagePreview';
 import { Award, Star, BadgePercent, ArrowRight } from 'lucide-react';
 import { Button, Link, Input, Image } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
