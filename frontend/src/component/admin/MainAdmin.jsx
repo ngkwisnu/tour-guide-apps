@@ -172,7 +172,7 @@ const MainAdmin = (props) => {
         <div>
           <ul className="flex gap-10 justify-center items-center my-5">
             {paginate.map((page, index) => (
-              <li className={`w-8 text-center rounded-md text-white font-bold ${currentPage == page ? `bg-blue-600` : `bg-blue-300`} cursor-pointer`} onClick={() => setCurrentPage(page)} key={index}>
+              <li className={`w-8 text-center rounded-md text-black font-bold ${currentPage == page ? `bg-blue` : `bg-blue-300`} cursor-pointer`} onClick={() => setCurrentPage(page)} key={index}>
                 {page}
               </li>
             ))}

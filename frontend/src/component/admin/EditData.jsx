@@ -3,6 +3,7 @@ import Stars from './Stars';
 import Swal from 'sweetalert2';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading';
+import { Button } from '@chakra-ui/react';
 
 const EditData = () => {
   const [star, setStar] = useState(5);
@@ -336,13 +337,13 @@ const EditData = () => {
                 </select>
               </div>
               <div className="w-full my-20 justify-center flex lg:gap-10 gap-5">
-                <button type="submit" className="text-white bg-blue-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm lg:w-1/5 px-5 py-2.5 text-center">
+                <Button type="submit" className="text-white bg-blue-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm lg:w-1/5 px-5 py-2.5 text-center">
                   Simpan
-                </button>
+                </Button>
                 <Link className="lg:w-1/5 justify-center" to="/admin">
-                  <button type="button" className="text-white bg-blue-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full px-5 py-2.5 text-center">
+                  <Button type="button" className="text-white bg-blue-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full px-5 py-2.5 text-center">
                     Batal
-                  </button>
+                  </Button>
                 </Link>
               </div>
             </form>
