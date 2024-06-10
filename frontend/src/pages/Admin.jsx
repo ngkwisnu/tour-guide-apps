@@ -15,7 +15,7 @@ const Admin = () => {
   return (
     <>
       <div className="hidden lg:block">
-        <NavbarAdmin />
+        {/* <NavbarAdmin /> */}
         <div className="flex w-full bg-slate-200">
           <div className="bg-white w-1/5 px-10 py-10">
             <h1 className="font-bold text-2xl">Akun Admin</h1>
