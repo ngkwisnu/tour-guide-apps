@@ -11,25 +11,45 @@
 
 :star: Star us on GitHub — it motivates us a lot!
 
-[Nusa Guide](https://aimeos.org/TYPO3) is THE Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
 ![Nusa-frontend](https://github.com/ngkwisnu/tour-guide-apps/assets/146515339/55b93ae6-0542-428f-86ce-8d8dbfae9ab9)
 
-## Table Of Content
+## 🌍 Project Overview
 
-- [Installation](#installation)
-  - [Composer](#composer)
-  - [DDev or Colima](#ddev)
-  - [TER](#ter-extension)
-- [TYPO3 setup](#typo3-setup)
-  - [Database setup](#database-setup)
-  - [Security](#security)
-- [Page setup](#page-setup)
-  - [Download the Aimeos Page Tree t3d file](#download-the-aimeos-page-tree-t3d-file)
-  - [Go to the Import View](#go-to-the-import-view)
-  - [Upload the page tree file](#upload-the-page-tree-file)
-  - [Go to the import view](#go-to-the-import-view)
-  - [Import the page tree](#import-the-page-tree)
-  - [SEO-friendly URLs](#seo-friendly-urls)
-- [License](#license)
-- [Links](#links)
+Welcome to the repository of my Nusa Guide, a web application developed by I GUSTI NGURAH RAI team for IL massive project. This project is designed to offer users a seamless experience in browsing and booking travel tours. With features allowing users to search for trips by location, distance, and number of travelers, our platform aims to personalize the travel planning experience. Users can log in to their profiles, book tours, and leave reviews (stars and written feedback) for each trip.
+
+## 🛠 Technologies Used
+
+React.js: For building the dynamic user interface.  
+Node.js & Express.js: For server-side logic and RESTful API development.  
+MySQL: For storing and managing data.  
+JWT & Cookies: For authentication and session management (Note: Cookie management is yet to be completed).
+
+## 🌟 Features
+
+Browse travel circuits with detailed information.  
+Book travel tours with ease.  
+Search for trips based on specific criteria.  
+User authentication and profile management.  
+Leave reviews for tours.
+
+## 🚀 Getting Started
+
+Prerequisites
+
+- Node.js installed on your machine
+- MongoDB installed locally or a MongoDB Atlas cluster ready to use
+
+To run this project locally:
+
+1. Clone this repository.
+2. Create a cluster and a database named travelBookingDB. Note the connection URI to be used to connect your application to MongoDB Atlas.
+3. Install dependencies for both the server and the client.
+4. Navigate to the server directory: npm install
+5. Navigate to the client directory: npm install
+6. Start the server: npm run start in the server directory.
+7. Start the client: npm start in the client directory.
+8. Open http://localhost:3000 to view it in your browser.
+
+## 🤝 Contributions
+
+The project is open for contributions, especially for debugging and implementing cookie management. If you're interested in contributing, please fork the repository and submit a pull request with your changes
