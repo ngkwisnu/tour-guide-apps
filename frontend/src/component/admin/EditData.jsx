@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import Stars from "./Stars";
 import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const EditData = () => {
   const [star, setStar] = useState(5);
   const [images, setImages] = useState([]);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     const getDataById = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/wisata/${id}`);
+        const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`);
         const result = await response.json();
         const { data } = result;
         setData(data);
@@ -34,58 +36,72 @@ const EditData = () => {
 
   const simpanData = (e) => {
     e.preventDefault();
-    const datas = {
-      nama: e.target.nama.value,
-      lokasi: e.target.lokasi.value,
-      harga: e.target.harga.value,
-      //   gambar1: e.target.gambar1.value,
-      //   gambar2: e.target.gambar2.value,
-      //   gambar3: e.target.gambar3.value,
-      //   gambar4: e.target.gambar4.value,
-      gambar1: images[0],
-      gambar2: images[1],
-      gambar3: images[2],
-      gambar4: images[3],
-      jarak_lokasi: e.target.jarak_lokasi.value,
-      jam_buka: e.target.jam_buka.value,
-      jam_tutup: e.target.jam_tutup.value,
-      deskripsi: e.target.deskripsi.value,
-      kategori: e.target.kategori.value,
-      informasi_tourguide: e.target.informasi_tourguide.value,
-      harga_termasuk: e.target.harga_termasuk.value,
-    };
-    console.log(datas);
+
+    const formData = new FormData();
+    formData.append("nama", e.target.nama.value);
+    formData.append("lokasi", e.target.lokasi.value);
+    formData.append("harga", e.target.harga.value);
+    formData.append("jarak_lokasi", e.target.jarak_lokasi.value);
+    formData.append("jam_buka", e.target.jam_buka.value);
+    formData.append("jam_tutup", e.target.jam_tutup.value);
+    formData.append("deskripsi", e.target.deskripsi.value);
+    formData.append("kategori", e.target.kategori.value);
+    formData.append("informasi_tourguide", e.target.informasi_tourguide.value);
+    formData.append("harga_termasuk", e.target.harga_termasuk.value);
+
+    if (e.target.gambar1.files[0]) {
+      formData.append("gambar1", e.target.gambar1.files[0]);
+    }
+    if (e.target.gambar2.files[0]) {
+      formData.append("gambar2", e.target.gambar2.files[0]);
+    }
+    if (e.target.gambar3.files[0]) {
+      formData.append("gambar3", e.target.gambar3.files[0]);
+    }
+    if (e.target.gambar4.files[0]) {
+      formData.append("gambar4", e.target.gambar4.files[0]);
+    }
+
+    console.log([...formData]); // Untuk debug, melihat isi formData
+
     if (
-      datas.nama ||
-      datas.lokasi ||
-      datas.jarak_lokasi ||
-      datas.harga ||
-      datas.deskripsi ||
-      datas.gambar1 ||
-      datas.gambar2 ||
-      datas.gambar3 ||
-      datas.gambar4 ||
-      datas.informasi_tourguide ||
-      datas.harga_termasuk ||
-      datas.kategori
+      e.target.nama.value ||
+      e.target.lokasi.value ||
+      e.target.jarak_lokasi.value ||
+      e.target.harga.value ||
+      e.target.deskripsi.value ||
+      e.target.gambar1.files[0] ||
+      e.target.gambar2.files[0] ||
+      e.target.gambar3.files[0] ||
+      e.target.gambar4.files[0] ||
+      e.target.informasi_tourguide.value ||
+      e.target.harga_termasuk.value ||
+      e.target.kategori.value
     ) {
-      fetch(`http://localhost:3000/wisata/${id}`, {
+      setLoading(true);
+      fetch(`http://18.141.9.175:5000/wisata/${id}`, {
         method: "PUT",
-        body: JSON.stringify(datas),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
+        body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          setLoading(false);
           Swal.fire({
             title: "Berhasil!",
-            text: "Data wisata telah diubah.",
+            text: "Data wisata telah diubah!.",
             icon: "success",
           }).then(() => {
             navigate("/admin");
           });
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat mengubah data.",
+            icon: "error",
+          });
+          setLoading(false);
         });
     } else {
       console.log("error");
@@ -99,7 +115,8 @@ const EditData = () => {
     });
   };
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto relative">
+      {loading && <Loading />}
       <h1 className="text-4xl font-bold my-10 mx-10">Form Edit Data</h1>
       <div className="w-full my-10 flex justify-center">
         {data.map((data, index) => (
@@ -239,8 +256,37 @@ const EditData = () => {
                 >
                   Galeri
                 </label>
-
-                <div className="flex items-center justify-center w-full">
+                <div className="w-full flex gap-5 flex-col justify-between">
+                  <div className="w-full flex gap-5">
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar1"
+                    />
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar2"
+                    />
+                  </div>
+                  <div className="w-full flex gap-5">
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar3"
+                    />
+                    <input
+                      class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                      id="file_input"
+                      type="file"
+                      name="gambar4"
+                    />
+                  </div>
+                </div>
+                {/* <div className="flex items-center justify-center w-full">
                   <label
                     htmlFor="dropzone-file"
                     className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
@@ -276,12 +322,8 @@ const EditData = () => {
                       className="hidden"
                     />
                   </label>
-                </div>
+                </div> */}
               </div>
-              {images.push(data.gambar1)}
-              {images.push(data.gambar2)}
-              {images.push(data.gambar3)}
-              {images.push(data.gambar4)}
               <div className="lg:w-4/5 w-full mb-5 lg:mb-0 flex lg:flex-row flex-col lg:justify-end">
                 <div className="lg:w-4/5 w-full justify-center lg:justify-start flex flex-wrap gap-5">
                   <img

@@ -4,9 +4,11 @@ import ReactDOM from "react-dom/client";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Loading from "./Loading";
 
 const MainAdmin = (props) => {
   const [page, setPage] = useState("admin");
+  const [loading, setLoading] = useState(false);
   const [datas, setDatas] = useState([]);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const MainAdmin = (props) => {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await fetch("http://localhost:3000/wisata");
+  //       const response = await fetch("http://18.141.9.175:5000/wisata");
   //       const fetchedDatas = await response.json();
   //       const { data } = fetchedDatas;
   //       setDatas(data);
@@ -43,7 +45,7 @@ const MainAdmin = (props) => {
     }
   }, []);
 
-  const hapusData = (index) => {
+  const hapusData = (id) => {
     Swal.fire({
       title: "Apakah anda yakin?",
       text: "Anda akan menghapus sebuah data wisata!",
@@ -56,25 +58,42 @@ const MainAdmin = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          setLoading(true);
           const response = await fetch(
-            `http://localhost:3000/wisata/${index}`,
+            `http://18.141.9.175:5000/wisata/${id}`,
             {
               method: "DELETE",
             }
           );
-          const fetchedDatas = await response.json();
-          const { data } = fetchedDatas;
-          setUsers((data) => {
-            return data.filter((item) => item.id !== id);
-          });
+
+          if (!response.ok) {
+            throw new Error("Failed to delete data");
+          }
+
+          if (response.ok) {
+            setDatas((prevData) => {
+              return prevData.filter((item) => item.id !== id);
+            });
+
+            setLoading(false);
+
+            Swal.fire({
+              title: "Data Dihapus!",
+              text: "Data wisata telah dihapus!",
+              icon: "success",
+            });
+          } else {
+            throw new Error("Data deletion failed");
+          }
         } catch (error) {
+          setLoading(false);
           console.error("Error fetching data:", error);
+          Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat menghapus data.",
+            icon: "error",
+          });
         }
-        Swal.fire({
-          title: "Data Dihapus!",
-          text: "Data wisata telah dihapus!",
-          icon: "success",
-        });
       }
     });
   };
@@ -95,7 +114,12 @@ const MainAdmin = (props) => {
   }
 
   return (
-    <div className="w-4/5 flex flex-col items-center gap-6 bg-white py-10">
+    <div
+      className={`w-4/5 ${
+        loading ? "relatve" : "flex flex-col"
+      } items-center gap-6 bg-white py-10`}
+    >
+      {loading && <Loading />}
       <div className="w-4/5">
         <Link to="/tambah-wisata">
           <button className="bg-blue-400 rounded-xl w-1/6 h-7 text-white">

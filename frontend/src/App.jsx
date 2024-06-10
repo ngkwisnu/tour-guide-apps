@@ -24,6 +24,7 @@ import ChatBot from "./component/ChatBot";
 import Package from "./pages/Package";
 import Footer from "./component/footer";
 import Pembayaran from "./pages/Pembayaran";
+import Loading from "./component/admin/Loading";
 
 function App() {
   return (
