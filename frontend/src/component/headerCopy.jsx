@@ -1,8 +1,19 @@
 import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function HeaderCopy() {
   const { isOpen, onToggle } = useDisclosure();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('user');
+    navigate('/'); // Arahkan pengguna ke halaman beranda setelah logout
+  };
 
   return (
     <Box px={{ base: 0, md: 8 }}>
@@ -30,27 +41,37 @@ export default function HeaderCopy() {
           <Flex display={{ base: 'none', md: 'flex' }} justifyContent={'center'} alignItems={'center'} ml={10}>
             <DesktopNav />
           </Flex>
-          <Link href={'#'} className="flex items-center">
-            <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'}>
-              Sign In
-            </Button>
-          </Link>
-          <Link href={'/register'}  className='flex items-center'>
-            <Button
-              as={'a'}
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'pink.400'}
-              
-              _hover={{
-                bg: 'pink.300',
-              }}
-            >
-              Sign Up
-            </Button>
-          </Link>
+          {currentUser ? (
+            <>
+              <p className={`loginBtn px-7 text-dark`}>{currentUser.name}</p>
+              <Button as={'a'} fontSize={'sm'} fontWeight={400} onClick={handleLogout} variant={'link'}>
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href={'/register'} className="flex items-center">
+                <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'}>
+                  Sign In
+                </Button>
+              </Link>
+              <Link href={'/register'} className="flex items-center">
+                <Button
+                  as={'a'}
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize={'sm'}
+                  fontWeight={600}
+                  color={'white'}
+                  bg={'pink.400'}
+                  _hover={{
+                    bg: 'pink.300',
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            </>
+          )}
         </Stack>
       </Flex>
 
