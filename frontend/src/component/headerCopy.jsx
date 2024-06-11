@@ -8,12 +8,14 @@ export default function HeaderCopy() {
   const { isOpen, onToggle } = useDisclosure();
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(currentUser);
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('user');
-    navigate('/'); // Arahkan pengguna ke halaman beranda setelah logout
+    navigate('/login'); // Arahkan pengguna ke halaman beranda setelah logout
   };
+
+  console.log(currentUser);
 
   return (
     <Box px={{ base: 0, md: 8 }}>
@@ -50,7 +52,7 @@ export default function HeaderCopy() {
             </>
           ) : (
             <>
-              <Link href={'/register'} className="flex items-center">
+              <Link href={'/login'} className="flex items-center">
                 <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'}>
                   Sign In
                 </Button>

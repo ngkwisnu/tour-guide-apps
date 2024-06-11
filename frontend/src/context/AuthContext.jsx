@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('user') || null);
   // const login = async (inputs) => {
   //   try {
   //     const res = await fetch('http://18.141.9.175:5000/auth/login', {
@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
   // };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = localStorage.getItem('user');
     if (user) {
       setCurrentUser(user);
     }

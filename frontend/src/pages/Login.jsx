@@ -1,8 +1,13 @@
 import { Link, Button } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 const Login = () => {
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const onLogin = async (e) => {
     // Cegah agar tidak dikirim form kosong
@@ -17,7 +22,7 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
+          username: username,
           password: password,
         }),
       });
@@ -26,17 +31,25 @@ const Login = () => {
       if (!res.ok) {
         const errorData = await res.json();
         setMsg(errorData.msg);
+        Swal.fire({
+          title: 'Error',
+          text: 'Username atau Password Tidak Sesuai!.',
+          icon: 'error',
+        });
         return;
       }
 
       // Ambil data respons
-      const data = await res.json();
+      const response = await res.json();
+      const {data} = response
 
       // Simpan token atau informasi pengguna jika diperlukan
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', data.username);
+      setCurrentUser(data.username);
 
       // Jika oke masuk ke home atau dashboard
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       // Penanganan error akan ditampilkan di konsol
       console.error('Error:', error);
@@ -58,12 +71,12 @@ const Login = () => {
             <form className="w-4/5 mx-auto">
               <div className="mb-3">
                 <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900">
-                  Email
+                  Username
                 </label>
                 <input
                   type="text"
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="masukkan email"
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="masukkan username"
                   id="small-input"
                   className="block w-full p-2 text-gray-900 border border-gray-300 rounded-full bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 "
                   required

@@ -25,7 +25,7 @@ const Register = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: name,
+          username: name,
           email: email,
           password: password,
         }),
@@ -34,6 +34,7 @@ const Register = () => {
       if (!res.ok) {
         const errorData = await res.json();
         setMsg(errorData.msg);
+        console.log(res);
         return;
       }
       //jika oke masuk ke home
@@ -41,6 +42,7 @@ const Register = () => {
     } catch (error) {
       //penangangan erro akan ditampilkan di konsol
       console.error('Error:', error);
+      console.log('hehe');
       setMsg('An error occurred. Please try again.');
     }
   };
