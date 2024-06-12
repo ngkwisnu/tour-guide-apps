@@ -45,7 +45,7 @@ export default function HeaderCopy() {
           </Flex>
           {currentUser ? (
             <>
-              <p className={`loginBtn px-7 text-dark`}>{currentUser.name}</p>
+              <p className={`loginBtn px-7 text-black`}>{currentUser}</p>
               <Button as={'a'} fontSize={'sm'} fontWeight={400} onClick={handleLogout} variant={'link'}>
                 Sign Out
               </Button>

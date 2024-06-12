@@ -28,6 +28,22 @@ const PackageDetail2 = ({}) => {
     }
   };
 
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://18.141.9.175:5000/ulasan');
+        const fetchedDatas = await response.json();
+        const { data } = fetchedDatas;
+        console.log(data);
+        setDatas(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [])
+
   useEffect(() => {
     getData();
   }, [id]);
@@ -202,10 +218,9 @@ const PHOTOS = [
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
+          {Array.from({ length: datas }).map((_, i) => (
+            <CommentListing className="py-8" />
+          ))}
           <div className="pt-8">
             <Button>View more 20 reviews</Button>
           </div>
