@@ -1,15 +1,14 @@
 {
-    "version": 2,
-    "builds": [
+    "projects": [
       {
-        "src": "./frontend/index.js",
+        "src": "frontend/",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "dist" }
+      },
+      {
+        "src": "backend/",
         "use": "@vercel/node"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
     ]
-}
+  }
+  
