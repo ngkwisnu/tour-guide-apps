@@ -4,6 +4,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: "dist", // pastikan ini sesuai dengan konfigurasi vercel.json
+    outDir: "frontend/dist", // pastikan ini sesuai dengan konfigurasi vercel.json
   },
 });
