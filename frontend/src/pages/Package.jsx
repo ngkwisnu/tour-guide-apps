@@ -7,7 +7,7 @@ import useFetch from '../hook/useFetch';
 
 async function getData() {
   try {
-    const response = await fetch('http://18.141.9.175:5000/wisata', {
+    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/wisata`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

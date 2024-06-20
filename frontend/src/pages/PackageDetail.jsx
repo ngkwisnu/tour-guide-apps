@@ -13,7 +13,7 @@ const PackageDetail = ({}) => {
 
   const getData = async () => {
     try {
-      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/wisata/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -58,13 +58,7 @@ const PackageDetail = ({}) => {
     return <p>Loading...</p>;
   }
 
-  const PHOTOS = [
-    packageDetail.gambar1,
-    packageDetail.gambar2,
-    packageDetail.gambar3,
-    packageDetail.gambar4,
-    packageDetail.gambar1,
-  ];
+  const PHOTOS = [packageDetail.gambar1, packageDetail.gambar2, packageDetail.gambar3, packageDetail.gambar4, packageDetail.gambar1];
 
   const renderSection6 = () => {
     const adaUlasan = datas.filter((d) => d.id_wisata == id);
@@ -116,18 +110,11 @@ const PackageDetail = ({}) => {
       <main className=" mb-16 ">
         {/* <ListingImageGallery /> */}
         <header className="rounded-md sm:rounded-xl px-4">
-          <Image
-            fill
-            className="object-cover rounded-md sm:rounded-xl w-full h-[500px]"
-            src={PHOTOS[0]}
-            alt=""
-          />
+          <Image fill className="object-cover rounded-md sm:rounded-xl w-full h-[500px]" src={PHOTOS[0]} alt="" />
         </header>
         <article className="mx-auto w-full max-w-4xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
           <div className="mt-8 grid gap-2">
-            <h1 className="text-2xl font-bold md:text-4xl">
-              {packageDetail.nama}
-            </h1>
+            <h1 className="text-2xl font-bold md:text-4xl">{packageDetail.nama}</h1>
           </div>
           {/* harga dan info singkt */}
           <div className="my-6 flex justify-between">
@@ -147,12 +134,9 @@ const PackageDetail = ({}) => {
             </div>
             <div className="text-right">
               <h1 className="text-2xl font-bold text-blue">
-                Rp {packageDetail.harga}{" "}
-                <span className="font-regular text-base italic">/orang</span>{" "}
+                Rp {packageDetail.harga} <span className="font-regular text-base italic">/orang</span>{' '}
               </h1>
-              <p className="max-w-[280px] text-sm">
-                Download aplikasi dan dapatkan harga spesial Rp 256.000!!
-              </p>
+              <p className="max-w-[280px] text-sm">Download aplikasi dan dapatkan harga spesial Rp 256.000!!</p>
             </div>
           </div>
 
@@ -166,28 +150,13 @@ const PackageDetail = ({}) => {
           <h1 className="text-2xl font-bold md:text-4xl my-5">Galeri</h1>
           <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
             <div className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer">
-              <Image
-                fill
-                className="object-cover rounded-md sm:rounded-xl w-[1000px] h-[500px]"
-                src={PHOTOS[0]}
-                alt=""
-              />
+              <Image fill className="object-cover rounded-md sm:rounded-xl w-[1000px] h-[500px]" src={PHOTOS[0]} alt="" />
               <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
             </div>
             {PHOTOS.filter((_, i) => i >= 1 && i < 5).map((item, index) => (
-              <div
-                key={index}
-                className={`relative rounded-md sm:rounded-xl overflow-hidden ${
-                  index >= 3 ? "hidden sm:block" : ""
-                }`}
-              >
+              <div key={index} className={`relative rounded-md sm:rounded-xl overflow-hidden ${index >= 3 ? 'hidden sm:block' : ''}`}>
                 <div className="aspect-w-4 aspect-h-3 sm:aspect-w-6 sm:aspect-h-5">
-                  <Image
-                    fill
-                    className="object-cover rounded-md sm:rounded-xl w-[1000px] h-[250px]"
-                    src={item || ""}
-                    alt=""
-                  />
+                  <Image fill className="object-cover rounded-md sm:rounded-xl w-[1000px] h-[250px]" src={item || ''} alt="" />
                 </div>
 
                 {/* OVERLAY */}
@@ -195,17 +164,13 @@ const PackageDetail = ({}) => {
               </div>
             ))}
           </div>
-          <h4 className="text-2xl font-bold md:text-xl mt-5">
-            Informasi Tour Guidek
-          </h4>
+          <h4 className="text-2xl font-bold md:text-xl mt-5">Informasi Tour Guidek</h4>
           <div id="mdx-article" className="prose max-w-4xl dark:prose-invert">
             {packageDetail.informasi_tourguide}
             {/* <span className="font-bold block text-red-500">{packageDetail.harga_termasuk}</span> */}
           </div>
           <h4 className="text-2xl font-bold md:text-xl mt-5">Harge Termasuk</h4>
-          <ul className="list-disc px-8 py-2">
-            {packageDetail.harga_termasuk}
-          </ul>
+          <ul className="list-disc px-8 py-2">{packageDetail.harga_termasuk}</ul>
 
           {/* <div>
             <h1 className="text-2xl font-bold md:text-4xl mt-5 mb-5">

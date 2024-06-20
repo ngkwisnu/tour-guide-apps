@@ -7,6 +7,7 @@ import { Button, ButtonGroup, Link, Text } from '@chakra-ui/react';
 import Benefit from '../component/Benefit';
 import SectionHowItWork from '../component/SectionHowItWork';
 import SectionClientSay from '../component/SectionClientSay';
+import SectionBanner from '../component/Banner';
 
 async function getData() {
   try {
