@@ -5,11 +5,11 @@ import { Image } from '@chakra-ui/react';
 export default function Benefit() {
   return (
     <div className={`nc-SectionOurFeatures relative my-6 flex flex-col items-center lg:flex-row  px-10`} data-nc-id="SectionOurFeatures">
-      <div className="flex-grow">
-        <Image  objectFit="cover" src={rightImgPng} alt="" />
+      <div className="w-full md:w-auto flex-[1.5] flex justify-center  max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
+        <Image objectFit="cover" src={rightImgPng} className="w-[600px]" alt="" />
       </div>
       <div className={`max-w-2xl flex-shrink-0 mt-10 lg:mt-0 lg:w-2/5`}>
-        <span className="uppercase text-sm text-gray-400 tracking-widest">BENnefits</span>
+        <span className="uppercase text-sm text-gray-400 tracking-widest">Benefits</span>
         <h2 className="font-semibold text-4xl mt-5">Kenapa Memilih Kami?</h2>
 
         <ul className="space-y-10 mt-16">

@@ -3,17 +3,21 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import UserDropdown from './UserDropDown';
+// import { Popover, Transition } from '@headlessui/react';
 
 export default function HeaderCopy() {
   const { isOpen, onToggle } = useDisclosure();
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(currentUser);
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('user');
-    navigate('/'); // Arahkan pengguna ke halaman beranda setelah logout
+    navigate('/login'); // Arahkan pengguna ke halaman beranda setelah logout
   };
+
+  console.log(currentUser);
 
   return (
     <Box px={{ base: 0, md: 8 }}>
@@ -43,14 +47,15 @@ export default function HeaderCopy() {
           </Flex>
           {currentUser ? (
             <>
-              <p className={`loginBtn px-7 text-dark`}>{currentUser.name}</p>
+              <UserDropdown />
+              {/* <p className={`loginBtn px-7 text-black`}>{currentUser}</p>
               <Button as={'a'} fontSize={'sm'} fontWeight={400} onClick={handleLogout} variant={'link'}>
                 Sign Out
-              </Button>
+              </Button> */}
             </>
           ) : (
             <>
-              <Link href={'/register'} className="flex items-center">
+              <Link href={'/login'} className="flex items-center">
                 <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'}>
                   Sign In
                 </Button>

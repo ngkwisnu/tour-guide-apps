@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/react';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+
 import Loading from './Loading';
 
 const MainAdmin = (props) => {

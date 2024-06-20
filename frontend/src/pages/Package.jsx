@@ -7,7 +7,7 @@ import useFetch from '../hook/useFetch';
 
 async function getData() {
   try {
-    const response = await fetch('http://18.141.9.175:5000/wisata');
+    const response = await fetch('http://54.254.36.46:5000/wisata');
 
     if (!response.ok) {
       throw new Error(`Error! status: ${response.status}`);
@@ -35,6 +35,23 @@ const Package = () => {
     console.log('Packages state:', packages); // Log state packages setelah update
   }, [packages]);
 
+  const [q, setQ] = useState('');
+  const [filterParam, setFilterParam] = useState('All');
+  const [searchParam] = useState(['capital', 'name']);
+  function search(packages) {
+    return packages.filter((pack) => {
+      if (pack.region == filterParam) {
+        return searchParam.some((newItem) => {
+          return pack[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1;
+        });
+      } else if (filterParam == 'All') {
+        return searchParam.some((newItem) => {
+          return item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1;
+        });
+      }
+    });
+  }
+
   return (
     <>
       <section className="overflow-hidden h-screen  px-4 sm:px-6 w-full relative">
@@ -58,14 +75,81 @@ const Package = () => {
       {/* input */}
       <div class="flex items-center justify-center py-10">
         <div class="flex w-full mx-16 items-center">
-          <InputGroup>
+          {/* <InputGroup>
             <Input focusBorderColor="black" placeholder="Nyari opo...? " size="md" borderRadius="full" />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" colorScheme="teal">
                 <Search />
               </Button>
             </InputRightElement>
-          </InputGroup>
+          </InputGroup> */}
+
+          <form class="w-full mx-auto">
+            <div class="flex">
+              <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">
+                Your Email
+              </label>
+              <button
+                id="dropdown-button"
+                data-dropdown-toggle="dropdown"
+                class="flex-shrink-0 z-10 inline-flex items-center py-4 px-4 text-sm font-medium text-center text-white bg-black border border-gray-300 rounded-s-lg focus:ring-4 focus:outline-none    dark:border-black"
+                type="button"
+              >
+                All categories{' '}
+                <svg class="w-4 h-4 ms-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+              {/* dropwodn */}
+              <div id="dropdown" class="z-10 hidden bg-white divide-y divide-white rounde">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                  <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
+                      Mockups
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
+                      Templates
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
+                      Design
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
+                      Logos
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              {/* searcj bar */}
+              <div class="relative w-full bg-[#f5f4f4]   ">
+                <input
+                  type="search"
+                  id="search-dropdown"
+                  class="block  py-4 px-2 w-full z-20 text-sm text-gray-900 bg-[#f5f4f4] focus:outline-none   dark:placeholder-black  "
+                  placeholder="Cari wisata idamanmu..."
+                  required
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                />
+                <div className="space-y-8">
+                  <button
+                    type="submit"
+                    class="absolute top-1/2 right-2 transform -translate-y-1/2 end-0 h-12 w-12 p-4 text-sm font-medium text-white bg-black border rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <section className="relative w-full py-8  px-[5%]  gap-6" id="destination">

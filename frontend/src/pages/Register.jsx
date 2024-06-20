@@ -19,13 +19,13 @@ const Register = () => {
     //buat try untuk mengetahui error
     try {
       //kirim data dalam bentuk josn, yg isinya nama, email, pas
-      const res = await fetch('http://18.141.9.175:5000/auth/register', {
+      const res = await fetch('http://54.254.36.46:5000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: name,
+          username: name,
           email: email,
           password: password,
         }),
@@ -34,6 +34,7 @@ const Register = () => {
       if (!res.ok) {
         const errorData = await res.json();
         setMsg(errorData.msg);
+        console.log(res);
         return;
       }
       //jika oke masuk ke home
@@ -41,6 +42,7 @@ const Register = () => {
     } catch (error) {
       //penangangan erro akan ditampilkan di konsol
       console.error('Error:', error);
+      console.log('hehe');
       setMsg('An error occurred. Please try again.');
     }
   };
