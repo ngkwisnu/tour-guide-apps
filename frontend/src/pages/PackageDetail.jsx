@@ -20,7 +20,13 @@ const PackageDetail = ({}) => {
 
   const getData = async () => {
     try {
-      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`); // Ganti dengan URL API yang sesuai
+      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      }); // Ganti dengan URL API yang sesuai
       const result = await response.json();
       if (Array.isArray(result.data) && result.data.length > 0) {
         setPackageDetail(result.data[0]); // Ambil elemen pertama dari array
@@ -208,21 +214,21 @@ const PackageDetail = ({}) => {
             {packageDetail.harga_termasuk}
           </ul>
 
-          <div>
+          {/* <div>
             <h1 className="text-2xl font-bold md:text-4xl mt-5 mb-5">
               Rating & Reviews
             </h1>
             {renderSection6()}
-          </div>
+          </div> */}
         </article>
         <div className="w-full text-center mt-8">
           <Button colorScheme="blue">
             <Link
-              href={`/wisata/${id}/payment`}
+              href={packageDetail.payment_link}
               _hover={{ textDecoration: "none" }}
             >
               Pesan sekarang
-            </Link>{" "}
+            </Link>
           </Button>
         </div>
       </main>
