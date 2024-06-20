@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
-import ImagePreview from "../component/ImagePreview";
-import { Award, Star, BadgePercent, ArrowRight, Heading3 } from "lucide-react";
-import {
-  Button,
-  Link,
-  Image,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
-import ListingImageGallery from "../component/ImageGallery";
-import CommentListing from "../component/CommentListing";
+import React, { useState, useEffect } from 'react';
+import ImagePreview from '../component/ImagePreview';
+import { Award, Star, BadgePercent, ArrowRight, Heading3 } from 'lucide-react';
+import { Button, Link, Image, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+import ListingImageGallery from '../component/ImageGallery';
+import CommentListing from '../component/CommentListing';
 
 const PackageDetail = ({}) => {
   const { id } = useParams();
@@ -20,14 +13,20 @@ const PackageDetail = ({}) => {
 
   const getData = async () => {
     try {
-      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`); // Ganti dengan URL API yang sesuai
+      const response = await fetch(`http://18.141.9.175:5000/wisata/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }); // Ganti dengan URL API yang sesuai
       const result = await response.json();
       if (Array.isArray(result.data) && result.data.length > 0) {
         setPackageDetail(result.data[0]); // Ambil elemen pertama dari array
       }
       // setPackageDetail(data);
     } catch (error) {
-      console.error("Error fetching package details:", error);
+      console.error('Error fetching package details:', error);
     }
   };
 
@@ -35,13 +34,13 @@ const PackageDetail = ({}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://18.141.9.175:5000/ulasan");
+        const response = await fetch('http://18.141.9.175:5000/ulasan');
         const fetchedDatas = await response.json();
         const { data } = fetchedDatas;
         console.log(data);
         setDatas(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
     fetchData();
@@ -52,7 +51,7 @@ const PackageDetail = ({}) => {
   }, [id]);
 
   useEffect(() => {
-    console.log("Packages state:", packageDetail);
+    console.log('Packages state:', packageDetail);
   }, [packageDetail]);
 
   if (!packageDetail) {
@@ -82,8 +81,8 @@ const PackageDetail = ({}) => {
             <InputGroup size="md">
               <Input pr="4.5rem" placeholder="Share your thought" />
               <InputRightElement width="4.5rem">
-                <Button h="1.75rem" bg={"#4f46e5"} size="sm">
-                  {"Send"}
+                <Button h="1.75rem" bg={'#4f46e5'} size="sm">
+                  {'Send'}
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -96,7 +95,7 @@ const PackageDetail = ({}) => {
             adaUlasan.map((d, i) => {
               console.log(d);
               if (d != null) {
-                console.log("haha", d);
+                console.log('haha', d);
                 return <CommentListing className="py-8" />;
               }
             })
@@ -208,21 +207,18 @@ const PackageDetail = ({}) => {
             {packageDetail.harga_termasuk}
           </ul>
 
-          <div>
+          {/* <div>
             <h1 className="text-2xl font-bold md:text-4xl mt-5 mb-5">
               Rating & Reviews
             </h1>
             {renderSection6()}
-          </div>
+          </div> */}
         </article>
         <div className="w-full text-center mt-8">
           <Button colorScheme="blue">
-            <Link
-              href={`/wisata/${id}/payment`}
-              _hover={{ textDecoration: "none" }}
-            >
+            <Link href={packageDetail.payment_link} _hover={{ textDecoration: 'none' }}>
               Pesan sekarang
-            </Link>{" "}
+            </Link>
           </Button>
         </div>
       </main>

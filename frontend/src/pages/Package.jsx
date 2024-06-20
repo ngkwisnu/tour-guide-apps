@@ -7,7 +7,13 @@ import useFetch from '../hook/useFetch';
 
 async function getData() {
   try {
-    const response = await fetch('http://54.254.36.46:5000/wisata');
+    const response = await fetch('http://18.141.9.175:5000/wisata', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Error! status: ${response.status}`);
@@ -23,39 +29,66 @@ async function getData() {
 
 const Package = () => {
   const [packages, setPackages] = useState([]);
+  const [searchItem, setSearchItem] = useState('');
+  const [filteredPackages, setFilteredPackages] = useState([]);
 
   useEffect(() => {
-    getData().then((data) => {
-      console.log('Data set in state:', data); // Log data yang diset ke state
-      setPackages(data);
-    });
+    async function fetchData() {
+      const result = await getData();
+      console.log('Data set in state:', result.data); // Log data yang diset ke state
+      setPackages(result.data || []); // Inisialisasi packages dengan data atau array kosong
+      setFilteredPackages(result.data || []); // Inisialisasi filteredPackages dengan data atau array kosong
+    }
+
+    fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   if (Array.isArray(packages)) {
+  //     const filtered = packages.filter((pkg) => pkg.nama.toLowerCase().includes(searchItem.toLowerCase()) || pkg.capital.toLowerCase().includes(searchItem.toLowerCase()));
+  //     setFilteredPackages(filtered);
+  //   }
+  // }, [searchItem, packages]);
   useEffect(() => {
-    console.log('Packages state:', packages); // Log state packages setelah update
-  }, [packages]);
+    if (Array.isArray(packages)) {
+      const filtered = packages.filter((pkg) => {
+        // Pastikan nama dan capital ada sebelum mengaksesnya
+        const nama = pkg.nama ? pkg.nama.toLowerCase() : '';
+        const capital = pkg.capital ? pkg.capital.toLowerCase() : '';
+        return nama.includes(searchItem.toLowerCase()) || capital.includes(searchItem.toLowerCase());
+      });
+      setFilteredPackages(filtered);
+    }
+  }, [searchItem, packages]);
 
-  const [q, setQ] = useState('');
-  const [filterParam, setFilterParam] = useState('All');
-  const [searchParam] = useState(['capital', 'name']);
-  function search(packages) {
-    return packages.filter((pack) => {
-      if (pack.region == filterParam) {
-        return searchParam.some((newItem) => {
-          return pack[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1;
-        });
-      } else if (filterParam == 'All') {
-        return searchParam.some((newItem) => {
-          return item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1;
-        });
-      }
-    });
-  }
+  // Mengupdate searchItem saat input berubah
+  const handleInputChange = (e) => {
+    setSearchItem(e.target.value);
+  };
+
+  // useEffect(() => {
+  //   getData().then((data) => {
+  //     console.log('Data set in state:', data);
+  //     setPackages(data);
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log('Packages state:', packages);
+  // }, [packages]);
 
   return (
     <>
       <section className="overflow-hidden h-screen  px-4 sm:px-6 w-full relative">
-        <div className="relative min-h-screen rounded-lg object-cover w-full" style={{ backgroundImage: `url(${Background})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div
+          className="relative min-h-screen rounded-lg object-cover w-full"
+          style={{
+            backgroundImage: `url(${Background})`,
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        >
           <div class="absolute bg-black opacity-40 inset-0 rounded-lg "></div>
           {/* tulisan */}
           <div className="flex justify-start px-10 md:px-24 top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 h-full w-full items-start pt-20 absolute inset-0 ">
@@ -129,12 +162,12 @@ const Package = () => {
               <div class="relative w-full bg-[#f5f4f4]   ">
                 <input
                   type="search"
+                  value={searchItem}
+                  onChange={handleInputChange}
                   id="search-dropdown"
-                  class="block  py-4 px-2 w-full z-20 text-sm text-gray-900 bg-[#f5f4f4] focus:outline-none   dark:placeholder-black  "
+                  className="block  py-4 px-2 w-full z-20 text-sm text-gray-900 bg-[#f5f4f4] focus:outline-none   dark:placeholder-black  "
                   placeholder="Cari wisata idamanmu..."
                   required
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
                 />
                 <div className="space-y-8">
                   <button
@@ -154,8 +187,10 @@ const Package = () => {
       </div>
       <section className="relative w-full py-8  px-[5%]  gap-6" id="destination">
         <div className="grid  grid-cols-2 sm:grid-cols-4 items-center gap-4 lg:gap-6 special-font">
-          {Array.isArray(packages.data) && packages.data.length > 0 ? (
-            packages.data.map((pkg) => (
+          {/* {Array.isArray(filteredPackages) && filteredPackages.length > 0 ? (
+        filteredPackages.map((pkg) */}
+          {Array.isArray(filteredPackages) && filteredPackages.length > 0 ? (
+            filteredPackages.map((pkg) => (
               <Link href={`/wisata/${pkg.id}`} _hover={{ textDecoration: 'none' }} className="group relative flex flex-col rounded-2xl shadow-sm border border-black " key={pkg.id}>
                 <div className="relative z-10" data-aos="fade-down">
                   <div className="h-[250px] ">
