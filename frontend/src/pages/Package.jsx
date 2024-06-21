@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Search } from 'lucide-react';
 import { Input, InputGroup, InputRightElement, Button, Link, Box, Center, Heading, Text, Stack, Avatar, useColorModeValue, Image } from '@chakra-ui/react';
 import { Star, MapPin } from 'lucide-react';
@@ -30,7 +30,20 @@ async function getData() {
 const Package = () => {
   const [packages, setPackages] = useState([]);
   const [searchItem, setSearchItem] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const selectedCategoryRef = useRef('All categories');
   const [filteredPackages, setFilteredPackages] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  // Mengupdate kategori yang dipilih
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    selectedCategoryRef.current = category;
+    setIsOpen(false); // Tutup dropdown setelah memilih kategori
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -43,39 +56,23 @@ const Package = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   if (Array.isArray(packages)) {
-  //     const filtered = packages.filter((pkg) => pkg.nama.toLowerCase().includes(searchItem.toLowerCase()) || pkg.capital.toLowerCase().includes(searchItem.toLowerCase()));
-  //     setFilteredPackages(filtered);
-  //   }
-  // }, [searchItem, packages]);
   useEffect(() => {
     if (Array.isArray(packages)) {
       const filtered = packages.filter((pkg) => {
         // Pastikan nama dan capital ada sebelum mengaksesnya
         const nama = pkg.nama ? pkg.nama.toLowerCase() : '';
         const capital = pkg.capital ? pkg.capital.toLowerCase() : '';
-        return nama.includes(searchItem.toLowerCase()) || capital.includes(searchItem.toLowerCase());
+        const kategori = pkg.kategori ? pkg.kategori.toLowerCase() : '';
+        return (nama.includes(searchItem.toLowerCase()) || capital.includes(searchItem.toLowerCase())) && (selectedCategory === 'All' || kategori.includes(selectedCategory.toLowerCase()));
       });
       setFilteredPackages(filtered);
     }
-  }, [searchItem, packages]);
+  }, [searchItem, packages, selectedCategory]);
 
   // Mengupdate searchItem saat input berubah
   const handleInputChange = (e) => {
     setSearchItem(e.target.value);
   };
-
-  // useEffect(() => {
-  //   getData().then((data) => {
-  //     console.log('Data set in state:', data);
-  //     setPackages(data);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log('Packages state:', packages);
-  // }, [packages]);
 
   return (
     <>
@@ -108,56 +105,47 @@ const Package = () => {
       {/* input */}
       <div class="flex items-center justify-center py-10">
         <div class="flex w-full mx-16 items-center">
-          {/* <InputGroup>
-            <Input focusBorderColor="black" placeholder="Nyari opo...? " size="md" borderRadius="full" />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" colorScheme="teal">
-                <Search />
-              </Button>
-            </InputRightElement>
-          </InputGroup> */}
-
           <form class="w-full mx-auto">
-            <div class="flex">
-              <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">
-                Your Email
-              </label>
+            <div class="flex relative">
               <button
                 id="dropdown-button"
                 data-dropdown-toggle="dropdown"
                 class="flex-shrink-0 z-10 inline-flex items-center py-4 px-4 text-sm font-medium text-center text-white bg-black border border-gray-300 rounded-s-lg focus:ring-4 focus:outline-none    dark:border-black"
                 type="button"
+                onClick={toggleDropdown}
               >
-                All categories{' '}
+                {selectedCategoryRef.current}{' '}
                 <svg class="w-4 h-4 ms-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                 </svg>
               </button>
               {/* dropwodn */}
-              <div id="dropdown" class="z-10 hidden bg-white divide-y divide-white rounde">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                  <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
-                      Mockups
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
-                      Templates
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
-                      Design
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-white dark:hover:bg-black dark:hover:text-white">
-                      Logos
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              {isOpen && (
+                <div id="dropdown" class="z-50 absolute left-2  top-16  bg-black divide-y divide-white rounde">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                    <li>
+                      <button onClick={() => handleCategorySelect('Alam')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
+                        Alam
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleCategorySelect('Budaya')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
+                        Budaya
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleCategorySelect('Massage')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
+                        Massage
+                      </button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleCategorySelect('Outdoor Activity')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
+                        Outdoor Activity
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
               {/* searcj bar */}
               <div class="relative w-full bg-[#f5f4f4]   ">
                 <input
