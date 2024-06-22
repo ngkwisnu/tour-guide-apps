@@ -11,14 +11,13 @@ import TambaData from '../admin/TambahData';
 import EditData from '../admin/EditData';
 import UserLayout from '../layout/userLayout';
 import Pembayaran from '../../pages/Pembayaran';
-import AccountLayout from '../AccountLayout';
+
 import ProfileUser from '../../pages/ProfileUser';
 import InvoicePage from '../../pages/InvoicePage';
 import BuktiPembayaran from '../../pages/BuktiPembayaranPage';
 import PembayaranPage from '../../pages/PembayaranPage';
 import RiwayatTransaksi from '../../pages/RiwayatTransaksiPage';
 import BantuanPage from '../../pages/BantuanPage';
-import PackageDetail2 from '../../pages/PackageDetail2';
 
 const Router = () => {
   return (
