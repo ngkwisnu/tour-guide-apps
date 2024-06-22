@@ -77,9 +77,7 @@ const TambahData = () => {
           console.log(response.message);
           if (!response.ok) {
             setLoading(false);
-            throw new Error(
-              "Network response was not ok " + response.statusText
-            );
+            throw new Error("Network response " + response.statusText);
           }
           return response.json();
         })
