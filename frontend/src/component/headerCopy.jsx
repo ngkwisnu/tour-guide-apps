@@ -3,6 +3,8 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import UserDropdown from './UserDropDown';
+// import { Popover, Transition } from '@headlessui/react';
 
 export default function HeaderCopy() {
   const { isOpen, onToggle } = useDisclosure();
@@ -45,10 +47,11 @@ export default function HeaderCopy() {
           </Flex>
           {currentUser ? (
             <>
-              <p className={`loginBtn px-7 text-black`}>{currentUser}</p>
+              <UserDropdown />
+              {/* <p className={`loginBtn px-7 text-black`}>{currentUser}</p>
               <Button as={'a'} fontSize={'sm'} fontWeight={400} onClick={handleLogout} variant={'link'}>
                 Sign Out
-              </Button>
+              </Button> */}
             </>
           ) : (
             <>

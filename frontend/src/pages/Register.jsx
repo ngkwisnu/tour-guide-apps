@@ -19,7 +19,7 @@ const Register = () => {
     //buat try untuk mengetahui error
     try {
       //kirim data dalam bentuk josn, yg isinya nama, email, pas
-      const res = await fetch('http://18.141.9.175:5000/auth/register', {
+      const res = await fetch('http://54.254.36.46:5000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,38 +46,6 @@ const Register = () => {
       setMsg('An error occurred. Please try again.');
     }
   };
-
-  //memberikan nilai baru
-  // const handleChange = (e) => {
-  //   setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  // };
-
-  // const Register = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await fetch('http://18.141.9.175:5000/auth/register', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(credentials),
-  //     });
-
-  //     Check if response is not OK
-  //     if (!res.ok) {
-  //       const result = await res.json();
-  //       alert(result.message);
-  //       return;
-  //     }
-
-  //     const result = await res.json();
-  //     dispatch({ type: 'REGISTER_SUCCESS', payload: result });
-  //     navigate('/');
-  //   } catch (err) {
-  //     alert(err.message);
-  //   }
-  // };
 
   return (
     <>
