@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Stars from './Stars';
-import Swal from 'sweetalert2';
-import { Link, useNavigate } from 'react-router-dom';
-import MainAdmin from './MainAdmin';
-import Loading from './Loading';
+import React, { useState } from "react";
+import Stars from "./Stars";
+import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
+import MainAdmin from "./MainAdmin";
+import Loading from "./Loading";
 
 const TambahData = () => {
   const [star, setStar] = useState(5);
@@ -17,31 +17,33 @@ const TambahData = () => {
     }
   };
 
-  const simpanData = (e) => {
+  const simpanData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('nama', e.target.nama.value);
-    formData.append('lokasi', e.target.lokasi.value);
-    formData.append('harga', e.target.harga.value);
-    formData.append('jarak_lokasi', e.target.jarak_lokasi.value);
-    formData.append('jam_buka', e.target.jam_buka.value);
-    formData.append('jam_tutup', e.target.jam_tutup.value);
-    formData.append('deskripsi', e.target.deskripsi.value);
-    formData.append('kategori', e.target.kategori.value);
-    formData.append('informasi_tourguide', e.target.informasi_tourguide.value);
-    formData.append('harga_termasuk', e.target.harga_termasuk.value);
+    formData.append("nama", e.target.nama.value);
+    formData.append("lokasi", e.target.lokasi.value);
+    formData.append("harga", e.target.harga.value);
+    formData.append("jarak_lokasi", e.target.jarak_lokasi.value);
+    formData.append("jam_buka", e.target.jam_buka.value);
+    formData.append("jam_tutup", e.target.jam_tutup.value);
+    formData.append("deskripsi", e.target.deskripsi.value);
+    formData.append("kategori", e.target.kategori.value);
+    formData.append("informasi_tourguide", e.target.informasi_tourguide.value);
+    formData.append("harga_termasuk", e.target.harga_termasuk.value);
+    formData.append("rating", e.target.rating.value);
+    formData.append("payment_link", e.target.payment_link.value);
 
     if (e.target.gambar1.files[0]) {
-      formData.append('gambar1', e.target.gambar1.files[0]);
+      formData.append("gambar1", e.target.gambar1.files[0]);
     }
     if (e.target.gambar2.files[0]) {
-      formData.append('gambar2', e.target.gambar2.files[0]);
+      formData.append("gambar2", e.target.gambar2.files[0]);
     }
     if (e.target.gambar3.files[0]) {
-      formData.append('gambar3', e.target.gambar3.files[0]);
+      formData.append("gambar3", e.target.gambar3.files[0]);
     }
     if (e.target.gambar4.files[0]) {
-      formData.append('gambar4', e.target.gambar4.files[0]);
+      formData.append("gambar4", e.target.gambar4.files[0]);
     }
 
     console.log([...formData]); // Untuk debug, melihat isi formData
@@ -58,42 +60,51 @@ const TambahData = () => {
       e.target.gambar4.files[0] ||
       e.target.informasi_tourguide.value ||
       e.target.harga_termasuk.value ||
+      e.target.payment_link.value ||
+      e.target.rating.value ||
       e.target.kategori.value
     ) {
       setLoading(true);
-      fetch('http://18.141.9.175:5000/wisata', {
-        method: 'POST',
+      await fetch("http://54.254.36.46:5000/wisata", {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
         body: formData,
       })
         .then((response) => {
+          console.log(formData);
+          console.log(response.message);
           if (!response.ok) {
             setLoading(false);
-            throw new Error('Network response was not ok ' + response.statusText);
+            throw new Error(
+              "Network response was not ok " + response.statusText
+            );
           }
           return response.json();
         })
         .then((data) => {
           Swal.fire({
-            title: 'Berhasil!',
+            title: "Berhasil!",
             text: data.message,
-            icon: 'success',
+            icon: "success",
           }).then(() => {
             setLoading(false);
-            navigate('/admin');
+            navigate("/admin");
           });
         })
         .catch((error) => {
-          console.error('Fetch error:', error);
+          console.error("Fetch error:", error);
           Swal.fire({
-            title: 'Error',
-            text: 'Terjadi kesalahan saat menambahkan data.',
-            icon: 'error',
+            title: "Error",
+            text: "Terjadi kesalahan saat menambahkan data.",
+            icon: "error",
           });
           setLoading(false);
         });
     } else {
       setLoading(false);
-      console.log('error');
+      console.log("error");
     }
   };
 
@@ -105,19 +116,40 @@ const TambahData = () => {
         <div className="w-4/5 my-10">
           <form className="w-full mx-auto" onSubmit={(e) => simpanData(e)}>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium w-1/6 text-slate-700"
+              >
                 Nama
               </label>
-              <input type="text" id="text" name="nama" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan nama wisata" />
+              <input
+                type="text"
+                id="text"
+                name="nama"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Masukkan nama wisata"
+              />
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium w-1/6 text-slate-700"
+              >
                 Lokasi
               </label>
-              <input type="text" id="text" name="lokasi" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan lokasi wisata" />
+              <input
+                type="text"
+                id="text"
+                name="lokasi"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Masukkan lokasi wisata"
+              />
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
                 Jam Buka/Tutup
               </label>
               <div className="flex justify-between w-full gap-4">
@@ -138,7 +170,10 @@ const TambahData = () => {
               </div>
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
                 Jarak Lokasi <i></i>
               </label>
               <input
@@ -150,13 +185,25 @@ const TambahData = () => {
               />
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
                 Harga <i></i>
               </label>
-              <input type="number" name="harga" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan harga" />
+              <input
+                type="number"
+                name="harga"
+                id="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Masukkan harga"
+              />
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium w-1/6 text-slate-700"
+              >
                 Deskripsi
               </label>
               <textarea
@@ -168,29 +215,62 @@ const TambahData = () => {
               ></textarea>
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium w-1/6 text-slate-700">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium w-1/6 text-slate-700"
+              >
                 Galeri
               </label>
               <div className="w-full flex gap-5 flex-col justify-between">
                 <div className="w-full flex gap-5">
-                  <input class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" type="file" name="gambar1" />
-                  <input class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" type="file" name="gambar2" />
+                  <input
+                    class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                    id="file_input"
+                    type="file"
+                    name="gambar1"
+                  />
+                  <input
+                    class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                    id="file_input"
+                    type="file"
+                    name="gambar2"
+                  />
                 </div>
                 <div className="w-full flex gap-5">
-                  <input class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" type="file" name="gambar3" />
-                  <input class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" type="file" name="gambar4" />
+                  <input
+                    class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                    id="file_input"
+                    type="file"
+                    name="gambar3"
+                  />
+                  <input
+                    class="block w-full text-sm text-slate-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                    id="file_input"
+                    type="file"
+                    name="gambar4"
+                  />
                 </div>
               </div>
             </div>
             <div className="lg:w-4/5 w-full mb-5 lg:mb-0 flex lg:flex-row flex-col lg:justify-end">
               <div className="lg:w-4/5 w-full justify-center lg:justify-start flex flex-wrap gap-5">
                 {images.map((image, index) => {
-                  return <img src={`assets/img/${image}`} key={index} className="w-32 lg:mb-5" alt="" />;
+                  return (
+                    <img
+                      src={`assets/img/${image}`}
+                      key={index}
+                      className="w-32 lg:mb-5"
+                      alt=""
+                    />
+                  );
                 })}
               </div>
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium lg:w-1/6 pr-4 text-slate-700">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium lg:w-1/6 pr-4 text-slate-700"
+              >
                 Informasi Tour Guide
               </label>
               <textarea
@@ -202,7 +282,10 @@ const TambahData = () => {
               ></textarea>
             </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
                 Harga Termasuk
               </label>
               <textarea
@@ -213,9 +296,9 @@ const TambahData = () => {
                 placeholder="Masukkan deskripsi wisata..."
               ></textarea>
             </div>
-            {/* <div className="mb-5 lg:flex justify-center">
+            <div className="mb-5 lg:flex justify-center">
               <label className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
-                Rating & Ulasan
+                Rating
               </label>
               <div className="w-full lg:flex lg:flex-row flex flex-col lg:gap-0 gap-4 lg:justify-between lg:items-center">
                 <div className="flex items-center">
@@ -224,27 +307,43 @@ const TambahData = () => {
                 <div className="lg:w-4/5 w-full lg:flex lg:justify-between lg:items-center lg:flex-row flex flex-col gap-3">
                   <input
                     type="number"
-                    name="rating_tour"
+                    name="rating"
                     min="1"
                     max="5"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Masukkan rating user"
                     onChange={(e) => setStar(e.target.value)}
                   />
-                  <input
-                    type="number"
-                    name="ulasan"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Masukkan jumlah ulasan"
-                  />
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="mb-5 lg:flex justify-center">
-              <label htmlFor="text" className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700">
-                Harga <i></i>
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
+                Payment Link <i></i>
               </label>
-              <select id="countries" class="bg-gray-50 border border-gray-300 text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" name="kategori">
+              <input
+                type="text"
+                name="payment_link"
+                id="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Masukkan payment link"
+              />
+            </div>
+            <div className="mb-5 lg:flex justify-center">
+              <label
+                htmlFor="text"
+                className="block mb-2 text-sm font-medium lg:w-1/6 text-slate-700"
+              >
+                Kategori <i></i>
+              </label>
+              <select
+                id="countries"
+                class="bg-gray-50 border border-gray-300 text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                name="kategori"
+              >
                 <option selected>Pilih Kategori</option>
                 <option value="budaya">Budaya</option>
                 <option value="tour">Tour</option>
@@ -254,7 +353,10 @@ const TambahData = () => {
               </select>
             </div>
             <div className="w-full my-10 justify-center flex">
-              <button type="submit" className="text-white bg-blue-300 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-3/5 px-5 py-2.5 text-center">
+              <button
+                type="submit"
+                className="text-white bg-black hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-3/5 px-5 py-2.5 text-center"
+              >
                 Tambah Data
               </button>
             </div>
