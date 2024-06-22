@@ -1,7 +1,7 @@
-import ImagePreview from '../ImagePreview';
-import { Award, Star, BadgePercent } from 'lucide-react';
-import { Button, Link } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import ImagePreview from "../ImagePreview";
+import { Award, Star, BadgePercent } from "lucide-react";
+import { Button, Link } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 export default function PackageLayout() {
   return (
@@ -34,22 +34,35 @@ export default function PackageLayout() {
             </div>
             <div className="text-right">
               <h1 className="text-2xl font-bold text-blue">
-                Rp 320.000 <span className="font-regular text-base italic">/orang</span>{' '}
+                Rp 320.000{" "}
+                <span className="font-regular text-base italic">/orang</span>{" "}
               </h1>
-              <p className="max-w-[280px] text-sm">Download aplikasi dan dapatkan harga spesial Rp 256.000!!</p>
+              <p className="max-w-[280px] text-sm">
+                Download aplikasi dan dapatkan harga spesial Rp 256.000!!
+              </p>
             </div>
           </div>
 
           {/* deskrips */}
           <div className="mt-4 grid gap-8 lg:grid-cols-[auto,1fr]">
             <div id="mdx-article" className="prose max-w-4xl dark:prose-invert">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum quam arcu, eu tempus tortor molestie at. Vestibulum pretium condimentum dignissim. Vestibulum ultrices vitae nisi sed imperdiet. Mauris quis erat
-              consequat, commodo massa quis, feugiat sapien. Suspendisse placerat vulputate posuere. Curabitur neque tortor, mattis nec lacus non, placerat congue elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              condimentum quam arcu, eu tempus tortor molestie at. Vestibulum pretium condimentum dignissim. Vestibulum ultrices vitae nisi sed imperdiet. Mauris quis erat consequat, commodo massa quis, feugiat sapien. Suspendisse placerat
-              vulputate posuere. Curabitur neque tortor, mattis nec lacus non, placerat congue elit.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              condimentum quam arcu, eu tempus tortor molestie at. Vestibulum
+              pretium condimentum dignissim. Vestibulum ultrices vitae nisi sed
+              imperdiet. Mauris quis erat consequat, commodo massa quis, feugiat
+              sapien. Suspendisse placerat vulputate posuere. Curabitur neque
+              tortor, mattis nec lacus non, placerat congue elit. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit. Donec condimentum
+              quam arcu, eu tempus tortor molestie at. Vestibulum pretium
+              condimentum dignissim. Vestibulum ultrices vitae nisi sed
+              imperdiet. Mauris quis erat consequat, commodo massa quis, feugiat
+              sapien. Suspendisse placerat vulputate posuere. Curabitur neque
+              tortor, mattis nec lacus non, placerat congue elit.
             </div>
           </div>
-          <h1 className="text-2xl font-bold md:text-4xl mt-5">Informasi Paket</h1>
+          <h1 className="text-2xl font-bold md:text-4xl mt-5">
+            Informasi Paket
+          </h1>
           <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
@@ -61,25 +74,31 @@ export default function PackageLayout() {
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
-          <h4 className="text-2xl font-bold md:text-xl mt-5">Paket tidak Termasuk</h4>
+          <h4 className="text-2xl font-bold md:text-xl mt-5">
+            Paket tidak Termasuk
+          </h4>
           <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
-          <h4 className="text-2xl font-bold md:text-xl mt-5">Pilihan Jenis Kendaraan</h4>
+          <h4 className="text-2xl font-bold md:text-xl mt-5">
+            Pilihan Jenis Kendaraan
+          </h4>
           <ul className="list-disc px-8 py-2">
             <li>Low contrast between thick and thin strokes</li>
             <li>Diagonal stress in the strokes</li>
             <li>Slanted serifs on lower-case ascenders</li>
           </ul>
           <div>
-            <h1 className="text-2xl font-bold md:text-4xl mt-5">Rating & Reviews</h1>
+            <h1 className="text-2xl font-bold md:text-4xl mt-5">
+              Rating & Reviews
+            </h1>
           </div>
         </article>
-        <div className="w-full text-center mt-8">
+        <div className="w-full text-center m-8">
           <Button colorScheme="blue">
-            <Link href="/pembayaran">Pesan sekarang</Link>{' '}
+            <Link href="/pembayaran">Pesan sekarang</Link>{" "}
           </Button>
         </div>
       </main>

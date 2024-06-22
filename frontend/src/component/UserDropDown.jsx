@@ -222,7 +222,7 @@ export default function UserDropdown({ className = "" }) {
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      href={"/#"}
+                      href={"/profile/pusat-bantuan"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -279,7 +279,9 @@ export default function UserDropdown({ className = "" }) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Help"}</p>
+                        <p className="text-sm font-medium ">
+                          {"Pusat Bantuan"}
+                        </p>
                       </div>
                     </Link>
 

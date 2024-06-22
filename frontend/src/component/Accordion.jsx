@@ -12,7 +12,7 @@ export default function Accordion({ faq, openContent, setOpenContent, index }) {
       <div className="bg-gray-50 border-2 rounded-xl p-4 border-regent-500 shadow-lg">
         <div className="flex items-center justify-between">
           <p className="first-letter:uppercase text-2xl font-semibold">
-            {faq.title}
+            {faq.judul}
           </p>
           <Button
             type="circle"
@@ -31,7 +31,7 @@ export default function Accordion({ faq, openContent, setOpenContent, index }) {
           }
         >
           <div className="border my-8 border-gray-500"></div>
-          <p className="text-2xl">{faq.content}</p>
+          <p className="text-2xl">{faq.deskripsi}</p>
         </div>
       </div>
     </>
