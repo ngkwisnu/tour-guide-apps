@@ -47,38 +47,6 @@ const Register = () => {
     }
   };
 
-  //memberikan nilai baru
-  // const handleChange = (e) => {
-  //   setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  // };
-
-  // const Register = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await fetch('http://18.141.9.175:5000/auth/register', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(credentials),
-  //     });
-
-  //     Check if response is not OK
-  //     if (!res.ok) {
-  //       const result = await res.json();
-  //       alert(result.message);
-  //       return;
-  //     }
-
-  //     const result = await res.json();
-  //     dispatch({ type: 'REGISTER_SUCCESS', payload: result });
-  //     navigate('/');
-  //   } catch (err) {
-  //     alert(err.message);
-  //   }
-  // };
-
   return (
     <>
       <div className="mx-auto lg:flex lg:h-auto">

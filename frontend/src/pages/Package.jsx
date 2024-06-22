@@ -129,6 +129,11 @@ const Package = () => {
                       </button>
                     </li>
                     <li>
+                      <button onClick={() => handleCategorySelect('Tour')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
+                        Tour
+                      </button>
+                    </li>
+                    <li>
                       <button onClick={() => handleCategorySelect('Budaya')} type="button" class="inline-flex w-full px-4 py-2 hover:bg-white  dark:hover:text-black">
                         Budaya
                       </button>

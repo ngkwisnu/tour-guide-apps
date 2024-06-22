@@ -4,6 +4,7 @@ import { Award, Star, BadgePercent, ArrowRight, Heading3 } from 'lucide-react';
 import { Button, Link, Image, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import ListingImageGallery from '../component/ImageGallery';
+import PackageRecom from '../component/PackageRecom';
 import CommentListing from '../component/CommentListing';
 
 const PackageDetail = ({}) => {
@@ -70,7 +71,6 @@ const PackageDetail = ({}) => {
 
         {/* Content */}
         <div className="space-y-5">
-          {/* <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" /> */}
           <div className="relative w-full">
             <InputGroup size="md">
               <Input pr="4.5rem" placeholder="Share your thought" />
@@ -98,9 +98,6 @@ const PackageDetail = ({}) => {
               <i>Belum ada ulasan!</i>
             </h3>
           )}
-          {/* <div className="pt-8">
-            <Button>View more 20 reviews</Button>
-          </div> */}
         </div>
       </div>
     );
@@ -171,13 +168,6 @@ const PackageDetail = ({}) => {
           </div>
           <h4 className="text-2xl font-bold md:text-xl mt-5">Harge Termasuk</h4>
           <ul className="list-disc px-8 py-2">{packageDetail.harga_termasuk}</ul>
-
-          {/* <div>
-            <h1 className="text-2xl font-bold md:text-4xl mt-5 mb-5">
-              Rating & Reviews
-            </h1>
-            {renderSection6()}
-          </div> */}
         </article>
         <div className="w-full text-center mt-8">
           <Button colorScheme="blue">
@@ -186,6 +176,7 @@ const PackageDetail = ({}) => {
             </Link>
           </Button>
         </div>
+        <PackageRecom />
       </main>
     </>
   );

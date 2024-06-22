@@ -11,7 +11,11 @@ import { useNavigate } from 'react-router-dom';
 export default function UserDropdown({ className = '' }) {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(currentUser);
+  console.log('tes woiii:', currentUser);
+
+  if (!currentUser) {
+    return <div>Loading...</div>;
+  }
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('user');
@@ -26,7 +30,7 @@ export default function UserDropdown({ className = '' }) {
           <>
             <PopoverButton className={`self-center w-10 h-10 sm:w-12 cursor-pointer sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}>
               <button className="inline-flex items-center justify-center h-10 px-4 font-medium bg-black tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none">
-                {currentUser}
+                {currentUser.username}
               </button>
             </PopoverButton>
             <Transition
@@ -44,7 +48,7 @@ export default function UserDropdown({ className = '' }) {
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Eden Smith</h4>
+                        <h4 className="font-semibold">{currentUser.username}</h4>
                         <p className="text-xs mt-0.5">Los Angeles, CA</p>
                       </div>
                     </div>
@@ -210,10 +214,9 @@ export default function UserDropdown({ className = '' }) {
                           <path d="M5.85 8.6499L2.5 11.9999L5.85 15.3499" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
-                      <Button as={'a'} fontSize={'sm'} color={'#000'} className='ml-4 text-black' fontWeight={400} onClick={handleLogout} variant={'link'}>
+                      <Button as={'a'} fontSize={'sm'} color={'#000'} className="ml-4 text-black" fontWeight={400} onClick={handleLogout} variant={'link'}>
                         Sign Out
                       </Button>{' '}
-                      
                     </Link>
                   </div>
                 </div>
