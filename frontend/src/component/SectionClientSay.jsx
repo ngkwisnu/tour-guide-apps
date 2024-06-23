@@ -20,19 +20,20 @@ const DEMO_DATA = [
     id: 1,
     clientName: 'Tiana Abie',
     clientAddress: 'Malaysia',
-    content: 'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+    content: 'Saya seorang pelancong solo dan saya selalu mencari cara yang aman dan menyenangkan untuk menjelajahi tempat baru. Saya menemukan Nusa Guide online dan saya sangat senang saya melakukannya!',
   },
   {
     id: 2,
     clientName: 'Lennie Swiffan',
     clientAddress: 'London',
-    content: 'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+    content:
+      'Keluarga saya dan saya baru saja melakukan tur petualangan bersama Nusa Guide dan itu adalah pengalaman yang tak terlupakan!Pemandunya membawa kami ke tempat-tempat yang tidak akan pernah kami temukan sendiri dan membantu kami menantang diri kami sendiri.',
   },
   {
     id: 3,
     clientName: 'Berta Emili',
     clientAddress: 'Tokyo',
-    content: 'This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!',
+    content: 'Pemandu wisata yang luar biasa! Dia sangat berpengetahuan tentang Nusa Penida dan menunjukkan kepada kami semua tempat wisata terbaik.',
   },
 ];
 
@@ -80,8 +81,8 @@ const SectionClientSay = ({ className = '', data = DEMO_DATA }) => {
 
   return (
     <div className={`nc-SectionClientSay relative ${className} `}>
-      <Heading desc="Let's see what people think of Chisfis" className='mb-10' isCenter>
-        Good news from far away
+      <Heading desc="Let's see what people think of Chisfis" className="mb-10" isCenter>
+        Testimonial
       </Heading>
       <div className="relative md:mb-16 max-w-2xl mx-auto">
         {renderBg()}

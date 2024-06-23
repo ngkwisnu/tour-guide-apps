@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Background from '../assets/images/bg-hero.png';
 import Background2 from '../assets/images/bg-hero.png';
 import People from '../assets/images/people.png';
-import { Star, MapPin } from 'lucide-react';
+import { Star, MapPin, ThumbsUp, ThumbsDown, MessagesSquare, Shield } from 'lucide-react';
 import { Button, ButtonGroup, Link, Text } from '@chakra-ui/react';
 import Benefit from '../component/Benefit';
 import SectionHowItWork from '../component/SectionHowItWork';
@@ -12,10 +12,10 @@ import SectionBanner from '../component/Banner';
 async function getData() {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/wisata`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
     });
 
@@ -36,74 +36,47 @@ export default function Home() {
 
   useEffect(() => {
     getData().then((data) => {
-      console.log("Data set in state:", data); // Log data yang diset ke state
+      console.log('Data set in state:', data); // Log data yang diset ke state
       setPackages(data);
     });
   }, []);
 
   useEffect(() => {
-    console.log("Packages state:", packages); // Log state packages setelah update
+    console.log('Packages state:', packages); // Log state packages setelah update
   }, [packages]);
 
   return (
     <>
       {/* Home */}
-      <section
-        className="relative overflow-hidden  px-4 sm:px-6 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${Background})` }}
-      >
+      <section className="relative overflow-hidden  px-4 sm:px-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background})` }}>
         {/* <div className="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div> */}
 
         <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen items-center justify-center lg:px-8 lg:flex-row lg:justify-between">
           <div className="max-w-xl text-center md:text-left">
-            <h1 className="text-3xl text-white font-extrabold sm:text-5xl">
-              Lebih dari Sekadar Wisata!
-            </h1>
+            <h1 className="text-3xl text-white font-extrabold sm:text-5xl">Lebih dari Sekadar Wisata!</h1>
 
-            <p className="mt-4 max-w-lg text-white sm:text-lg">
-              Jelajahi keindahan dan budaya Bali bersama Nusa Guide. Biarkan
-              kami membantu merencanakan liburan impian Anda!
-            </p>
+            <p className="mt-4 max-w-lg text-white sm:text-lg">Jelajahi keindahan dan budaya Bali bersama Nusa Guide. Biarkan kami membantu merencanakan liburan impian Anda!</p>
 
             <div className="mt-8 flex flex-wrap gap-4 text-center">
-              <Link
-                color="white"
-                href="#popular"
-                _hover={{ textDecoration: "none" }}
-                className="block  bg-[#319795] w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto"
-              >
+              <Link color="white" href="#popular" _hover={{ textDecoration: 'none' }} className="block  bg-[#319795] w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">
                 Mulai perjalan
               </Link>
-              <Link
-                color="black"
-                href="#learn"
-                _hover={{ textDecoration: "none" }}
-                className="block  bg-white w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto"
-              >
+              <Link color="black" href="#learn" _hover={{ textDecoration: 'none' }} className="block  bg-white w-full rounded  px-12 py-3 text-sm font-medium text-white shadow  sm:w-auto">
                 Pelajari lebih lanjut
               </Link>
             </div>
           </div>
           <div className="md:flex hidden h-screen items-center justify-center p-6 mt-8 lg:mt-0  sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
-            <img
-              src={People}
-              alt=""
-              className="object-contain h-72 sm:h-80 lg:h-[500px] "
-            />
+            <img src={People} alt="" className="object-contain h-72 sm:h-80 lg:h-[500px] " />
           </div>
         </div>
       </section>
 
       {/* POPULAR DEST */}
-      <section
-        id="popular"
-        className="relative w-full mt-10  px-[5%] grid grid-cols-1 gap-6"
-      >
+      <section id="popular" className="relative w-full mt-10  px-[5%] grid grid-cols-1 gap-6">
         <div className="border-b mb-5 flex justify-between text-sm">
           <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
-            <Text className="font-semibold inline-block">
-              Popular destination
-            </Text>
+            <Text className="font-semibold inline-block">Popular destination</Text>
           </div>
           <div className="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase">
             <Link color="teal.500" href="/package">
@@ -118,27 +91,14 @@ export default function Home() {
               .sort(() => Math.random() - 0.5)
               .slice(0, 3)
               .map((pkg) => (
-                <Link
-                  href={`/wisata/${pkg.id}`}
-                  _hover={{ textDecoration: "none" }}
-                  className="group relative flex flex-col rounded-2xl shadow-sm border border-black "
-                  key={pkg.id}
-                >
+                <Link href={`/wisata/${pkg.id}`} _hover={{ textDecoration: 'none' }} className="group relative flex flex-col rounded-2xl shadow-sm border border-black " key={pkg.id}>
                   <div className="relative z-10" data-aos="fade-down">
                     <div className="h-[250px] ">
-                      <img
-                        src={pkg.gambar1}
-                        alt={`Image of ${pkg.nama}`}
-                        width={300}
-                        height={300}
-                        className="w-full h-full rounded-tl-2xl rounded-tr-2xl group-hover:grayscale-[50%]"
-                      />
+                      <img src={pkg.gambar1} alt={`Image of ${pkg.nama}`} width={300} height={300} className="w-full h-full rounded-tl-2xl rounded-tr-2xl group-hover:grayscale-[50%]" />
                     </div>
                     <div className="absolute w-full flex justify-between px-2 top-3 gap-2">
                       <div className="  p-1 bg-[#ff5b00]">
-                        <p className="text-xs text-white font-semibold">
-                          pilihan kami
-                        </p>
+                        <p className="text-xs text-white font-semibold">pilihan kami</p>
                       </div>
                       <Star color="#ff5b00" />
                     </div>
@@ -159,9 +119,7 @@ export default function Home() {
                         </div>
                         <p className="font-bold text-[#319795]">
                           {pkg.harga}
-                          <span className="text-sm font-normal italic">
-                            /orang
-                          </span>
+                          <span className="text-sm font-normal italic">/orang</span>
                         </p>
                       </div>
                     </div>
@@ -174,10 +132,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BENEFIT */}
-      <Benefit />
-      {/* HIW */}
-      <SectionHowItWork className="px-4 lg:py-16 flex items-center justify-center flex-col" />
+      <div className="max-w-screen-full h-screen flex flex-col items-center justify-center mt-10 mx-auto p-5 sm:p-10 md:p-16 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${Background2})` }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
+            <div class="flex justify-center">
+              <div className="rounded-full flex justify-center gap-2 items-center mx-auto absolute -top-20 w-32 h-32 bg-white">
+                <ThumbsUp size={48} color="#224858" />
+                <ThumbsDown size={48} color="#224858" />
+              </div>
+            </div>
+
+            <div class=" h-48 flex justify-center items-center flex-col gap-4">
+              <h1 class="font-bold text-center text-xl text-gray-900">Rating & Review</h1>
+              <p class="text-center text-sm text-gray-400 font-medium">Membantu pengguna memilih tour guide yang terpercaya</p>
+            </div>
+          </div>
+          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
+            <div class="flex justify-center ">
+              <div className="rounded-full flex justify-center gap-2 items-center mx-auto absolute -top-20 w-32 h-32 bg-white">
+                <Shield size={48} color="#224858" />
+              </div>
+              {/* <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" /> */}
+            </div>
+
+            <div class=" h-48 flex justify-center items-center flex-col gap-4">
+              <h1 class="font-bold text-center text-xl text-gray-900">Layanan terpercaya</h1>
+              <p class="text-center text-sm text-gray-400 font-medium">Menyediakan layanan tour guide yang terpercaya, mudah, cepat serta dengan harga yang terjangkau</p>
+            </div>
+          </div>
+          <div class="bg-[#9BCFE0] relative shadow rounded-lg w-full mx-auto">
+            <div class="flex justify-center">
+              <div className="rounded-full flex justify-center gap-2 items-center mx-auto absolute -top-20 w-32 h-32 bg-white">
+                <MessagesSquare size={48} color="#224858" />
+              </div>
+            </div>
+
+            <div class=" h-48 flex justify-center items-center flex-col gap-4">
+              <h1 class="font-bold text-center text-xl text-gray-900">Pemesanan Online</h1>
+              <p class="text-center text-sm text-gray-400 font-medium">Kemudahan dalam pemesanan layanan tour guide secara online</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PREVIEW */}
+
+      {/* <Benefit />
+
+      <SectionHowItWork className="px-4 lg:py-16 flex items-center justify-center flex-col" /> */}
 
       {/* PREVIEW */}
       <SectionClientSay className="px-4 lg:py-16 flex items-center justify-center flex-col" />
