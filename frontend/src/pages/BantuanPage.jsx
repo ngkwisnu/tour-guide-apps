@@ -1,33 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "../component/Accordion";
-
-const faqTemp = [
-  {
-    title: "apa itu invoice?",
-    content: `Invoice adalah faktur yang akan didapatkan saat Anda sudah berhasil melakukan pembayaran dan upload bukti pembayaran`,
-  },
-  {
-    title: "bagaimana cara saya memesan tour guide?",
-    content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-        incidunt amet accusamus aperiam laboriosam facere ipsa impedit
-        natus, asperiores a!`,
-  },
-  {
-    title: "bagaimana mengubah akun saya?",
-    content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-        incidunt amet accusamus aperiam laboriosam facere ipsa impedit
-        natus, asperiores a!`,
-  },
-];
 
 export default function BantuanPage() {
   const [openContent, setOpenContent] = useState();
+  const [datas, setDatas] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://54.254.36.46:5000/pusat-bantuan", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        const fetchedDatas = await response.json();
+        const { data } = fetchedDatas;
+        setDatas(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(datas);
   return (
-    <div className="profile-container">
-      <h1 className="profile-header text-center mb-8">Informasi Umum</h1>
+    <div className="profile-container mb-8">
+      <h1 className="profile-header text-center my-8 font-bold">
+        Informasi Umum
+      </h1>
       <div className="flex flex-col gap-6">
-        {faqTemp.map((faq, index) => (
+        {datas.map((faq, index) => (
           <Accordion
             key={index}
             faq={faq}

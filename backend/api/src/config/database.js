@@ -1,10 +1,10 @@
-const mysql = require('mysql2');
+const mysql = require("mysql2");
 
 const dbPool = mysql.createPool({
-  host: 'SG-tour-guide-apps-8584-mysql-master.servers.mongodirector.com',
-  user: 'sgroot',
-  password: 'TssrFMTJs1Bf,Ow6',
-  database: 'nusaguide',
+  host: "sql12.freesqldatabase.com",
+  user: "sql12714367",
+  password: "8csKtDY2yZ",
+  database: "sql12714367",
 });
 
 module.exports = dbPool.promise();
