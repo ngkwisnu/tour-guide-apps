@@ -1,24 +1,25 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "../../pages/home";
-import Package from "../../pages/Package";
-import PackageDetail from "../../pages/PackageDetail";
-import Login from "../../pages/Login";
-import Register from "../../pages/Register";
-import NotFound from "../../pages/NotFound";
-import Admin from "../../pages/Admin";
-import TambaData from "../admin/TambahData";
-import EditData from "../admin/EditData";
-import UserLayout from "../layout/userLayout";
-import Pembayaran from "../../pages/Pembayaran";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Home from '../../pages/home';
+import Package from '../../pages/Package';
+import PackageDetail from '../../pages/PackageDetail';
+import Login from '../../pages/Login';
+import Register from '../../pages/Register';
+import NotFound from '../../pages/NotFound';
+import Admin from '../../pages/Admin';
+import TambaData from '../admin/TambahData';
+import EditData from '../admin/EditData';
+import UserLayout from '../layout/userLayout';
+import Pembayaran from '../../pages/Pembayaran';
 
-import ProfileUser from "../../pages/ProfileUser";
-import InvoicePage from "../../pages/InvoicePage";
-import BuktiPembayaran from "../../pages/BuktiPembayaranPage";
-import PembayaranPage from "../../pages/PembayaranPage";
-import RiwayatTransaksi from "../../pages/RiwayatTransaksiPage";
-import BantuanPage from "../../pages/BantuanPage";
-import ChangePassword from "../../pages/ChangePassword";
+import ProfileUser from '../../pages/ProfileUser';
+import InvoicePage from '../../pages/InvoicePage';
+import BuktiPembayaran from '../../pages/BuktiPembayaranPage';
+import PembayaranPage from '../../pages/PembayaranPage';
+import RiwayatTransaksi from '../../pages/RiwayatTransaksiPage';
+import BantuanPage from '../../pages/BantuanPage';
+import ChangePassword from '../../pages/ChangePassword';
+import About from '../../pages/About';
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wisata" element={<Package />} />
+        <Route path="/about" element={<About />} />
 
         <Route path="/wisata/:id" element={<PackageDetail />} />
         <Route path="/admin" element={<Admin />} />
